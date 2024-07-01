@@ -1,6 +1,12 @@
 *
 
+!ex00
+!ex01
+!ex01/inc
+!ex01/src
+
 !Makefile
 !*.h
 !*.hpp
 !*.cpp
+
