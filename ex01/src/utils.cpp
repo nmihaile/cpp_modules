@@ -6,11 +6,11 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:53:40 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/05 11:29:03 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:44:51 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/phonebook_header.h"
+#include "../inc/PhoneBookApp.h"
 
 static bool	ft_isspace(int c)
 {

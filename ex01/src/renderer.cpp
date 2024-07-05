@@ -6,11 +6,11 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 14:20:00 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/05 10:30:36 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:44:47 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/phonebook_header.h"
+#include "../inc/PhoneBookApp.h"
 
 void	clear_lines(int	size)
 {

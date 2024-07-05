@@ -6,11 +6,11 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:47:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/05 11:30:25 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:44:44 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/phonebook_header.h"
+#include "../inc/PhoneBookApp.h"
 
 static bool	capture_string(std::string *dst, std::string msg, t_input *input, PhoneBook *phonebook)
 {

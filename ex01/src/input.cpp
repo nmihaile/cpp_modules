@@ -6,11 +6,11 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:39:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/05 10:37:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:44:31 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/phonebook_header.h"
+#include "../inc/PhoneBookApp.h"
 
 void	input_error(t_input *input, std::string msg)
 {

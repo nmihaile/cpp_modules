@@ -6,11 +6,11 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 11:34:20 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/03 18:00:44 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:44:24 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/phonebook_header.h"
+#include "../inc/PhoneBookApp.h"
 
 void	init_input(t_input *input)
 {
