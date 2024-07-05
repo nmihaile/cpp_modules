@@ -1,11 +1,11 @@
 
-NAME	= phonebook
-CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -std=c++98
+NAME		= phonebook
+CC			= c++
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 SRCS	=	src/main.cpp \
-			src/contact.cpp \
-			src/phonebook.cpp \
+			src/Contact.cpp \
+			src/PhoneBook.cpp \
 			src/input.cpp \
 			src/checker.cpp \
 			src/executer.cpp \

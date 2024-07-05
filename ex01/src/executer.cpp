@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:47:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/03 17:47:06 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/04 20:50:19 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static bool	capture_string(std::string *dst, std::string msg, t_input *input, PhoneBook *phonebook)
 {
+	(void)phonebook;
 	render_phonebook(input, NULL, msg);
 	std::cout << "› ";
 	input->printed_lines++;
@@ -36,6 +37,7 @@ static bool	capture_string(std::string *dst, std::string msg, t_input *input, Ph
 
 static bool	capture_number(std::string *dst, std::string msg, t_input *input, PhoneBook *phonebook)
 {
+	(void)phonebook;
 	render_phonebook(input, NULL, msg);
 	std::cout << "› ";
 	input->printed_lines++;

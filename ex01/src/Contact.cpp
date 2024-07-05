@@ -6,20 +6,27 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 11:38:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/01 16:22:40 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/04 20:57:59 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/contact.hpp"
+#include "../inc/Contact.hpp"
 
 Contact::Contact()
 {
-	
+	first_name = "";
+	last_name = "";
+	nickname = "";
+	phone_number = "";
+	darkest_secret = "";
+}
+
+Contact::Contact(std::string fn, std::string ln, std::string nn, std::string pn, std::string ds) : first_name(fn), last_name(ln), nickname(nn), phone_number(pn), darkest_secret(ds)
+{
 }
 
 Contact::~Contact()
 {
-	
 }
 
 void	Contact::set_first_name(std::string fn)

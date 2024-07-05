@@ -6,14 +6,18 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 11:25:58 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/03 18:05:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 10:18:51 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma	once
 
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# include "contact.hpp"
+# include <string>
+# include <iostream>
+# include "Contact.hpp"
 
 # define MAX_ENTRIES 8
 

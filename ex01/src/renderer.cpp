@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 14:20:00 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/03 17:42:46 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 10:30:36 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	render_header(t_input *input)
 	render_line("┌", "─", "╖", LIGHTRED);
 	render_line("│", " ", "║", LIGHTRED);
 	render_txt_center("│", "welcome to", "║", LIGHTGREEN, LIGHTRED);
-	render_txt_center("│", "your darkest phonebook", "║", LIGHTGREEN, LIGHTRED);
+	render_txt_center("│", "your 80's phonebook", "║", LIGHTGREEN, LIGHTRED);
 	render_line("│", " ", "║", LIGHTRED);
 	input->printed_lines += 5;
 }
@@ -73,18 +73,27 @@ static void	render_error_msg(t_input *input)
 static void	render_contact_line(t_input *input, int i, Contact contact)
 {
 	if (i == 0)
+	{
 		std::cout << LIGHTRED << "├────────────┬────────────┬────────────┬────────────╢" << std::endl;
-	else
+		std::cout << LIGHTRED << "│      INDEX │ FIRST NAME │  LAST NAME │   NICKNAME ║" << std::endl;
 		std::cout << LIGHTRED << "├────────────┼────────────┼────────────┼────────────╢" << std::endl;
+		input->printed_lines += 3;
+	}
+	else
+	{
+		std::cout << LIGHTRED << "├────────────┼────────────┼────────────┼────────────╢" << std::endl;
+		input->printed_lines += 1;
+	}
 	std::cout << LIGHTRED << "│ " << RESET << std::setw(10) << (i + 1) << " ";
 	std::cout << LIGHTRED << "│ " << LIGHTCYAN << std::setw(10) << truncate(contact.get_first_name(), 10) << " ";
 	std::cout << LIGHTRED << "│ " << LIGHTCYAN << std::setw(10) << truncate(contact.get_last_name(), 10) << " ";
 	std::cout << LIGHTRED << "│ " << LIGHTCYAN << std::setw(10) << truncate(contact.get_nickname(), 10) << LIGHTRED << " ║" << std::endl;
-	input->printed_lines += 2;
+	input->printed_lines += 1;
 }
 
 int	render_phonebook(t_input *input, PhoneBook *phonebook, std::string msg)
 {
+	(void)phonebook;
 	render_header(input);
 	render_msg(msg, RESET, input);
 	render_error_msg(input);
@@ -118,15 +127,15 @@ int	render_contact(t_input *input, PhoneBook *phonebook, std::string msg)
 
 	contact = phonebook->get_contact(input->str.at(0) - 48);
 	std::cout << LIGHTRED << "├────────────────┬──────────────────────────────────╢" << std::endl;
-	std::cout << LIGHTRED << "│ First Name     │ " << LIGHTCYAN << align_left_into(contact.get_first_name(), 32) << LIGHTRED << " ║" << std::endl;
+	std::cout << LIGHTRED << "│ First Name     │ " << LIGHTCYAN << std::left << std::setw(32) << truncate(contact.get_first_name(), 32) << LIGHTRED << " ║" << std::endl;
 	std::cout << LIGHTRED << "├─              ─┼─                                ─╢" << std::endl;
-	std::cout << LIGHTRED << "│ Last Name      │ " << LIGHTCYAN << align_left_into(contact.get_last_name(), 32) << LIGHTRED << " ║" << std::endl;
+	std::cout << LIGHTRED << "│ Last Name      │ " << LIGHTCYAN << std::left << std::setw(32) << truncate(contact.get_last_name(), 32) << LIGHTRED << " ║" << std::endl;
 	std::cout << LIGHTRED << "├─              ─┼─                                ─╢" << std::endl;
-	std::cout << LIGHTRED << "│ Nickname       │ " << LIGHTCYAN << align_left_into(contact.get_nickname(), 32) << LIGHTRED << " ║" << std::endl;
+	std::cout << LIGHTRED << "│ Nickname       │ " << LIGHTCYAN << std::left << std::setw(32) << truncate(contact.get_nickname(), 32) << LIGHTRED << " ║" << std::endl;
 	std::cout << LIGHTRED << "├─              ─┼─                                ─╢" << std::endl;
-	std::cout << LIGHTRED << "│ Phone Number   │ " << LIGHTCYAN << align_left_into(contact.get_phone_number(), 32) << LIGHTRED << " ║" << std::endl;
+	std::cout << LIGHTRED << "│ Phone Number   │ " << LIGHTCYAN << std::left << std::setw(32) << truncate(contact.get_phone_number(), 32) << LIGHTRED << " ║" << std::endl;
 	std::cout << LIGHTRED << "├─              ─┼─                                ─╢" << std::endl;
-	std::cout << LIGHTRED << "│ Darkest Secret │ " << LIGHTCYAN << align_left_into(contact.get_darkest_secret(), 32) << LIGHTRED << " ║" << std::endl;
+	std::cout << LIGHTRED << "│ Darkest Secret │ " << LIGHTCYAN << std::left << std::setw(32) << truncate(contact.get_darkest_secret(), 32) << LIGHTRED << " ║" << std::endl;
 	std::cout << LIGHTRED << "├────────────────┴──────────────────────────────────╢" << std::endl;
 	render_line("│", " ", "║", LIGHTRED);
 	input->printed_lines += 12;

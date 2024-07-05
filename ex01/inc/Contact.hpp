@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/29 11:38:21 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/01 16:22:44 by nmihaile         ###   ########.fr       */
+/*   Created: 2024/07/05 10:18:11 by nmihaile          #+#    #+#             */
+/*   Updated: 2024/07/05 10:18:15 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma	once
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
@@ -25,7 +27,7 @@ private:
 	std::string	darkest_secret;
 public:
 	Contact();
-	Contact(std::string fn, std::string ln, std::string nn, std::string pn, std::string ds) : first_name(fn), last_name(ln), nickname(nn), phone_number(pn), darkest_secret(ds) {};
+	Contact(std::string fn, std::string ln, std::string nn, std::string pn, std::string ds);
 	~Contact();
 
 	void		set_first_name(std::string fn);

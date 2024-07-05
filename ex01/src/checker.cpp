@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:12 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/03 17:57:52 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 10:26:42 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 bool	check_main_input(t_input *input, PhoneBook *phonebook)
 {
+	(void)phonebook;
 	if (capitalize(input->str) == "EXIT")
 	{
 		input->status = PB_EXIT;
@@ -42,6 +43,8 @@ bool	check_main_input(t_input *input, PhoneBook *phonebook)
 
 bool	check_search_input(t_input *input, PhoneBook *phonebook)
 {
+	int index;
+	
 	if (std::cin.eof())
 	{
 		std::cout << std::endl;
@@ -50,16 +53,26 @@ bool	check_search_input(t_input *input, PhoneBook *phonebook)
 	}
 	else if (input->str.length() == 1 && std::isdigit(input->str.at(0)))
 	{
-		if (std::stoi(input->str) <= 0)
+		std::stringstream(input->str) >> index;
+		if (index <= 0)
 			return (input_error(input, std::string("Index should be greater than 0.")), false);
-		else if (std::stoi(input->str) <= phonebook->get_contact_count())
+		else if (index <= phonebook->get_contact_count())
 		{
 			input->status = PB_DISPLAY_CONTACT;
-			input->str = std::to_string(std::stoi(input->str) - 1);
+			std::ostringstream oss;
+			oss << (index - 1);
+			input->str = oss.str();
 			return (true);
 		}
 		else
-			return (input_error(input, std::string("Index should be smaller than ") += std::to_string(phonebook->get_contact_count() + 1) += "." ), false);
+		{
+			std::string msg = "Index should be smaller than ";
+			std::ostringstream oss;
+			oss << (phonebook->get_contact_count() + 1);
+			msg += oss.str() += ".";
+			input_error(input, msg);
+			return (false);
+		}
 	}
 	else if (input->str.length() > 0)
 		input_error(input, "Wrong input, try again.");
@@ -68,6 +81,7 @@ bool	check_search_input(t_input *input, PhoneBook *phonebook)
 
 bool	check_view_input(t_input *input, PhoneBook *phonebook)
 {
+	(void)phonebook;
 	if (std::cin.eof())
 		input->status = PB_EXIT;
 	return (true);

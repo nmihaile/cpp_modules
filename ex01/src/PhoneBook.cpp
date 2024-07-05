@@ -6,12 +6,11 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 11:25:59 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/03 18:05:14 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 10:23:40 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <iostream>
-#include "../inc/phonebook.hpp"
+#include "../inc/PhoneBook.hpp"
 
 PhoneBook::PhoneBook()
 {
