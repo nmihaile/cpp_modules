@@ -4,6 +4,7 @@
 !ex01
 !ex01/inc
 !ex01/src
+!ex02
 
 !Makefile
 !*.h
