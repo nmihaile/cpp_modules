@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:47:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/04 20:50:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:30:25 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,23 @@ static void	capture_contact_details(t_input *input, PhoneBook *phonebook)
 
 	if (capture_string(&str, "Enter first name:", input, phonebook))
 		return ;
-	contact.set_first_name(str);
+	contact.set_first_name(trim_whitespaces(str));
 	
 	if (capture_string(&str, "Enter last name:", input, phonebook))
 		return ;
-	contact.set_last_name(str);
+	contact.set_last_name(trim_whitespaces(str));
 
 	if (capture_string(&str, "Enter nickname:", input, phonebook))
 		return ;
-	contact.set_nickname(str);
+	contact.set_nickname(trim_whitespaces(str));
 
 	if (capture_number(&str, "Enter phone number:", input, phonebook))
 		return ;
-	contact.set_phone_number(str);
+	contact.set_phone_number(trim_whitespaces(str));
 	
 	if (capture_string(&str, "Enter darkest secret:", input, phonebook))
 		return ;
-	contact.set_darkest_secret(str);
+	contact.set_darkest_secret(trim_whitespaces(str));
 	
 	if (phonebook->add_contact(contact))
 		input_error(input, "The phonebook reached its max capacity.");

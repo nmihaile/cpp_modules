@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 11:52:11 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/05 10:37:26 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:19:26 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <iostream>
 # include <iomanip>
 # include <sstream>
+# include <iterator>
 # include "PhoneBook.hpp"
 
 # define WIDTH 53
@@ -74,5 +75,6 @@ int			render_searchbook(t_input *input, PhoneBook *phonebook, std::string msg);
 int			render_contact(t_input *input, PhoneBook *phonebook, std::string msg);
 std::string	capitalize(std::string str);
 std::string	truncate(std::string str, size_t size);
+std::string	trim_whitespaces(std::string str);
 
 #endif
