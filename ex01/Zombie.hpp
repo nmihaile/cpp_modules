@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:32:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/07 18:34:54 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/07 19:47:32 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <string>
 #include <iostream>
+
+#define DEBUG_INFO
 
 class Zombie
 {
