@@ -6,13 +6,13 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:33:41 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/07 16:49:49 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/07 18:18:41 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(void)
+Zombie::Zombie(void) : m_name("Unnamed Zombie")
 {	
 }
 
