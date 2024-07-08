@@ -6,12 +6,12 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:32:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/07 17:50:25 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:18:48 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __ZOMBIE_HPP__
-#define __ZOMBIE_HPP__
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
 
 #include <string>
 #include <iostream>
