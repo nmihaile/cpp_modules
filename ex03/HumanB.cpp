@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:27:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/08 12:55:05 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:20:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	HumanB::setWeapon(Weapon &weapon)
 void	HumanB::attack(void)
 {
 	if (m_weapon == NULL || m_weapon->getType().compare("") == 0)
-		std::cout << m_name << ": no weapon to attack " << std::endl;
+		std::cout << m_name << " with no weapon " << std::endl;
 	else
 		std::cout << m_name << " attacks with their " << m_weapon->getType() << std::endl;
 }
