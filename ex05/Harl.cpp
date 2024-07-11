@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:39:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/11 18:48:59 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:27:43 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,46 +46,68 @@ void	Harl::complain(std::string level)
 
 void	Harl::debug(void)
 {
-	std::cout	<< LIGHTBLUE
-				<< MSG_BORDER
-				<< HAL_DEBUG
-				<< MSG_BORDER << RESET
-				<< std::endl;
+	std::cout
+	<< LIGHTBLUE
+	<< MSG_BORDER
+	<< "[ DEBUG ]\n"
+	<< RESET
+	<< HAL_DEBUG
+	<< LIGHTBLUE
+	<< MSG_BORDER
+	<< RESET
+	<< std::endl;
 }
 
 void	Harl::info(void)
 {
-	std::cout	<< LIGHTCYAN
-				<< MSG_BORDER
-				<< HAL_INFO
-				<< MSG_BORDER << RESET
-				<< std::endl;
+	std::cout
+	<< LIGHTCYAN
+	<< MSG_BORDER
+	<< "[ INFO ]\n"
+	<< RESET
+	<< HAL_INFO
+	<< LIGHTCYAN
+	<< MSG_BORDER
+	<< RESET
+	<< std::endl;
 }
 
 void	Harl::warning(void)
 {
-	std::cout	<< LIGHTYELLOW
-				<< MSG_BORDER
-				<< HAL_WARNING
-				<< MSG_BORDER << RESET
-				<< std::endl;
+	std::cout
+	<< LIGHTYELLOW
+	<< MSG_BORDER
+	<< "[ WARNING ]\n"
+	<< RESET
+	<< HAL_WARNING
+	<< LIGHTYELLOW
+	<< MSG_BORDER
+	<< RESET
+	<< std::endl;
 }
 
 void	Harl::error(void)
 {
-	std::cout	<< LIGHTRED
-				<< MSG_BORDER
-				<< HAL_ERROR
-				<< MSG_BORDER << RESET
-				<< std::endl;
+	std::cout
+	<< LIGHTRED
+	<< MSG_BORDER
+	<< "[ ERROR ]\n"
+	<< RESET
+	<< HAL_ERROR
+	<< LIGHTRED
+	<< MSG_BORDER
+	<< RESET
+	<< std::endl;
 }
 
 void	Harl::no_complain(void)
 {
-	std::cout	<< MSG_BORDER
-				<< HAL_NO_COMPLAIN
-				<< MSG_BORDER
-				<< std::endl;	
+	std::cout
+	<< MSG_BORDER
+	<< "[ NO COMPLAIN ]\n"
+	<< HAL_NO_COMPLAIN
+	<< MSG_BORDER
+	<< std::endl;	
 }
 
 std::string	Harl::capitalize_level(std::string str)
