@@ -75,6 +75,8 @@ test:
 
 	@echo -e '[TEST 05] › Tests failing out_file '$(LC)'./ftrplc tests/test02 hello HALLO'$(R)
 	@echo -n '          › '
+	@touch tests/test05.replace
+	@chmod 000 tests/test05.replace
 	@res=$$(./$(NAME) tests/test05 hello HELLO 2>&1); \
 	diff <(echo $$res) <(echo "Error: failed to open: tests/test05.replace") >/dev/null \
 		&& echo -e $(LG)"[OK]"$(R) \
