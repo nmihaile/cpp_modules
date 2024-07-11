@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 18:36:25 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/11 10:47:56 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:04:38 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	error_msg(std::string msg)
 bool	ft_replace(std::string inFileName, std::string s1, std::string s2)
 {
 	std::string		outFileName = inFileName + ".replace";
-	std::ifstream	inFile(inFileName);
+	std::ifstream	inFile(inFileName.c_str());
 
 	if (s1.empty())
 		return (error_msg("Error: string1: is empty."), true);
@@ -28,7 +28,7 @@ bool	ft_replace(std::string inFileName, std::string s1, std::string s2)
 	if (!inFile.is_open())
 		return (error_msg("Error: failed to open: " + inFileName), true);
 
-	std::ofstream	outFile(outFileName);
+	std::ofstream	outFile(outFileName.c_str());
 	if (!outFile.is_open())
 	{
 		inFile.close();
