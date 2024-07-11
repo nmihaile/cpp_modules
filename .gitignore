@@ -7,6 +7,9 @@
 !ex02
 !ex03
 !ex04
+!ex04/tests
+!ex04/tests/test*
+ex04/tests/test05.replace
 
 !Makefile
 !*.h
