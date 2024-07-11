@@ -11,6 +11,7 @@
 !ex04/tests/test*
 ex04/tests/test05.replace
 !ex05
+!ex06
 
 !Makefile
 !*.h
