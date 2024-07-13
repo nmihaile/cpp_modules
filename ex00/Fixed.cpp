@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:14:35 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/13 12:00:25 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:38:28 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ Fixed& Fixed::operator = (const Fixed &other)
 	return (*this);
 }
 
-int	Fixed::getRawBits(void) const
+int32_t	Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
 
 	return (m_rawBits);
 }
 
-void	Fixed::setRawBits(int const raw)
+void	Fixed::setRawBits(int32_t const raw)
 {
 	std::cout << "setRawBits member function called" << std::endl;
 
@@ -65,7 +65,7 @@ void	Fixed::setRawBits(int const raw)
 
 void	Fixed::swap(Fixed &other)
 {
-	int	tmp = m_rawBits;
+	int32_t	tmp = m_rawBits;
 	m_rawBits = other.m_rawBits;
 	other.m_rawBits = tmp;
 }

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:14:35 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/13 13:13:48 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:36:42 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Fixed::Fixed() : m_rawBits(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int i) : m_rawBits(i << m_precision)
+Fixed::Fixed(const int32_t i) : m_rawBits(i << m_precision)
 {
 	std::cout << "Int constructor called" << std::endl;
 }
@@ -54,14 +54,14 @@ Fixed& Fixed::operator = (const Fixed &other)
 	return (*this);
 }
 
-int	Fixed::getRawBits(void) const
+int32_t	Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
 
 	return (m_rawBits);
 }
 
-void	Fixed::setRawBits(int const raw)
+void	Fixed::setRawBits(int32_t const raw)
 {
 	std::cout << "setRawBits member function called" << std::endl;
 
@@ -73,7 +73,7 @@ float	Fixed::toFloat( void ) const
 	return ( static_cast<float>(m_rawBits) / static_cast<float>(1 << m_precision) );
 }
 
-int 	Fixed::toInt(void) const
+int32_t 	Fixed::toInt(void) const
 {
 	return ( m_rawBits >> m_precision );
 }

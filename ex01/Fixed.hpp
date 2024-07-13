@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:14:36 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/13 12:58:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:36:12 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,21 @@ class Fixed
 {
 public:
 	Fixed();
-	Fixed(const int i);
+	Fixed(const int32_t i);
 	Fixed(const float f);
 	Fixed(const Fixed &other);
 	~Fixed();
 
 	Fixed& operator = (const Fixed &other);
 
-	int		getRawBits(void) const;
-	void	setRawBits(int const raw);
-	float	toFloat(void) const;
-	int 	toInt(void) const;
+	int32_t		getRawBits(void) const;
+	void		setRawBits(int32_t const raw);
+	float		toFloat(void) const;
+	int32_t 	toInt(void) const;
 
 private:
-	int					m_rawBits;
-	static const int	m_precision = 8;
+	int32_t					m_rawBits;
+	static const int32_t	m_precision = 8;
 
 	void		swap(Fixed &other);
 };

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:14:36 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/13 12:12:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:37:59 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ public:
 
 	Fixed& operator = (const Fixed &other);
 
-	int		getRawBits(void) const;
-	void	setRawBits(int const raw);
+	int32_t	getRawBits(void) const;
+	void	setRawBits(int32_t const raw);
 
 private:
-	int					m_rawBits;
-	static const int	m_precision = 8;
+	int32_t					m_rawBits;
+	static const int32_t	m_precision = 8;
 
 	void		swap(Fixed &other);
 };
