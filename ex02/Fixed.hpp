@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:14:36 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/13 21:47:35 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:14:20 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <iostream>
 #include <cmath>
+
+#define ENABLED_FIXED_DEBUG false
 
 class Fixed
 {
@@ -42,15 +44,21 @@ public:
 	bool	operator <= (const Fixed& other) const;
 	bool	operator == (const Fixed& other) const;
 	bool	operator != (const Fixed& other) const;
+
+	Fixed&	operator += (const Fixed& other);
+	Fixed&	operator -= (const Fixed& other);
+	Fixed&	operator *= (const Fixed& other);
+	Fixed&	operator /= (const Fixed& other);
+
 	Fixed	operator +  (const Fixed& other) const;
 	Fixed	operator -  (const Fixed& other) const;
 	Fixed	operator *  (const Fixed& other) const;
 	Fixed	operator /  (const Fixed& other) const;
+
 	Fixed&	operator ++ ();
 	Fixed&	operator -- ();
 	Fixed	operator ++ (int);
 	Fixed	operator -- (int);
-
 
 private:
 	int32_t					m_rawBits;
