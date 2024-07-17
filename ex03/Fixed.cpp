@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:14:35 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/17 12:02:42 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:05:44 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Fixed::Fixed(const int32_t i) : m_rawBits(i << m_precision)
 #endif
 }
 
-Fixed::Fixed(const float f) : m_rawBits(std::roundf(f * (1 << m_precision)))
+Fixed::Fixed(const float f) : m_rawBits(roundf(f * (1 << m_precision)))
 {
 #if ENABLED_FIXED_DEBUG
 	std::cout << "Float constructor called" << std::endl;
