@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 12:13:58 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/17 19:52:16 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:15:50 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ const Fixed&	Point::getY(void) const
 
 std::ostream& operator << (std::ostream& os, const Point& point)
 {
-	// std::ostream os;
 	os << "Point(" << point.getX() << ", " << point.getY() << ")";
 	return (os);
 }
