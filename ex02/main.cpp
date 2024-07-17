@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 18:12:42 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/17 12:01:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/17 12:07:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void	custom_tests(void)
 
 int	main(int ac, char **av)
 {
-	if (ac == 1)
+	if (ac != 1)
 		return ((void)av, custom_tests(), 0);
 		
 	Fixed a;

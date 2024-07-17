@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:14:36 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/16 12:14:20 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/17 12:05:56 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 #include <cmath>
 
-#define ENABLED_FIXED_DEBUG false
+#define ENABLED_FIXED_DEBUG true
 
 class Fixed
 {
