@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:18:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/20 16:10:54 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:49:03 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ ScavTrap::ScavTrap(const std::string name)
 	std::cout << "ScavTrap name constructor called: " << m_name << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& other)
+// The base 'class ClapTrap' must be explicitly initialized in the copy constructor
+// because ScavTrap contains a base class subobject of type ClapTrap. 
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 {
 	std::cout << "ScavTrap copy constructor called: " << other.m_name << std::endl;	
-
+	
 	this->copy_member_vars(other);
 }
 
@@ -57,6 +59,31 @@ void	ScavTrap::attack(const std::string& target)
 	
 }
 
+void 	ScavTrap::guardGate(unsigned int id)
+{
+	std::string	action("guard gate ");
+	std::ostringstream os;
+	os << id;
+	action += os.str();
+	if (this->is_dead(action))
+		return ;
+
+	m_guardedGateID	= id;
+
+	if (m_guardedGateID > 0)
+	{
+		m_state		= ST_GATE_KEEPER;
+		std::cout	<< "ScavTrap "	<< m_name
+					<< " is now in Gate keeper mode." << std::endl;
+	}
+	else
+	{
+		m_state		= ST_IDLE;		
+		std::cout	<< "ScavTrap "	<< m_name
+					<< " is now in Idle mode." << std::endl;
+	}
+}
+
 void	ScavTrap::status(void)
 {
 	std::cout	<< "Status of ScavTrap: name: " << m_name
@@ -73,7 +100,9 @@ void	ScavTrap::status(void)
 
 void	ScavTrap::init(void)
 {
+	m_state			= ST_IDLE;
 	m_hit_points	= 100;
 	m_energy_points	= 50;
 	m_attack_damage	= 20;
+	m_guardedGateID = 0;
 }

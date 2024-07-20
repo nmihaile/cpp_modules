@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:18:05 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/20 16:59:32 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/20 17:42:05 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,31 @@
 #define SCAVTRAP_HPP
 
 #include "ClapTrap.hpp"
+#include <sstream>
 
 class ScavTrap : public ClapTrap
 {
 public:
+
+	typedef enum e_state
+	{
+		ST_IDLE,
+		ST_GATE_KEEPER
+	}	t_state;
+
 	ScavTrap();
 	ScavTrap(const std::string name);
 	ScavTrap(const ScavTrap& other);
 	~ScavTrap();
 
 	void	attack(const std::string& target);
+	void 	guardGate(unsigned int id);
 	void	status(void);
 
 private:	
-	void	init(void);
-	
+	void			init(void);
+	t_state			m_state;
+	unsigned int	m_guardedGateID;
 };
 
 #endif
