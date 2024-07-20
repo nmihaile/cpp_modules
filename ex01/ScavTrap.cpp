@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:18:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/20 20:49:03 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/20 21:37:34 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,15 @@ void	ScavTrap::status(void)
 				<< ", energy_points: " << m_energy_points
 				<< ", attack_damage: " << m_attack_damage
 				<< std::endl;	
+}
+
+ScavTrap&	ScavTrap::operator = (const ScavTrap& other)
+{
+	std::cout << "ScavTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;	
+
+	if (this != &other)
+		this->copy_member_vars(other);		
+	return (*this);		
 }
 
 
