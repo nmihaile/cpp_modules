@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:51 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/20 15:02:38 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:11:03 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,15 @@ void	ClapTrap::beRepaired(unsigned int amount)
 
 	m_hit_points += amount;
 	m_energy_points--;
+}
+
+void	ClapTrap::status(void)
+{
+	std::cout	<< "Status of ClapTrap: name: " << m_name
+				<< ", hit_points: " << m_hit_points
+				<< ", energy_points: " << m_energy_points
+				<< ", attack_damage: " << m_attack_damage
+				<< std::endl;	
 }
 
 

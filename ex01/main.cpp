@@ -6,11 +6,12 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:27 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/20 15:02:23 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:11:28 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int	main(void)
 {
@@ -18,6 +19,15 @@ int	main(void)
 	ClapTrap Tom2(Tom);
 	ClapTrap Tom3;
 	Tom3 = Tom2;
+
+	
+	std::cout << "-------------------------" << std::endl;
+	Tom.status();
+	
+	std::cout << "-------------------------" << std::endl;
+	ScavTrap Jerry("Jerry");
+	Jerry.status();
+	std::cout << "-------------------------" << std::endl;
 	
 
 	// Basic test
