@@ -6,13 +6,13 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 20:57:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/21 11:01:08 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/21 11:27:14 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap("Undefined", 100, 100, 30)
+FragTrap::FragTrap() : ClapTrap("Unnamed", 100, 100, 30)
 {
 	std::cout << "FragTrap default constructor called: " << this->m_name << std::endl;
 }
