@@ -6,28 +6,21 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:27 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/20 20:33:57 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/21 10:49:01 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int	main(void)
 {
 	ClapTrap Tom("Tom");
-	ClapTrap Tom2(Tom);
-	ClapTrap Tom3;
-	Tom3 = Tom2;
-
-	
-	std::cout << "--------------------------------------------------" << std::endl;
-	Tom.status();
-	
-	std::cout << "--------------------------------------------------" << std::endl;
+		
+	std::cout << "\n~~{ ScavTrap }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 	ScavTrap Jerry("Jerry");
 	Jerry.status();
-	std::cout << "--------------------------------------------------" << std::endl;
 	
 	Jerry.guardGate(15);
 
@@ -41,7 +34,8 @@ int	main(void)
 
 
 	// Basic test
-	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+	std::cout << "\n~~{ ClapTrap }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+	Tom.status();
 	Tom.attack("Jerry");
 	Tom.takeDamage(3);
 	Tom.beRepaired(3);
@@ -62,6 +56,22 @@ int	main(void)
 	Tom.takeDamage(10);
 	Tom.beRepaired(10);
 	
+	std::cout << "\n~~{ FragTrap }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+
+	FragTrap ft("FortyTwo");
+
+	ft.takeDamage(3);
+	ft.beRepaired(3);
+
+	ft.status();
+	ft.highFivesGuys();
+
+	for (int i = 0; i < 9; i++)
+		ft.attack("Jerry");
+	ft.beRepaired(10);
+	ft.highFivesGuys();
+
+	std::cout << "\n~~{ DECONSTRUCT }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 		
 	return (0);
 }

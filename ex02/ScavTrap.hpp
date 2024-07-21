@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:18:05 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/20 17:42:05 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/20 21:35:38 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ public:
 	ScavTrap(const ScavTrap& other);
 	~ScavTrap();
 
-	void	attack(const std::string& target);
-	void 	guardGate(unsigned int id);
-	void	status(void);
+	void		attack(const std::string& target);
+	void	 	guardGate(unsigned int id);
+	void		status(void);
+	ScavTrap&	operator = (const ScavTrap& other);
 
 private:	
 	void			init(void);

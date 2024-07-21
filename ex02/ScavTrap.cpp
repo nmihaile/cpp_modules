@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:18:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/20 20:49:03 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/21 10:59:07 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ ScavTrap::ScavTrap(const std::string name)
 }
 
 // The base 'class ClapTrap' must be explicitly initialized in the copy constructor
-// because ScavTrap contains a base class subobject of type ClapTrap. 
+// because ScavTrap contains a base class subobject of type ClapTrap.
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 {
-	std::cout << "ScavTrap copy constructor called: " << other.m_name << std::endl;	
-	
+	std::cout << "ScavTrap copy constructor called: " << other.m_name << std::endl;
+
 	this->copy_member_vars(other);
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap destructor called: " << m_name << std::endl;	
+	std::cout << "ScavTrap destructor called: " << m_name << std::endl;
 }
 
 
@@ -50,13 +50,13 @@ void	ScavTrap::attack(const std::string& target)
 {
 	if (this->is_dead("attack") || this->out_of_energy("attack"))
 		return ;
-		
+
 	std::cout	<< "ScavTrap "	<< m_name
 				<< " attacks "	<< target
 				<< ", causing "	<< m_attack_damage
 				<< " points of damage!" << std::endl;
 	m_energy_points--;
-	
+
 }
 
 void 	ScavTrap::guardGate(unsigned int id)
@@ -78,7 +78,7 @@ void 	ScavTrap::guardGate(unsigned int id)
 	}
 	else
 	{
-		m_state		= ST_IDLE;		
+		m_state		= ST_IDLE;
 		std::cout	<< "ScavTrap "	<< m_name
 					<< " is now in Idle mode." << std::endl;
 	}
@@ -86,13 +86,21 @@ void 	ScavTrap::guardGate(unsigned int id)
 
 void	ScavTrap::status(void)
 {
-	std::cout	<< "Status of ScavTrap: name: " << m_name
+	std::cout	<< "ScavTrap Status: name: " << m_name
 				<< ", hit_points: " << m_hit_points
 				<< ", energy_points: " << m_energy_points
 				<< ", attack_damage: " << m_attack_damage
-				<< std::endl;	
+				<< std::endl;
 }
 
+ScavTrap&	ScavTrap::operator = (const ScavTrap& other)
+{
+	std::cout << "ScavTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
+
+	if (this != &other)
+		this->copy_member_vars(other);
+	return (*this);
+}
 
 /* ************************************************************************** */
 /* ************************************************************************** */
