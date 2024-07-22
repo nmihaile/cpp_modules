@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:27 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/21 10:49:01 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:55:19 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	main(void)
 	for (int i = 0; i < 9; i++)
 		ft.attack("Jerry");
 	ft.beRepaired(10);
+	ft.highFivesGuys();
+	ft.takeDamage(200);
 	ft.highFivesGuys();
 
 	std::cout << "\n~~{ DECONSTRUCT }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;

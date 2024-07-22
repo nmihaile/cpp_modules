@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 20:57:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/21 11:27:14 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:54:24 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ FragTrap::~FragTrap()
 
 void	FragTrap::highFivesGuys(void)
 {
+	if (this->is_dead("request_high_five"))
+		return ;
+
 	std::cout	<< "FragTrap "	<< m_name
 				<< " requests a high 5!" << std::endl;
 }
