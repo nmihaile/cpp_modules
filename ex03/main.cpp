@@ -6,70 +6,51 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:27 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/21 10:49:01 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:14:32 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int	main(void)
 {
-	ClapTrap Tom("Tom");
-		
-	std::cout << "\n~~{ ScavTrap }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
-	ScavTrap Jerry("Jerry");
-	Jerry.status();
+
+	std::cout << "\n~~{ DiamondTrap }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+
+	DiamondTrap dt1("D-01");
+	DiamondTrap dt2;
+	DiamondTrap dt3(dt1);
+
+
+	std::cout << "~~" << std::endl;
+	std::cout	<< dt1.get_name() << "\n"
+				<< dt1.get_hit_points() << "\n"
+				<< dt1.get_energy_points() << "\n"
+				<< dt1.get_attack_damage() << std::endl;
+	std::cout << "~~" << std::endl;
+
+
+	dt2 = dt1;
+
+	dt1.attack("Tom");
+	dt1.takeDamage(25);
+	dt1.beRepaired(7);
+	dt1.highFivesGuys();
+	dt2.highFivesGuys();
+
 	
-	Jerry.guardGate(15);
+	dt1.status();
+	dt2.status();
 
-	Jerry.attack("Tom");
-	Jerry.takeDamage(15);
-	
-	Jerry.guardGate(0);
+	dt1.takeDamage(150);
+	dt1.highFivesGuys();
 
-	Jerry.takeDamage(233);
-	Jerry.guardGate(14);
-
-
-	// Basic test
-	std::cout << "\n~~{ ClapTrap }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
-	Tom.status();
-	Tom.attack("Jerry");
-	Tom.takeDamage(3);
-	Tom.beRepaired(3);
-
-	// Run out of ENERGY_POINTS and test
-	// attack
-	// beRepaired
-	for (int i = 0; i < 9; i++)
-		Tom.attack("Jerry");
-	Tom.beRepaired(10);
-
-	// Run out of HIT_POINTS …
-	Tom.takeDamage(5);
-	Tom.takeDamage(7);
-
-	// … and test all actions
-	Tom.attack("Jerry");
-	Tom.takeDamage(10);
-	Tom.beRepaired(10);
-	
-	std::cout << "\n~~{ FragTrap }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
-
-	FragTrap ft("FortyTwo");
-
-	ft.takeDamage(3);
-	ft.beRepaired(3);
-
-	ft.status();
-	ft.highFivesGuys();
-
-	for (int i = 0; i < 9; i++)
-		ft.attack("Jerry");
-	ft.beRepaired(10);
-	ft.highFivesGuys();
+	dt1.who_am_I();
+	dt2.who_am_I();
+	dt3.who_am_I();
 
 	std::cout << "\n~~{ DECONSTRUCT }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 		

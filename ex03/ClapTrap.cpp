@@ -6,41 +6,37 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:51 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/21 10:54:52 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:11:26 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : m_name("Unnamed")
+ClapTrap::ClapTrap()
+	:	m_name("Unnamed"),
+		m_hit_points(10),
+		m_energy_points(10),
+		m_attack_damage(0)
 {
 	std::cout << "ClapTrap default constructor called: " << m_name << std::endl;
-
-	this->init();
 }
 
-ClapTrap::ClapTrap(const std::string name) : m_name(name)
+ClapTrap::ClapTrap(const std::string name)
+	:	m_name(name),
+		m_hit_points(10),
+		m_energy_points(10),
+		m_attack_damage(0)
 {
 	std::cout << "ClapTrap name constructor called: " << m_name << std::endl;
-
-	this->init();
-}
-
-ClapTrap::ClapTrap(const std::string name, int hit, int energy, int attack_damage)
-	:	m_name(name),
-		m_hit_points(hit),
-		m_energy_points(energy),
-		m_attack_damage(attack_damage)
-{
-	std::cout << "ClapTrap name & values constructor called: " << m_name << std::endl;
-
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
+	:	m_name(other.m_name),
+		m_hit_points(other.m_hit_points),
+		m_energy_points(other.m_energy_points),
+		m_attack_damage(other.m_attack_damage)	
 {
 	std::cout << "ClapTrap copy constructor called: " << other.m_name << std::endl;
-
-	this->copy_member_vars(other);
 }
 
 ClapTrap::~ClapTrap()
@@ -52,10 +48,13 @@ ClapTrap&	ClapTrap::operator = (const ClapTrap& other)
 {
 	std::cout << "ClapTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
 
-	if (this == &other)
-		return (*this);
-
-	this->copy_member_vars(other);
+	if (this != &other)
+	{
+		m_name			= other.m_name;
+		m_hit_points	= other.m_hit_points;
+		m_energy_points	= other.m_energy_points;
+		m_attack_damage	= other.m_attack_damage;		
+	}
 	return (*this);
 }
 
@@ -114,38 +113,28 @@ void	ClapTrap::beRepaired(unsigned int amount)
 
 void	ClapTrap::status(void)
 {
-	std::cout	<< "ClapTrap Status: name: " << m_name
+	std::cout	<< "Status: name: " << m_name
 				<< ", hit_points: " << m_hit_points
 				<< ", energy_points: " << m_energy_points
 				<< ", attack_damage: " << m_attack_damage
 				<< std::endl;
 }
 
+std::string		ClapTrap::get_name(void)			{ return (m_name); }
+unsigned int	ClapTrap::get_hit_points(void)		{ return (m_hit_points); }
+unsigned int	ClapTrap::get_energy_points(void)	{ return (m_energy_points); }
+unsigned int	ClapTrap::get_attack_damage(void)	{ return (m_attack_damage); }
+
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-
-void	ClapTrap::init(void)
-{
-	m_hit_points	= 10;
-	m_energy_points	= 10;
-	m_attack_damage	= 0;
-}
-
-void	ClapTrap::copy_member_vars(const ClapTrap& other)
-{
-	m_name			= other.m_name;
-	m_hit_points	= other.m_hit_points;
-	m_energy_points	= other.m_energy_points;
-	m_attack_damage	= other.m_attack_damage;
-}
 
 bool	ClapTrap::is_dead(const std::string action)
 {
 	if (m_hit_points == 0)
 	{
-		std::cout	<< "ClapTrap "	<< m_name
+		std::cout	<< m_name
 					<< " has no hit points left. It can't perform action: "
 					<< action << std::endl;
 		return (true);
@@ -157,7 +146,7 @@ bool	ClapTrap::out_of_energy(const std::string action)
 {
 	if (m_energy_points == 0)
 	{
-		std::cout	<< "ClapTrap "	<< m_name
+		std::cout	<< m_name
 					<< " has no energy points left. It can't perform action: "
 					<< action << std::endl;
 		return (true);

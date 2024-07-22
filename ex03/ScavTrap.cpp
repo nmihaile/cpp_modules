@@ -6,34 +6,40 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:18:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/21 10:59:07 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:15:49 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap("Unnamed")
 {
-	std::cout << "ScavTrap default constructor called: " << this->m_name << std::endl;
+	m_hit_points	= 100;
+	m_energy_points	= 50;
+	m_attack_damage	= 20;
 
-	this->init();
+	std::cout << "ScavTrap default constructor called: " << this->m_name << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string name)
+ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
 {
-	m_name = name;
-	this->init();
+	m_hit_points	= 100;
+	m_energy_points	= 50;
+	m_attack_damage	= 20;
 
 	std::cout << "ScavTrap name constructor called: " << m_name << std::endl;
 }
 
 // The base 'class ClapTrap' must be explicitly initialized in the copy constructor
 // because ScavTrap contains a base class subobject of type ClapTrap.
-ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)	
 {
 	std::cout << "ScavTrap copy constructor called: " << other.m_name << std::endl;
 
-	this->copy_member_vars(other);
+	m_name			= other.m_name;
+	m_hit_points	= other.m_hit_points;
+	m_energy_points	= other.m_energy_points;
+	m_attack_damage	= other.m_attack_damage;
 }
 
 ScavTrap::~ScavTrap()
@@ -56,7 +62,6 @@ void	ScavTrap::attack(const std::string& target)
 				<< ", causing "	<< m_attack_damage
 				<< " points of damage!" << std::endl;
 	m_energy_points--;
-
 }
 
 void 	ScavTrap::guardGate(unsigned int id)
@@ -93,24 +98,18 @@ void	ScavTrap::status(void)
 				<< std::endl;
 }
 
+unsigned int	ScavTrap::get_energy_points(void)	{ return (m_energy_points); }
+
 ScavTrap&	ScavTrap::operator = (const ScavTrap& other)
 {
 	std::cout << "ScavTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
 
 	if (this != &other)
-		this->copy_member_vars(other);
+	{
+		m_name			= other.m_name;
+		m_hit_points	= other.m_hit_points;
+		m_energy_points	= other.m_energy_points;
+		m_attack_damage	= other.m_attack_damage;
+	}
 	return (*this);
-}
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-
-void	ScavTrap::init(void)
-{
-	m_state			= ST_IDLE;
-	m_hit_points	= 100;
-	m_energy_points	= 50;
-	m_attack_damage	= 20;
-	m_guardedGateID = 0;
 }
