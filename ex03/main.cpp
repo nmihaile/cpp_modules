@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:27 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/22 21:14:32 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 16:35:10 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	main(void)
 	DiamondTrap dt2;
 	DiamondTrap dt3(dt1);
 
+	std::cout << "~~" << std::endl;
+	dt3.whoAmI();
+	dt3.status();
+	std::cout << "~~" << std::endl;
+
 
 	std::cout << "~~" << std::endl;
 	std::cout	<< dt1.get_name() << "\n"
@@ -31,7 +36,6 @@ int	main(void)
 				<< dt1.get_energy_points() << "\n"
 				<< dt1.get_attack_damage() << std::endl;
 	std::cout << "~~" << std::endl;
-
 
 	dt2 = dt1;
 
@@ -48,9 +52,9 @@ int	main(void)
 	dt1.takeDamage(150);
 	dt1.highFivesGuys();
 
-	dt1.who_am_I();
-	dt2.who_am_I();
-	dt3.who_am_I();
+	dt1.whoAmI();
+	dt2.whoAmI();
+	dt3.whoAmI();
 
 	std::cout << "\n~~{ DECONSTRUCT }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 		
