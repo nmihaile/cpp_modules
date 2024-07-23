@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:53 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/23 14:44:38 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:41:47 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ public:
 	void	takeDamage(unsigned int amount);
 	void	beRepaired(unsigned int amount);
 	void	status(void);
-	
+
+	std::string		get_name(void);
+	unsigned int	get_hit_points(void);
+	unsigned int	get_energy_points(void);
+	unsigned int	get_attack_damage(void);
+
 protected:
 	std::string		m_name;
 	unsigned int	m_hit_points;

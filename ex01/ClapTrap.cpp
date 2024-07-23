@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:51 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/23 14:44:51 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:42:18 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,11 @@ void	ClapTrap::status(void)
 				<< ", attack_damage: " << m_attack_damage
 				<< std::endl;	
 }
+
+std::string		ClapTrap::get_name(void)			{ return (m_name); }
+unsigned int	ClapTrap::get_hit_points(void)		{ return (m_hit_points); }
+unsigned int	ClapTrap::get_energy_points(void)	{ return (m_energy_points); }
+unsigned int	ClapTrap::get_attack_damage(void)	{ return (m_attack_damage); }
 
 
 /* ************************************************************************** */
