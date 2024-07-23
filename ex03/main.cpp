@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:27 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/23 16:35:10 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:33:40 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,18 @@ int	main(void)
 
 	dt2 = dt1;
 
+	std::cout << "~ ~ ~ ~ > ";
+	dt1.guardGate(42);
+
 	dt1.attack("Tom");
 	dt1.takeDamage(25);
 	dt1.beRepaired(7);
 	dt1.highFivesGuys();
 	dt2.highFivesGuys();
+
+
+	std::cout << "~ ~ ~ ~ > ";
+	dt1.guardGate(0);
 
 	
 	dt1.status();
@@ -51,6 +58,9 @@ int	main(void)
 
 	dt1.takeDamage(150);
 	dt1.highFivesGuys();
+
+	std::cout << "~ ~ ~ ~ > ";
+	dt1.guardGate(21);
 
 	dt1.whoAmI();
 	dt2.whoAmI();
