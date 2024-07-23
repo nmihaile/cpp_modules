@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 20:57:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/22 21:12:02 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:46:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,22 @@ FragTrap::FragTrap(const std::string name) : ClapTrap(name)
 FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other)
 {
 	std::cout << "FragTrap copy constructor called: " << other.m_name << std::endl;
-
-	m_name			= other.m_name;
-	m_hit_points	= other.m_hit_points;
-	m_energy_points	= other.m_energy_points;
-	m_attack_damage	= other.m_attack_damage;
 }
 
 FragTrap::~FragTrap()
 {
 	std::cout << "FragTrap destructor called: " << m_name << std::endl;
+}
+
+FragTrap&	FragTrap::operator = (const FragTrap& other)
+{
+	std::cout << "FragTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
+
+	if (this == &other)
+		return (*this);
+
+	ClapTrap::operator=(static_cast<const ClapTrap&>(other));
+	return (*this);
 }
 
 
@@ -60,21 +66,3 @@ void	FragTrap::highFivesGuys(void)
 	std::cout	<< "FragTrap "	<< m_name
 				<< " requests a high 5!" << std::endl;
 }
-
-FragTrap&	FragTrap::operator = (const FragTrap& other)
-{
-	std::cout << "FragTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
-
-	if (this != &other)
-	{
-		m_name			= other.m_name;
-		m_hit_points	= other.m_hit_points;
-		m_energy_points	= other.m_energy_points;
-		m_attack_damage	= other.m_attack_damage;
-	}
-	return (*this);
-}
-
-
-/* ************************************************************************** */
-/* ************************************************************************** */

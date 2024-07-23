@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 20:57:47 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/22 19:47:51 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:46:39 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ public:
 	FragTrap(const FragTrap& other);
 	~FragTrap();
 
-	void		highFivesGuys(void);
 	FragTrap&	operator = (const FragTrap& other);
 
-private:
+	void		highFivesGuys(void);
 };
 
 #endif
