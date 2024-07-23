@@ -6,13 +6,16 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:18:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/22 21:15:49 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:21:49 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap("Unnamed")
+ScavTrap::ScavTrap()
+	:	ClapTrap("Unnamed"),
+		m_state(ST_IDLE),
+		m_guardedGateID(0)
 {
 	m_hit_points	= 100;
 	m_energy_points	= 50;
@@ -21,7 +24,10 @@ ScavTrap::ScavTrap() : ClapTrap("Unnamed")
 	std::cout << "ScavTrap default constructor called: " << this->m_name << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
+ScavTrap::ScavTrap(const std::string name)
+	:	ClapTrap(name),
+		m_state(ST_IDLE),
+		m_guardedGateID(0)
 {
 	m_hit_points	= 100;
 	m_energy_points	= 50;
@@ -32,19 +38,31 @@ ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
 
 // The base 'class ClapTrap' must be explicitly initialized in the copy constructor
 // because ScavTrap contains a base class subobject of type ClapTrap.
-ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)	
+ScavTrap::ScavTrap(const ScavTrap& other)
+	:	ClapTrap(other),
+		m_state(other.m_state),
+		m_guardedGateID(other.m_guardedGateID)
 {
 	std::cout << "ScavTrap copy constructor called: " << other.m_name << std::endl;
-
-	m_name			= other.m_name;
-	m_hit_points	= other.m_hit_points;
-	m_energy_points	= other.m_energy_points;
-	m_attack_damage	= other.m_attack_damage;
 }
 
 ScavTrap::~ScavTrap()
 {
 	std::cout << "ScavTrap destructor called: " << m_name << std::endl;
+}
+
+ScavTrap&	ScavTrap::operator = (const ScavTrap& other)
+{
+	std::cout << "ScavTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
+
+	if (this == &other)
+		return (*this);
+
+	ClapTrap::operator=(static_cast<const ClapTrap&>(other));
+	m_state			= other.m_state;
+	m_guardedGateID	= other.m_guardedGateID;
+
+	return (*this);
 }
 
 
@@ -89,27 +107,7 @@ void 	ScavTrap::guardGate(unsigned int id)
 	}
 }
 
-void	ScavTrap::status(void)
+unsigned int	ScavTrap::get_energy_points(void)
 {
-	std::cout	<< "ScavTrap Status: name: " << m_name
-				<< ", hit_points: " << m_hit_points
-				<< ", energy_points: " << m_energy_points
-				<< ", attack_damage: " << m_attack_damage
-				<< std::endl;
-}
-
-unsigned int	ScavTrap::get_energy_points(void)	{ return (m_energy_points); }
-
-ScavTrap&	ScavTrap::operator = (const ScavTrap& other)
-{
-	std::cout << "ScavTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
-
-	if (this != &other)
-	{
-		m_name			= other.m_name;
-		m_hit_points	= other.m_hit_points;
-		m_energy_points	= other.m_energy_points;
-		m_attack_damage	= other.m_attack_damage;
-	}
-	return (*this);
+	return (m_energy_points);
 }
