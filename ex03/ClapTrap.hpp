@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:53 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/22 20:10:03 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:23:00 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,6 @@
 
 #include <string>
 #include <iostream>
-
-
-/* 
-DiamondTrap
-attribute
-Claptrap:name claptrapname -> Scav -> Fragtrap
-Claptrap:hitpoints claptvalue ->Scav -> frag
-Claptrap:attack clapvalue -> scav -> frag
-Claptrap:energypoints clapenergy -> Scavtrap:Energypoints -> frag(Claptrap->energy)  
- */
 
 class ClapTrap
 {

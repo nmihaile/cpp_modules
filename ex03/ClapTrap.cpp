@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:35:51 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/22 21:11:26 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:36:54 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ ClapTrap&	ClapTrap::operator = (const ClapTrap& other)
 {
 	std::cout << "ClapTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
 
-	if (this != &other)
-	{
-		m_name			= other.m_name;
-		m_hit_points	= other.m_hit_points;
-		m_energy_points	= other.m_energy_points;
-		m_attack_damage	= other.m_attack_damage;		
-	}
+	if (this == &other)
+		return (*this);
+
+	m_name			= other.m_name;
+	m_hit_points	= other.m_hit_points;
+	m_energy_points	= other.m_energy_points;
+	m_attack_damage	= other.m_attack_damage;		
 	return (*this);
 }
 
@@ -113,7 +113,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 
 void	ClapTrap::status(void)
 {
-	std::cout	<< "Status: name: " << m_name
+	std::cout	<< "[ STATUS ] -> name: " << m_name
 				<< ", hit_points: " << m_hit_points
 				<< ", energy_points: " << m_energy_points
 				<< ", attack_damage: " << m_attack_damage
