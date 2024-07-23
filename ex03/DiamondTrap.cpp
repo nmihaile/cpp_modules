@@ -6,14 +6,14 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 11:22:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/22 21:22:48 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/23 16:37:12 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap()
-	:	ClapTrap("clap_name_Unnamed"),
+	:	ClapTrap("Unnamed_clap_name"),
 		ScavTrap(),
 		FragTrap()
 {
@@ -23,7 +23,7 @@ DiamondTrap::DiamondTrap()
 }
 
 DiamondTrap::DiamondTrap(const std::string name)
-	:	ClapTrap("clap_name_" + name),
+	:	ClapTrap(name + "_clap_name"),
 		ScavTrap(name),
 		FragTrap(name)
 {
@@ -41,7 +41,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other)
 		FragTrap(other),
 		m_name("Unnamed")
 {
-	*this = other;
+	m_name = other.m_name;
 	
 	std::cout << "DiamondTrap copy constructor called: " << other.m_name << std::endl;
 }
@@ -49,6 +49,19 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other)
 DiamondTrap::~DiamondTrap()
 {
 	std::cout << "DiamondTrap destructor called: " << m_name << std::endl;
+}
+
+DiamondTrap&	DiamondTrap::operator = (const DiamondTrap& other)
+{	
+	std::cout << "DiamondTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
+
+	if (this == &other)
+		return (*this);
+
+	ClapTrap::operator=(static_cast<const ClapTrap&>(other));
+	m_name = other.m_name;
+
+	return (*this);
 }
 
 
@@ -61,23 +74,8 @@ void	DiamondTrap::attack(const std::string& target)
 	ScavTrap::attack(target);
 }
 
-void	DiamondTrap::who_am_I(void)
+void	DiamondTrap::whoAmI(void)
 {	
 	std::cout	<< "My DiamondTrap name is: " << m_name
-				<< ", and my ClapTrap is " << this->get_name() << std::endl;
-}
-
-DiamondTrap&	DiamondTrap::operator = (const DiamondTrap& other)
-{	
-	std::cout << "DiamondTrap copy assignement operator overload called: " << m_name << " = " << other.m_name << std::endl;
-
-	if (this != &other)
-	{
-		m_name				= other.m_name;
-		m_hit_points		= other.m_hit_points;
-		m_energy_points		= other.m_energy_points;
-		m_attack_damage		= other.m_attack_damage;
-		ClapTrap::m_name	= other.ClapTrap::m_name;
-	}
-	return (*this);
+				<< ", and my ClapTrap name is " << this->get_name() << std::endl;
 }
