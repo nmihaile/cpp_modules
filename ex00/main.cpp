@@ -6,13 +6,15 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:44:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 15:34:21 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:58:23 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
+#include "WrongAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongCat.hpp"
 
 void	custom_tests(void)
 {
@@ -42,6 +44,15 @@ void	custom_tests(void)
 	c3 = cat;
 	c3.makeSound();
 	std::cout << "-------------" << std::endl;
+
+	WrongCat wcat;
+	wcat.makeSound();
+	WrongCat wc2(wcat);
+	wc2.makeSound();
+	WrongCat wc3;
+	wc3 = wcat;
+	wc3.makeSound();
+	std::cout << "-------------" << std::endl;
 }
 
 int	main(int ac, char **av)
@@ -52,12 +63,16 @@ int	main(int ac, char **av)
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
+	const WrongAnimal* l = new WrongCat();
 	std::cout << j->getType() << " " << std::endl;
 	std::cout << i->getType() << " " << std::endl;
+	std::cout << l->getType() << " " << std::endl;
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
+	l->makeSound();
 	meta->makeSound();
 	
+	delete(l);
 	delete(j);
 	delete(j);
 	delete(meta);
