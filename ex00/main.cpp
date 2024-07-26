@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:44:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 15:08:03 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:34:21 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,31 @@
 void	custom_tests(void)
 {
 	Animal	animal;
-	
 	animal.makeSound();
+	Animal a2(animal);
+	a2.makeSound();
+	Animal a3;
+	a3 = animal;
+	a3.makeSound();
+	std::cout << "-------------" << std::endl;
 
 	Dog dog;
 	dog.makeSound();
+	Dog d2(dog);
+	d2.makeSound();
+	Dog d3;
+	d3 = dog;
+	d3.makeSound();
+	std::cout << "-------------" << std::endl;
 
 	Cat cat;
-	cat.makeSound();	
+	cat.makeSound();
+	Cat c2(cat);
+	c2.makeSound();
+	Cat c3;
+	c3 = cat;
+	c3.makeSound();
+	std::cout << "-------------" << std::endl;
 }
 
 int	main(int ac, char **av)
@@ -39,7 +56,11 @@ int	main(int ac, char **av)
 	std::cout << i->getType() << " " << std::endl;
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
-	meta->makeSound();	
+	meta->makeSound();
+	
+	delete(j);
+	delete(j);
+	delete(meta);
 
 	return (0);
 }

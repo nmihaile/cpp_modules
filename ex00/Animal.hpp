@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:45:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 15:07:39 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:36:55 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@
 #include <string>
 #include <iostream>
 
+// In C++, if a class has virtual functions, it should also have a virtual
+// destructor to ensure that the destructor of the derived class is called
+// when an object is deleted through a base class pointer.
+
 class Animal
 {
 public:
 	Animal();
 	Animal(const Animal& other);
-	~Animal();
+	virtual ~Animal();
 
 	Animal&	operator = (const Animal& other);
 
