@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:44:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 15:58:23 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:03:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int ac, char **av)
 	meta->makeSound();
 	
 	delete(l);
-	delete(j);
+	delete(i);
 	delete(j);
 	delete(meta);
 

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 15:20:03 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:01:52 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Dog::Dog()
 	std::cout << "🐶 Dog default constructor called." << std::endl;
 }
 
-Dog::Dog(const Dog& other)
+Dog::Dog(const Dog& other) : Animal(other)
 {
 	m_type = other.m_type;
 	std::cout << "🐶 Dog copy constructor called." << std::endl;
