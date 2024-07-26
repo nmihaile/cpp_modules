@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 18:53:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:01:42 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	Dog::swap(Dog& other)
 	Brain		*tmpBrain	= m_brain;
 
 	m_type = other.m_type;
-	other.m_type = tmpType;
-
 	m_brain = other.m_brain;
+
+	other.m_type = tmpType;
 	other.m_brain = tmpBrain;
 }
