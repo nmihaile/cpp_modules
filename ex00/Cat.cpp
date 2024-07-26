@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:45 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 14:03:02 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:13:20 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ Cat& Cat::operator = (const Cat& other)
 /* ************************************************************************** */
 
 
-void	Cat::makeSound(void)
+void	Cat::makeSound(void) const
 {
 	std::cout << "😺 › Miau" << std::endl;	
 }

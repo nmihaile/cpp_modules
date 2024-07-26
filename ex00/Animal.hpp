@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:45:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 13:52:46 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:07:39 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ public:
 
 	Animal&	operator = (const Animal& other);
 
-	void	makeSound(void);
+	virtual void	makeSound(void) const;
+
+	std::string	getType(void) const;
 
 protected:
 	std::string	m_type;

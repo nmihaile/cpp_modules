@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:47 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 14:02:56 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:10:08 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ public:
 
 	Cat& operator = (const Cat& other);
 
-	void	makeSound(void);
+	virtual void	makeSound(void) const;
 };
 
 #endif

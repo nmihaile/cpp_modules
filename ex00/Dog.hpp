@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:49 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 13:52:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:09:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ public:
 
 	Dog&	operator = (const Dog& other);
 
-	void	makeSound(void);
+	virtual void	makeSound(void) const;
 };
 
 #endif

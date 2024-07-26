@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:45:24 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 13:25:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:13:14 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ Animal&	Animal::operator = (const Animal& other)
 /* ************************************************************************** */
 
 
-void	Animal::makeSound(void)
+void	Animal::makeSound(void) const
 {
 	std::cout << "🤐" << std::endl;	
+}
+
+std::string	Animal::getType(void) const
+{
+	return (m_type);
 }
