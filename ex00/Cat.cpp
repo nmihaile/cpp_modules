@@ -1,41 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 13:09:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 14:00:15 by nmihaile         ###   ########.fr       */
+/*   Created: 2024/07/26 13:09:45 by nmihaile          #+#    #+#             */
+/*   Updated: 2024/07/26 14:03:02 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "Cat.hpp"
 
-Dog::Dog()
+Cat::Cat()
 {
-	m_type = "🐶 DOG";
+	m_type = "😺 CAT";
 }
 
-Dog::Dog(const Dog& other)
+Cat::Cat(const Cat& other)
 {
 	m_type = other.m_type;
 }
 
-Dog::~Dog()
+Cat::~Cat()
 {
 }
 
-Dog& Dog::operator = (const Dog& other)
+
+Cat& Cat::operator = (const Cat& other)
 {
 	if (this == &other)
 		return (*this);
-	
+
 	m_type = other.m_type;
 	return (*this);
 }
 
-void	Dog:: makeSound(void)
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+
+void	Cat::makeSound(void)
 {
-	std::cout << "🐶 › Woof" << std::endl;
+	std::cout << "😺 › Miau" << std::endl;	
 }

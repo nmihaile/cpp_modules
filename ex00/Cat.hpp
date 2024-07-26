@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 13:09:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 14:00:15 by nmihaile         ###   ########.fr       */
+/*   Created: 2024/07/26 13:09:47 by nmihaile          #+#    #+#             */
+/*   Updated: 2024/07/26 14:02:56 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#pragma once
+#ifndef CAT_HPP
+#define CAT_HPP
 
-Dog::Dog()
-{
-	m_type = "🐶 DOG";
-}
+#include "Animal.hpp"
 
-Dog::Dog(const Dog& other)
+class Cat : public Animal
 {
-	m_type = other.m_type;
-}
+public:
+	Cat();
+	Cat(const Cat& other);
+	~Cat();
 
-Dog::~Dog()
-{
-}
+	Cat& operator = (const Cat& other);
 
-Dog& Dog::operator = (const Dog& other)
-{
-	if (this == &other)
-		return (*this);
-	
-	m_type = other.m_type;
-	return (*this);
-}
+	void	makeSound(void);
+};
 
-void	Dog:: makeSound(void)
-{
-	std::cout << "🐶 › Woof" << std::endl;
-}
+#endif
