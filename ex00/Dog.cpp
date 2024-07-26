@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 12:44:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 13:28:41 by nmihaile         ###   ########.fr       */
+/*   Created: 2024/07/26 13:09:48 by nmihaile          #+#    #+#             */
+/*   Updated: 2024/07/26 13:56:23 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
 #include "Dog.hpp"
 
-int	main(void)
+Dog::Dog()
 {
+	m_type = "DOG";
+}
 
-	Animal	animal;
+Dog::Dog(const Dog& other)
+{
+	m_type = other.m_type;
+}
+
+Dog::~Dog()
+{
+}
+
+Dog& Dog::operator = (const Dog& other)
+{
+	if (this == &other)
+		return (*this);
 	
-	animal.makeSound();
+	m_type = other.m_type;
+	return (*this);
+}
 
-	Dog dog;
-	dog.makeSound();
-	
-
-	return (0);
+void	Dog:: makeSound(void)
+{
+	std::cout << "🐶 › Woof" << std::endl;
 }

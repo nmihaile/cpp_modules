@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 12:44:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 13:28:41 by nmihaile         ###   ########.fr       */
+/*   Created: 2024/07/26 13:09:49 by nmihaile          #+#    #+#             */
+/*   Updated: 2024/07/26 13:52:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+#ifndef DOG_HPP
+#define DOG_HPP
+
 #include "Animal.hpp"
-#include "Dog.hpp"
 
-int	main(void)
+class Dog : public Animal
 {
+public:
+	Dog();
+	Dog(const Dog& other);
+	~Dog();
 
-	Animal	animal;
-	
-	animal.makeSound();
+	Dog&	operator = (const Dog& other);
 
-	Dog dog;
-	dog.makeSound();
-	
+	void	makeSound(void);
+};
 
-	return (0);
-}
+#endif
