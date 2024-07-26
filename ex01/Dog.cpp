@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:48 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 19:01:42 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:46:26 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ Dog& Dog::operator = (const Dog& other)
 void	Dog::makeSound() const
 {
 	std::cout << "🐶 › Woof" << std::endl;
+}
+
+Brain*&	Dog::getBrain(void)
+{
+	return (m_brain);
 }
 
 
