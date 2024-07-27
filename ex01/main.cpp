@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:44:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 21:29:16 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:20:51 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	custom_tests(void)
 	std::cout << "---------------------------------------" << std::endl;
 
 
+	// RENDER ALL IDEAS OF DOG1
 	// for (int it = 0; it < MAX_IDEAS; it++)
 	// 	std::cout << dog1.getBrain()->ideas[it] << "\n";
 	// std::cout << std::endl;
