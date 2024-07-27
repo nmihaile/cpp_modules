@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:45 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 17:02:11 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:25:01 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ WrongCat& WrongCat::operator = (const WrongCat& other)
 
 void	WrongCat::makeSound(void) const
 {
-	std::cout << "🦠😺 › Grunz" << std::endl;	
+	std::cout << "🦠😺 › Miau" << std::endl;	
 }

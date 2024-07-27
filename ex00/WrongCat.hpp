@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:47 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 15:52:04 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:24:00 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ public:
 
 	WrongCat& operator = (const WrongCat& other);
 
-	virtual void	makeSound(void) const;
+	void	makeSound(void) const;
 };
 
 #endif

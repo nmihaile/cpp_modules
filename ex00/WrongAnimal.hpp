@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:45:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 15:45:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:32:42 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ class WrongAnimal
 public:
 	WrongAnimal();
 	WrongAnimal(const WrongAnimal& other);
-	virtual ~WrongAnimal();
+	~WrongAnimal();
 
 	WrongAnimal&	operator = (const WrongAnimal& other);
 
-	virtual void	makeSound(void) const;
-
+	void		makeSound(void) const;
 	std::string	getType(void) const;
 
 protected:

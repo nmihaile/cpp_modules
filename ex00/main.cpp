@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:44:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 17:03:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:34:57 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,10 @@ void	custom_tests(void)
 	c3.makeSound();
 	std::cout << "-------------" << std::endl;
 
-	WrongCat wcat;
-	wcat.makeSound();
-	WrongCat wc2(wcat);
-	wc2.makeSound();
-	WrongCat wc3;
-	wc3 = wcat;
-	wc3.makeSound();
+	
+	WrongAnimal* wcat = new WrongCat();
+	wcat->makeSound();
+	delete(wcat);
 	std::cout << "-------------" << std::endl;
 }
 
