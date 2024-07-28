@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:00:11 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 13:06:32 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 13:14:54 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ Cure&	Cure::operator = (const Cure& other)
 
 void		Cure::use(ICharacter& target)
 {
-	std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
+	std::cout << "* heals 🩹 " << target.getName() << "’s wounds *" << std::endl;
 }
 
 AMateria*	Cure::clone() const
