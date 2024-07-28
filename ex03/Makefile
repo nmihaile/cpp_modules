@@ -3,7 +3,7 @@ NAME		= main
 CC			= c++
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS	= main.cpp AMateria.cpp Ice.cpp Cure.cpp
+SRCS	= main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 all: $(NAME)
