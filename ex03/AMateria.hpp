@@ -6,13 +6,13 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:20:44 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 13:51:34 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:08:24 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef AMATERIA_HPP
-#define AMATERIA_HPP
+#ifndef A_MATERIA_HPP
+#define A_MATERIA_HPP
 
 #include <string>
 #include <iostream>

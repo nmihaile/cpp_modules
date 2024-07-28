@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ICharacter.hpp                                     :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 15:27:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 18:08:10 by nmihaile         ###   ########.fr       */
+/*   Created: 2024/07/28 18:06:20 by nmihaile          #+#    #+#             */
+/*   Updated: 2024/07/28 18:12:41 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef I_CHARACTER_HPP
-#define I_CHARACTER_HPP
+#ifndef I_MATERIA_SOURCE_HPP
+#define I_MATERIA_SOURCE_HPP
 
 #include <string>
+#include "AMateria.hpp"
 
-// Circular reference
-class AMateria;
-
-class ICharacter
+class IMateriaSource
 {
 public:
-	virtual ~ICharacter() {}
+	virtual ~IMateriaSource() {}
 
-	virtual const std::string&	getName() const		=0;
-	virtual void				equip(AMateria *m)	=0;
-	virtual void				unequip(int idx)	=0;
-	virtual void				use(int idx, ICharacter& target) =0;
+	virtual void		learnMateria(AMateria*) =0;
+	virtual AMateria*	createMateria(std::string const & type) =0;
 };
 
 #endif

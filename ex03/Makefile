@@ -1,9 +1,9 @@
 
 NAME		= main
 CC			= c++
-CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS	= main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp
+SRCS	= main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 all: $(NAME)
