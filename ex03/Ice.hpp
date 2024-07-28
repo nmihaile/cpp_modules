@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:28:36 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 12:56:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 20:46:21 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #ifndef ICE_HPP
 #define ICE_HPP
 
+#include "debug.hpp"
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 

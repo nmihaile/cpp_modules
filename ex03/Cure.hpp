@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:00:12 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 13:02:25 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 20:46:25 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #ifndef CURE_HPP
 #define CURE_HPP
 
+#include "debug.hpp"
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 

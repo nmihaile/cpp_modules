@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:13:10 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 18:34:00 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 20:47:11 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #ifndef MATERIA_SOURCE_HPP
 #define MATERIA_SOURCE_HPP
 
+#include "debug.hpp"
 #include "IMateriaSource.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"

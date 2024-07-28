@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:10:31 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 17:12:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 20:46:31 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #define CHARACTER_HPP
 
 #include <string>
+#include "debug.hpp"
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
 

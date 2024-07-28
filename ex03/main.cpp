@@ -6,24 +6,15 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:18:49 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 19:19:32 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 21:17:03 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "debug.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
 #include "Character.hpp"
 #include "MateriaSource.hpp"
-
-#define LIGHTGRAY		"\033[97m"
-#define DARKBLACK		"\033[90m"
-#define LIGHTRED		"\033[91m"
-#define LIGHTGREEN		"\033[92m"
-#define LIGHTYELLOW		"\033[93m"
-#define LIGHTBLUE		"\033[94m"
-#define LIGHTMAGENTA	"\033[95m"
-#define LIGHTCYAN		"\033[96m"
-#define RESET			"\033[0m"
 
 void	pmsg(std::string msg, std::string color)
 {
@@ -76,6 +67,7 @@ void	custom_tests(void)
 	player.equip(src->createMateria("ice"));
 	player.equip(src->createMateria("cure"));
 
+	src->learnMateria(NULL);
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
 	src->learnMateria(new Ice());
@@ -94,6 +86,18 @@ void	custom_tests(void)
 	player.use(2, enemie);
 	player.use(3, enemie);
 
+	pmsg("[ TEST ] › Additional MateriaSources", LIGHTCYAN);
+	IMateriaSource* src2 = new MateriaSource(*static_cast<const MateriaSource*>(src));
+	src2->learnMateria(new Ice());
+	src2->learnMateria(new Cure());
+
+	player.equip(src2->createMateria("ice"));
+	player.equip(src2->createMateria("cure"));
+
+	player.use(2, enemie);
+	player.use(3, enemie);
+
+	delete (src2);
 	delete (src);
 
 	// We dont have to test this, since target is a Reference

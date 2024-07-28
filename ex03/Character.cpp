@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:10:30 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 17:56:37 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 21:13:11 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 Character::Character() : m_name("undefined_character"), m_didx(0)
 {
+	log(DEBUG_LOG, "Character default constructor called.");
+
 	for (int idx = 0; idx < INVENTORY_SIZE; idx++)
 	{
 		m_inventory[idx] = NULL;
@@ -23,6 +25,8 @@ Character::Character() : m_name("undefined_character"), m_didx(0)
 
 Character::Character(std::string name) : m_name(name), m_didx(0)
 {
+	log(DEBUG_LOG, "Character name constructor called.");
+
 	for (int idx = 0; idx < INVENTORY_SIZE; idx++)
 	{
 		m_inventory[idx] = NULL;	
@@ -32,6 +36,8 @@ Character::Character(std::string name) : m_name(name), m_didx(0)
 
 Character::Character(const Character& other) : m_name(other.m_name), m_didx(0)
 {
+	log(DEBUG_LOG, "Character copy constructor called.");
+
 	for (int idx = 0; idx < INVENTORY_SIZE; idx++)
 	{
 		if (other.m_inventory[idx])
@@ -44,6 +50,8 @@ Character::Character(const Character& other) : m_name(other.m_name), m_didx(0)
 
 Character::~Character()
 {
+	log(DEBUG_LOG, "Character destructor called.");
+
 	for (int idx = 0; idx < INVENTORY_SIZE; idx++)
 	{
 		if (m_inventory[idx])
@@ -56,6 +64,8 @@ Character::~Character()
 
 Character&	Character::operator = (const Character& other)
 {
+	log(DEBUG_LOG, "Character copy assignement operator overload called.");
+
 	if (this == &other)
 		return (*this);
 
@@ -84,9 +94,16 @@ const std::string&	Character::getName() const
 
 void	Character::equip(AMateria *m)
 {
+	if (m == NULL)
+	{
+		log(WARNING_LOG, "Character equip failed: materia is NULL");
+		return ;
+	}
+		
 	for (int idx = 0; idx < INVENTORY_SIZE; idx++)
 		if (m_inventory[idx] == NULL)
 		{
+			log(INFO_LOG, "Character equips slot " + ft_itostring(idx) + " with " + m->getType());
 			m_inventory[idx] = m;
 			return ;
 		}
@@ -99,6 +116,7 @@ void	Character::unequip(int idx)
 	{
 		this->drop(m_inventory[idx]);
 		m_inventory[idx] = NULL;
+		log(INFO_LOG, "Character unequips slot " + ft_itostring(idx));
 	}
 }
 
@@ -115,6 +133,7 @@ void	Character::use(int idx, ICharacter& target)
 
 void	Character::drop(AMateria *m)
 {
+	log(INFO_LOG, "Character drops " + m->getType());
 	if (m_droped_inv[m_didx])
 		delete(m_droped_inv[m_didx]);
 	m_droped_inv[m_didx++] = m;

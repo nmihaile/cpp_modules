@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:20:44 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 18:08:24 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 20:44:32 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #include <string>
 #include <iostream>
+#include "debug.hpp"
 
 // Circular reference
 class ICharacter;
