@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 13:10:31 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 13:45:58 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 17:12:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ public:
 private:
 	std::string	m_name;
 	AMateria*	m_inventory[INVENTORY_SIZE];
+	AMateria*	m_droped_inv[INVENTORY_SIZE];
+	int			m_didx;
+
+	void	drop(AMateria *m);
 };
 
 #endif
