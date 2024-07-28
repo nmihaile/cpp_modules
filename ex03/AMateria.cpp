@@ -6,13 +6,13 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:23:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 12:40:10 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 13:26:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
 
-AMateria::AMateria() : m_type("undefined")
+AMateria::AMateria() : m_type("undefined_materia")
 {
 }
 

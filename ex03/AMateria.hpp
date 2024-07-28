@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:20:44 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 12:53:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/28 13:51:34 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
 	AMateria();
 	AMateria(const AMateria& other);
 	AMateria(std::string const & type);
-	~AMateria();
+	virtual ~AMateria();
 
 	AMateria&	operator = (const AMateria& other);
 	
