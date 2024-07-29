@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:44:46 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/27 12:34:57 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:00:17 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	custom_tests(void)
 	WrongAnimal* wcat = new WrongCat();
 	wcat->makeSound();
 	delete(wcat);
+
+	WrongCat stackCat;
+	stackCat.makeSound();
+
 	std::cout << "-------------" << std::endl;
 }
 
