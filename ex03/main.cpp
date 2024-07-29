@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:18:49 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/28 21:17:03 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:47:18 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void	custom_tests(void)
 	player.use(2, enemie);
 	player.use(3, enemie);
 
+	pmsg("[ TEST ] › Character copy constructor", LIGHTCYAN);
+	Character *luigi = new Character("Luigi");
+
 	pmsg("[ TEST ] › Additional MateriaSources", LIGHTCYAN);
 	IMateriaSource* src2 = new MateriaSource(*static_cast<const MateriaSource*>(src));
 	src2->learnMateria(new Ice());
@@ -97,8 +100,9 @@ void	custom_tests(void)
 	player.use(2, enemie);
 	player.use(3, enemie);
 
-	delete (src2);
-	delete (src);
+	delete(luigi);
+	delete(src2);
+	delete(src);
 
 	// We dont have to test this, since target is a Reference
 	// which should never be NULL
