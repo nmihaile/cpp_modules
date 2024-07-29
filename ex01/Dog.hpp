@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:49 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 19:46:20 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:18:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ public:
 	Dog&	operator = (const Dog& other);
 
 	virtual void	makeSound(void) const;
-	Brain*&	getBrain(void);
+	Brain*&			getBrain(void);
 	
 private:
 	Brain	*m_brain;

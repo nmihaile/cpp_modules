@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 13:09:47 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 20:12:13 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:18:23 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ public:
 
 	virtual void	makeSound(void) const;
 
-	Brain*&	getBrain(void);
+	Brain*&			getBrain(void);
 
 private:
 	Brain	*m_brain;

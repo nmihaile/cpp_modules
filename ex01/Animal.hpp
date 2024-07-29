@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:45:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/07/26 15:36:55 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:18:51 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ public:
 
 	virtual void	makeSound(void) const;
 
-	std::string	getType(void) const;
+	std::string		getType(void) const;
 
 protected:
 	std::string	m_type;
