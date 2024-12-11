@@ -5,8 +5,6 @@ CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 SRCS		=	main.cpp Bureaucrat.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
-.SILENT:
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
