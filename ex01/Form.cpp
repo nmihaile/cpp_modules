@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 11:50:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:14:56 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,13 @@ unsigned int	Form::getGradeToExec() const
 	return ( UINT_MAX );
 }
 
-void			Form::beSigned(const Bureaucrat& bureaucrat)
+void	Form::beSigned(const Bureaucrat& bureaucrat)
 {
+	if (validateGrade(bureaucrat.getGrade()) == false)
+	{
+		throw (std::string("Bureaucrat: ") + bureaucrat.getName() + std::string(" has and inavlid grade: -> debugging required…"));
+		return ;
+	}
 	if (bureaucrat.getGrade() > m_grade_to_sign)
 		throw (GradeTooLowException());
 	else

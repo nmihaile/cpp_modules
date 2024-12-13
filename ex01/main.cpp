@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 13:01:02 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:20:27 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,60 @@ void	FormGetter_GetGradeToSign_INVALID(void)
 	}
 }
 
+void	FormGetter_GetGradeToExec_VALID(void)
+{
+	printFunc(__func__);
+	{
+		Form form("Enrole @ 42", 42, 42);
+		unsigned int grade_to_exec = form.getGradeToExec();
+		if (grade_to_exec != 42)
+			throw (std::string("Form::getGradeToExec() faild: -> investigate"));
+	}
+}
+
+void	FormGetter_GetGradeToExec_INVALID(void)
+{
+	printFunc(__func__);
+	{
+		Form form("Enrole @ 42", 42, 42);
+		std::memset(&form, 0, sizeof(Form));
+		unsigned int grade_to_exec = form.getGradeToExec();
+		if (grade_to_exec != 42)
+			throw (std::string("Form::getGradeToExec() faild: -> investigate"));
+	}
+}
+
+void	Form_BeSigned_VALID(void)
+{
+	printFunc(__func__);
+	{
+		Bureaucrat b("Moritz", 1);
+		Form form("Enrole @ 42", 42, 42);
+		form.beSigned(b);
+	}
+}
+
+void	Form_BeSigned_INVALID_LowGrade(void)
+{
+	printFunc(__func__);
+	{
+		Bureaucrat b("Intern", 150);
+		Form form("Enrole @ 42", 42, 42);
+		form.beSigned(b);
+	}
+}
+
+void	Form_BeSigned_INVALID_InvalidBureaucratGrade(void)
+{
+	printFunc(__func__);
+	{
+		Bureaucrat b("Invalid", 42);
+		std::memset(&b, 0, sizeof(Bureaucrat));
+		Form form("Enrole @ 42", 42, 42);
+		form.beSigned(b);
+	}
+}
+
 
 int	main(void)
 {
@@ -281,6 +335,13 @@ int	main(void)
 	nl();
 	test(FormGetter_GetGradeToSign_VALID, SUCCESS);
 	test(FormGetter_GetGradeToSign_INVALID, FAIL);
+	nl();
+	test(FormGetter_GetGradeToExec_VALID, SUCCESS);
+	test(FormGetter_GetGradeToExec_INVALID, FAIL);
+	nl();
+	test(Form_BeSigned_VALID, SUCCESS);
+	test(Form_BeSigned_INVALID_LowGrade, FAIL);
+	test(Form_BeSigned_INVALID_InvalidBureaucratGrade, FAIL);
 
 
 	// Form f1("Enroll @ 42", 42, 1);
