@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:09 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 15:04:16 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:01:43 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ public:
 	};
 
 	class GradeTooLowException : public std::exception {
+		const char* what() const throw() override;
+	};
+
+	class InvalidGradeException : public std::exception {
+		const char* what() const throw() override;
+	};
+
+	class AlreadySignedException : public std::exception {
 		const char* what() const throw() override;
 	};
 

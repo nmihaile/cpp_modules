@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:29 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 14:57:34 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:06:23 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 
 std::string	Bureaucrat::getName() const
 {
+	if (m_name.empty())
+		return ("<Bureaucrat::m_name is empty>");
 	return (m_name);
 }
 
@@ -74,7 +76,22 @@ void	Bureaucrat::decrementGrade()
 
 void	Bureaucrat::signForm(Form& form) const
 {
-	
+	try
+	{
+		form.beSigned(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout	<< this->getName() << " couldn’t sign \""
+					<< form.getName() << "\" because "
+					<< e.what() << "." << std::endl;
+
+		// Advanced Exception Handling:
+		// Here we RETHROW the original exception !!!
+		throw ;
+		return ;
+	}
+	std::cout << this->getName() << " signed \"" << form.getName() << "\"" << std::endl;
 }
 
 
@@ -82,14 +99,14 @@ void	Bureaucrat::signForm(Form& form) const
 /* ************************************************************************** */
 
 
-const char* Bureaucrat::GradeTooHighExcpetion::what() const throw()
+const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("Grade is to HIGH!");
+	return ("Bureaucrat:: Grade is to HIGH!");
 }
 
-const char* Bureaucrat::GradeTooLowExcpetion::what() const throw()
+const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("Grade is to LOW!");
+	return ("Bureaucrat:: Grade is to LOW!");
 }
 
 
@@ -101,12 +118,12 @@ bool	Bureaucrat::isValidGrade(unsigned int grade)
 {
 	if (grade < HIGHEST_GRADE)
 	{
-		throw ( GradeTooHighExcpetion() );
+		throw ( GradeTooHighException() );
 		return (false);
 	}
 	if (grade > LOWEST_GRADE)
 	{
-		throw ( GradeTooLowExcpetion() );
+		throw ( GradeTooLowException() );
 		return (false);
 	}
 	return (true);

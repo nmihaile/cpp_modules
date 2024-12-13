@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 14:56:01 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:39:09 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,40 @@
 #define defaultExceptionMSG std::string("Default exception caught. Please debug further.")
 #define ExceptionPrefix std::string(LIGHTRED) + std::string("Exception cought: ") + std::string(RESET)
 
+typedef struct s_counter
+{
+	size_t	counted;
+	size_t	passed;
+}			t_counter;
+
 void	printFunc(const char *func) { std::cout << LIGHTCYAN << "--[ " << func << " ]--" << RESET << std::endl; }
 void	printDefaultException(void) { std::cout << defaultExceptionMSG << std::endl; }
 void	passed(void) { std::cout << LIGHTGREEN << "[OK] " << RESET << std::endl; }
 void	failed(void) { std::cout << LIGHTRED   << "[KO] " << RESET << std::endl; }
 void	nl(void) { std::cout << std::endl; }
-void	Succeded_or_Failed(bool expected, bool result, std::string msg)
+void	Succeded_or_Failed(bool expected, bool result, std::string msg, t_counter& counter)
 {
 	if (expected == result)
+	{
+		++counter.passed;
 		std::cout << LIGHTGREEN << "  [OK] " << RESET;
+	}
 	else
 		std::cout << LIGHTRED << "  [KO] " << RESET;
 	std::cout << msg << std::endl; // << std::endl
 }
 
-void	test(void f(void), bool expected)
+void	test(t_counter& counter, void f(void), bool expected)
 {
 	bool result = SUCCESS;
 	std::string msg = SuccessMSG;
 
+	++counter.counted;
 	try { f(); }
 	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
 	catch (std::string& e)		{ msg = ExceptionPrefix + e;					result = FAIL; }
 	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
+	Succeded_or_Failed(expected, result, msg, counter);
 }
 
 /* ************************************************************************** */
@@ -68,6 +78,7 @@ void	FormDefaultConstructor(void)
 	}
 }
 
+/* ************************************************************************** */
 
 void	FormParameterConstructor_VALID(void)
 {
@@ -117,6 +128,8 @@ void	FormParameterConstructor_INVALID_GradeToExec_02(void)
 	}
 }
 
+/* ************************************************************************** */
+
 void	FormCopyConstructor_VALID(void)
 {
 	printFunc(__func__);
@@ -136,6 +149,8 @@ void	FormCopyConstructor_INVALID_base_class(void)
 		Form copy(inavlid_base);
 	}
 }
+
+/* ************************************************************************** */
 
 void	FormCopyAssignmentOperator_VALID(void)
 {
@@ -208,6 +223,8 @@ void	FormCopyAssignmentOperator_INVALID_base_class_01(void)
 // 	Succeded_or_Failed(expected, result, msg);
 // }
 
+/* ************************************************************************** */
+
 void	FormGetter_Name_VALID(void)
 {
 	printFunc(__func__);
@@ -227,17 +244,21 @@ void	FormGetter_Name_INVALID(void)
 	}
 }
 
+/* ************************************************************************** */
+
 void	FormGetter_IsSigned_VALID(void)
 {
 	printFunc(__func__);
 	{
 		Form form("Enrole @ 42", 42, 42);
 		bool is_signed = form.isSigned();
-		Bureaucrat B("Moritz", 1);
-		form.beSigned(B);
+		Bureaucrat ceo("CEO", 1);
+		form.beSigned(ceo);
 		is_signed = form.isSigned();
 	}
 }
+
+/* ************************************************************************** */
 
 void	FormGetter_GetGradeToSign_VALID(void)
 {
@@ -262,6 +283,8 @@ void	FormGetter_GetGradeToSign_INVALID(void)
 	}
 }
 
+/* ************************************************************************** */
+
 void	FormGetter_GetGradeToExec_VALID(void)
 {
 	printFunc(__func__);
@@ -285,13 +308,27 @@ void	FormGetter_GetGradeToExec_INVALID(void)
 	}
 }
 
+/* ************************************************************************** */
+
 void	Form_BeSigned_VALID(void)
 {
 	printFunc(__func__);
 	{
-		Bureaucrat b("Moritz", 1);
+		Bureaucrat ceo("CEO", 1);
 		Form form("Enrole @ 42", 42, 42);
-		form.beSigned(b);
+		form.beSigned(ceo);
+	}
+}
+
+void	Form_BeSigned_INVALID_AlreadySigned(void)
+{
+	printFunc(__func__);
+	{
+		Bureaucrat ceo("CEO", 1);
+		Bureaucrat employee("Employee", 42);
+		Form form("Enrole @ 42", 42, 42);
+		form.beSigned(employee);
+		form.beSigned(ceo);
 	}
 }
 
@@ -316,40 +353,115 @@ void	Form_BeSigned_INVALID_InvalidBureaucratGrade(void)
 	}
 }
 
+/* ************************************************************************** */
 
-int	main(void)
+void	Bureaucrat_SignForm_VALID(void)
+{
+	printFunc(__func__);
+	{
+		Bureaucrat employee("Employee", 42);
+		Form enrole("Enrole @ 42", 42, 42);
+		employee.signForm(enrole);
+	}
+}
+
+void	Bureaucrat_SignForm_INVALID_GradeTooLow(void)
+{
+	printFunc(__func__);
+	{
+		Bureaucrat intern("Intern", 150);
+		Form enrole("Enrole @ 42", 42, 42);
+		intern.signForm(enrole);
+	}
+}
+
+void	Bureaucrat_SignForm_INVALID_AlreadySigned(void)
+{
+	printFunc(__func__);
+	{
+		Bureaucrat ceo("CEO", 1);
+		Bureaucrat employee("Employee", 42);
+		Form enrole("Enrole @ 42", 42, 42);
+		ceo.signForm(enrole);
+		employee.signForm(enrole);
+	}
+}
+
+void	Bureaucrat_SignForm_INVALID_InvalidGrade(void)
+{
+	printFunc(__func__);
+	{
+		Bureaucrat invalid("Invalid", 42);
+		std::memset(&invalid, 0, sizeof(Bureaucrat));
+		Form enrole("Enrole @ 42", 42, 42);
+		invalid.signForm(enrole);
+	}
+}
+
+void	run_tests(void)
+{
+	static t_counter	counter;
+
+	test(counter, FormDefaultConstructor, SUCCESS);
+	nl();
+	test(counter, FormParameterConstructor_VALID, SUCCESS);
+	test(counter, FormParameterConstructor_EMPTY_Name, FAIL);
+	test(counter, FormParameterConstructor_INVALID_GradeToSign_01, FAIL);
+	test(counter, FormParameterConstructor_INVALID_GradeToSign_02, FAIL);
+	test(counter, FormParameterConstructor_INVALID_GradeToExec_01, FAIL);
+	test(counter, FormParameterConstructor_INVALID_GradeToExec_02, FAIL);
+	nl();
+	test(counter, FormCopyConstructor_VALID, SUCCESS);
+	test(counter, FormCopyConstructor_INVALID_base_class, FAIL);
+	nl();
+	test(counter, FormCopyAssignmentOperator_VALID, SUCCESS);
+	test(counter, FormCopyAssignmentOperator_INVALID_base_class_01, SUCCESS);
+	// test(counter, FormCopyAssignmentOperator_INVALID_base_class_02, FAIL);
+	nl();
+	test(counter, FormGetter_Name_VALID, SUCCESS);
+	test(counter, FormGetter_Name_INVALID, FAIL);
+	nl();
+	test(counter, FormGetter_IsSigned_VALID, SUCCESS);
+	nl();
+	test(counter, FormGetter_GetGradeToSign_VALID, SUCCESS);
+	test(counter, FormGetter_GetGradeToSign_INVALID, FAIL);
+	nl();
+	test(counter, FormGetter_GetGradeToExec_VALID, SUCCESS);
+	test(counter, FormGetter_GetGradeToExec_INVALID, FAIL);
+	nl();
+	test(counter, Form_BeSigned_VALID, SUCCESS);
+	test(counter, Form_BeSigned_INVALID_AlreadySigned, FAIL);
+	test(counter, Form_BeSigned_INVALID_LowGrade, FAIL);
+	test(counter, Form_BeSigned_INVALID_InvalidBureaucratGrade, FAIL);
+	nl();
+	test(counter, Bureaucrat_SignForm_VALID, SUCCESS);
+	test(counter, Bureaucrat_SignForm_INVALID_GradeTooLow, FAIL);
+	test(counter, Bureaucrat_SignForm_INVALID_AlreadySigned, FAIL);
+	test(counter, Bureaucrat_SignForm_INVALID_InvalidGrade, FAIL);
+
+	nl();
+	if (counter.counted == counter.passed)
+	{
+		std::cout << "  🎉🥳 All tests passed! 🥳🎉" << std::endl;
+		std::cout << LIGHTGREEN << "══════════════════════════════" << std::endl;
+
+	}
+	else
+	{
+		std::cout << "  ❌ " << counter.passed << "/" << counter.counted << " tests passed!" << std::endl;
+		std::cout << "     please investigate and debug further…" << std::endl;
+		std::cout << LIGHTRED << "═══════════════════════════════════════════════" << std::endl;
+	}
+	nl();
+	exit(counter.counted == counter.passed);
+}
+
+int	main(int ac, char **av)
 {
 
-	test(FormDefaultConstructor, SUCCESS);
-	nl();
-	test(FormParameterConstructor_VALID, SUCCESS);
-	test(FormParameterConstructor_EMPTY_Name, FAIL);
-	test(FormParameterConstructor_INVALID_GradeToSign_01, FAIL);
-	test(FormParameterConstructor_INVALID_GradeToSign_02, FAIL);
-	test(FormParameterConstructor_INVALID_GradeToExec_01, FAIL);
-	test(FormParameterConstructor_INVALID_GradeToExec_02, FAIL);
-	nl();
-	test(FormCopyConstructor_VALID, SUCCESS);
-	test(FormCopyConstructor_INVALID_base_class, FAIL);
-	nl();
-	test(FormCopyAssignmentOperator_VALID, SUCCESS);
-	test(FormCopyAssignmentOperator_INVALID_base_class_01, SUCCESS);
-	// test(FormCopyAssignmentOperator_INVALID_base_class_02, FAIL);
-	nl();
-	test(FormGetter_Name_VALID, SUCCESS);
-	test(FormGetter_Name_INVALID, FAIL);
-	nl();
-	test(FormGetter_IsSigned_VALID, SUCCESS);
-	nl();
-	test(FormGetter_GetGradeToSign_VALID, SUCCESS);
-	test(FormGetter_GetGradeToSign_INVALID, FAIL);
-	nl();
-	test(FormGetter_GetGradeToExec_VALID, SUCCESS);
-	test(FormGetter_GetGradeToExec_INVALID, FAIL);
-	nl();
-	test(Form_BeSigned_VALID, SUCCESS);
-	test(Form_BeSigned_INVALID_LowGrade, FAIL);
-	test(Form_BeSigned_INVALID_InvalidBureaucratGrade, FAIL);
+	if (ac == 2 && std::strcmp(av[1], "test") == 0)
+		run_tests();
+
 
 
 	// Form f1("Enroll @ 42", 42, 1);

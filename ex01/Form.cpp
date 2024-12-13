@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 13:14:56 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:46:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,25 +99,38 @@ unsigned int	Form::getGradeToExec() const
 
 void	Form::beSigned(const Bureaucrat& bureaucrat)
 {
-	if (validateGrade(bureaucrat.getGrade()) == false)
+	if (m_is_signed == true)
+	{
+		throw (Form::AlreadySignedException());
+		return ;
+	}
+	if (bureaucrat.getGrade() < HIGHEST_GRADE || bureaucrat.getGrade() > LOWEST_GRADE)
 	{
 		throw (std::string("Bureaucrat: ") + bureaucrat.getName() + std::string(" has and inavlid grade: -> debugging required…"));
 		return ;
 	}
 	if (bureaucrat.getGrade() > m_grade_to_sign)
+	{
 		throw (GradeTooLowException());
-	else
-		m_is_signed = true;
+		return ;
+	}
+	m_is_signed = true;
 }
 
-const char*	Form::GradeTooHighException::what() const throw()
-{
-	return ("Grade to HIGH!");
+const char*	Form::GradeTooHighException::what() const throw() {
+	return ("Form:: Grade to HIGH!");
 }
 
-const char*	Form::GradeTooLowException::what() const throw()
-{
-	return ("Grade to LOW!");
+const char*	Form::GradeTooLowException::what() const throw() {
+	return ("Form:: Grade to LOW!");
+}
+
+const char* Form::InvalidGradeException::what() const throw() {
+	return ("Form:: Invalid Grade!");
+}
+
+const char* Form::AlreadySignedException::what() const throw() {
+	return ("Form:: Form already signed!");
 }
 
 
@@ -127,14 +140,9 @@ const char*	Form::GradeTooLowException::what() const throw()
 
 bool	Form::validateGrade(const unsigned int& grade) const
 {
-	if (grade < HIGHEST_GRADE)
+	if (grade < HIGHEST_GRADE || grade > LOWEST_GRADE)
 	{
-		throw (GradeTooHighException());
-		return (false);
-	}
-	if (grade > LOWEST_GRADE)
-	{
-		throw (GradeTooLowException());
+		throw (InvalidGradeException());
 		return (false);
 	}
 	return (true);

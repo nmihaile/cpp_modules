@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:28 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 15:08:17 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:44:27 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ public:
 	void			decrementGrade();
 	void			signForm(Form& form) const;
 
-	class GradeTooHighExcpetion : public std::exception {
+	class GradeTooHighException : public std::exception {
 		const char* what() const throw() override;
 	};
 
-	class GradeTooLowExcpetion : public std::exception {
+	class GradeTooLowException : public std::exception {
 		const char* what() const throw() override;
 	};
 
