@@ -1,8 +1,8 @@
 NAME		=	main
 CC			=	c++
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
+CPPFLAGS	=	-std=c++11 #-Wall -Wextra -Werror -std=c++11
 
-SRCS		=	main.cpp Bureaucrat.cpp
+SRCS		=	main.cpp Form.cpp Bureaucrat.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
