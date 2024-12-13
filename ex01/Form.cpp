@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 16:46:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:49:00 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ bool	Form::validateGrade(const unsigned int& grade) const
 
 std::ostream& operator<<(std::ostream& os, const Form& form)
 {
-	return (os << "Form (" << form.getName() << "): "
+	return (os << "Form \"" << form.getName() << "\": "
 			<< "[is_signed: " << form.isSigned() << "], "
 			<< "[grade_to_sign: " << form.getGradeToSign() << "], "
 			<< "[grade_to_exec: " << form.getGradeToExec() << "]" << std::endl );

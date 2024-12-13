@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 17:39:09 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:57:04 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,17 +443,58 @@ void	run_tests(void)
 	if (counter.counted == counter.passed)
 	{
 		std::cout << "  🎉🥳 All tests passed! 🥳🎉" << std::endl;
-		std::cout << LIGHTGREEN << "══════════════════════════════" << std::endl;
-
+		std::cout << LIGHTGREEN << "══════════════════════════════" << RESET << std::endl;
 	}
 	else
 	{
 		std::cout << "  ❌ " << counter.passed << "/" << counter.counted << " tests passed!" << std::endl;
 		std::cout << "     please investigate and debug further…" << std::endl;
-		std::cout << LIGHTRED << "═══════════════════════════════════════════════" << std::endl;
+		std::cout << LIGHTRED << "═══════════════════════════════════════════════" << RESET << std::endl;
 	}
 	nl();
 	exit(counter.counted == counter.passed);
+}
+
+void	run_story()
+{
+	nl();
+
+	Form enrole("Enroll @ 42", 42, 1);
+	Bureaucrat moritz("Moritz", 1);
+	Bureaucrat patrick("Patrick", 42);
+	Bureaucrat intern("Intern", 150);
+	
+	std::cout << enrole;
+	try
+	{
+		enrole.beSigned(intern);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << " " << intern.getName() << " is not allowd to sign." << std::endl;
+	}
+
+	try
+	{
+		moritz.signForm(enrole);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << moritz.getName() << " tried to sign " << enrole.getName() << ": " << e.what() << std::endl;
+	}
+
+	try
+	{
+		patrick.signForm(enrole);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << patrick.getName() << " tried to sign " << enrole.getName() << ", BUT: " << e.what() << std::endl;
+	}
+
+	std::cout << enrole;
+
+	nl();
 }
 
 int	main(int ac, char **av)
@@ -461,31 +502,9 @@ int	main(int ac, char **av)
 
 	if (ac == 2 && std::strcmp(av[1], "test") == 0)
 		run_tests();
-
-
-
-	// Form f1("Enroll @ 42", 42, 1);
-	// Bureaucrat moritz("Moritz", 1);
-	// Bureaucrat trainee("Trainee", 150);
-	
-	// std::cout << f1;
-	// try
-	// {
-	// 	f1.beSigned(trainee);
-	// }
-	// catch (std::exception& e)
-	// {
-	// 	std::cout << e.what() << " " << trainee.getName() << " is not allowd to sign." << std::endl;
-	// }
-	// try
-	// {
-	// 	f1.beSigned(moritz);
-	// }
-	// catch (std::exception& e)
-	// {
-	// 	std::cout << e.what() << " " << moritz.getName() << " is not allowd to sign." << std::endl;
-	// }
-	// std::cout << f1;
-
+	else if (ac == 2 && std::strcmp(av[1], "story") == 0)
+		run_story();
+	else
+		std::cout << LIGHTCYAN << "usage: ./main <test|story>" << RESET << std::endl;
 	return (0);
 }
