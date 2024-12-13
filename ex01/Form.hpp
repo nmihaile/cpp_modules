@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:09 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 11:41:24 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:04:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
 #include <exception>
 #include <ostream>
 #include <climits>
-
-#include "authority.h"
 #include "Bureaucrat.hpp"
+
+#define HIGHEST_GRADE	1
+#define LOWEST_GRADE	150
+
+// Forward Declaration
+class Bureaucrat;
 
 class Form
 {

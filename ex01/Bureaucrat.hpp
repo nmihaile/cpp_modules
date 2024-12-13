@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:28 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/12 12:18:06 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:08:17 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@
 #include <string>
 #include <exception>
 #include <ostream>
-#include "authority.h"
+#include "Form.hpp"
+
+#define HIGHEST_GRADE	1
+#define LOWEST_GRADE	150
+
+// Forward Declaration
+class Form;
 
 class Bureaucrat
 {
@@ -28,12 +34,13 @@ public:
 	Bureaucrat(const Bureaucrat& other);
 	~Bureaucrat();
 	
-	Bureaucrat& operator=(const Bureaucrat& other);
+	Bureaucrat&		operator=(const Bureaucrat& other);
 
 	std::string		getName() const;
 	unsigned int	getGrade() const;
 	void			incrementGrade();
 	void			decrementGrade();
+	void			signForm(Form& form) const;
 
 	class GradeTooHighExcpetion : public std::exception {
 		const char* what() const throw() override;

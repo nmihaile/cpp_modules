@@ -6,15 +6,23 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 13:20:27 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:56:01 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "authority.h"
+#include <cstring>
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-#include <cstring>
+#define GREEN			"\033[32m"
+#define BLUE			"\033[34m"
+#define LIGHTRED		"\033[91m"
+#define LIGHTGREEN		"\033[92m"
+#define LIGHTYELLOW		"\033[93m"
+#define LIGHTBLUE		"\033[94m"
+#define LIGHTMAGENTA	"\033[95m"
+#define LIGHTCYAN		"\033[96m"
+#define RESET			"\033[0m"
 
 #define SUCCESS true
 #define FAIL false
