@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 11:47:56 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:01:02 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,161 +36,144 @@ void	Succeded_or_Failed(bool expected, bool result, std::string msg)
 	std::cout << msg << std::endl; // << std::endl
 }
 
-void	Test_FormDefaultConstructor(bool expected)
+void	test(void f(void), bool expected)
 {
 	bool result = SUCCESS;
 	std::string msg = SuccessMSG;
 
-	printFunc(__func__);
-	try { Form form; }
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
-}
-
-void	Test_FormParameterConstructor_VALID(bool expected)
-{
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
-	printFunc(__func__);
-	try { Form form("Enrole @ 42", 42, 1); }
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
-}
-
-void	Test_FormParameterConstructor_EMPTY_Name(bool expected)
-{
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
-	printFunc(__func__);
-	try { Form form("", 42, 1); }
+	try { f(); }
 	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
 	catch (std::string& e)		{ msg = ExceptionPrefix + e;					result = FAIL; }
 	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
 	Succeded_or_Failed(expected, result, msg);
 }
 
-void	Test_FormParameterConstructor_INVALID_GradeToSign_01(bool expected)
-{
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
+/* ************************************************************************** */
+/* ******************************  TESTS  *********************************** */
+/* ************************************************************************** */
 
+void	FormDefaultConstructor(void)
+{
 	printFunc(__func__);
-	try { Form form("Enrole @ 42", HIGHEST_GRADE - 1, 1); }
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
+	{
+		Form form;
+	}
 }
 
-void	Test_FormParameterConstructor_INVALID_GradeToSign_02(bool expected)
-{
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
 
+void	FormParameterConstructor_VALID(void)
+{
 	printFunc(__func__);
-	try { Form form("Enrole @ 42", LOWEST_GRADE + 1, 1); }
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
+	{
+		Form form("Enrole @ 42", 42, 1);
+	}
 }
 
-void	Test_FormParameterConstructor_INVALID_GradeToExec_01(bool expected)
+void	FormParameterConstructor_EMPTY_Name(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try { Form form("Enrole @ 42", 42, HIGHEST_GRADE - 1); }
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
+	{
+		Form form("", 42, 1);
+	}
 }
 
-void	Test_FormParameterConstructor_INVALID_GradeToExec_02(bool expected)
+void	FormParameterConstructor_INVALID_GradeToSign_01(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try { Form form("Enrole @ 42", 42, LOWEST_GRADE + 1); }
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
+	{
+		Form form("Enrole @ 42", HIGHEST_GRADE - 1, 1);
+	}
 }
 
-void	Test_FormCopyConstructor_VALID(bool expected)
+void	FormParameterConstructor_INVALID_GradeToSign_02(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try {
+	{
+		Form form("Enrole @ 42", LOWEST_GRADE + 1, 1);
+	}
+}
+
+void	FormParameterConstructor_INVALID_GradeToExec_01(void)
+{
+	printFunc(__func__);
+	{
+		Form form("Enrole @ 42", 42, HIGHEST_GRADE - 1);
+	}
+}
+
+void	FormParameterConstructor_INVALID_GradeToExec_02(void)
+{
+	printFunc(__func__);
+	{
+		Form form("Enrole @ 42", 42, LOWEST_GRADE + 1);
+	}
+}
+
+void	FormCopyConstructor_VALID(void)
+{
+	printFunc(__func__);
+	{
 		Form base("Enrole @ 42", 42, 42);
 		Form copy(base);
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
 
-void	Test_FormCopyConstructor_INVALID_base_class(bool expected)
+void	FormCopyConstructor_INVALID_base_class(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try {
+	{
 		Form inavlid_base;
 		std::memset(&inavlid_base, 0, sizeof(Form));
 
 		Form copy(inavlid_base);
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
 
-void	Test_FormCopyAssignmentOperator_VALID(bool expected)
+void	FormCopyAssignmentOperator_VALID(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try {
+	{
 		Form base("Enrole @ 42", 42, 42);
 		Form copy;
 		copy = base;
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
 
-void	Test_FormCopyAssignmentOperator_INVALID_base_class_01(bool expected)
+void	FormCopyAssignmentOperator_INVALID_base_class_01(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	// This test works, mut there should go some more thoughts into it
 	// if it makes sense like this, or if it has to be altered and
 	// modified to mekr more sense.
 	// However the test is here - so let's test it…
-
 	printFunc(__func__);
-	try {
+	{
 		Form inavlid_base("Enrole @ 42", 42, 42);
 		std::memset(&inavlid_base, 0, sizeof(Form));
 
 		Form copy;
 		copy = inavlid_base;
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
+
+// void	FormCopyAssignmentOperator_INVALID_base_class_02(void)
+// {
+// 	// with the new test() func this TEST does NOT work anymore !!!!
+// 	// befor it kinda worked BUT:
+// 	// This test executes like this on macOS, and SEGV on Linux
+// 	// on macOS is_signed is 0
+// 	// on Linux is_signed is 42
+// 	//
+// 	// so this test is probably way out of scope for this exercise
+// 	// and much more thought has to go into it, to make it worth while
+// 	printFunc(__func__);
+// 	{
+// 		Form inavlid_base("Enrole @ 42", 42, 42);
+// 		std::memset(&inavlid_base, 42, sizeof(Form));
+
+// 		Form copy;
+// 		copy = inavlid_base;
+// 	}
+// }
 
 // void	Test_FormCopyAssignmentOperator_INVALID_base_class_02(bool expected)
 // {
@@ -217,117 +200,88 @@ void	Test_FormCopyAssignmentOperator_INVALID_base_class_01(bool expected)
 // 	Succeded_or_Failed(expected, result, msg);
 // }
 
-void	Test_FormGetter_Name_VALID(bool expected)
+void	FormGetter_Name_VALID(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try {
+	{
 		Form form("Enrole @ 42", 42, 42);
 		std::string name = form.getName();
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
 
-void	Test_FormGetter_Name_INVALID(bool expected)
+void	FormGetter_Name_INVALID(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try {
+	{
 		Form form("Enrole @ 42", 42, 42);
 		std::memset(&form, 0, sizeof(Form));
 		std::string name = form.getName();
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (std::string& str)	{ msg = ExceptionPrefix + str;					result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
 
-void	Test_FormGetter_IsSigned_VALID(bool expected)
+void	FormGetter_IsSigned_VALID(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try {
+	{
 		Form form("Enrole @ 42", 42, 42);
 		bool is_signed = form.isSigned();
 		Bureaucrat B("Moritz", 1);
 		form.beSigned(B);
 		is_signed = form.isSigned();
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
 
-void	Test_FormGetter_GetGradeToSign_VALID(bool expected)
+void	FormGetter_GetGradeToSign_VALID(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try {
+	{
 		Form form("Enrole @ 42", 42, 42);
 		unsigned int grade_to_sign = form.getGradeToSign();
 		if (grade_to_sign != 42)
 			throw (std::string("Form::getGradeToSign() faild: -> investigate"));
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
 
-void	Test_FormGetter_GetGradeToSign_INVALID(bool expected)
+void	FormGetter_GetGradeToSign_INVALID(void)
 {
-	bool result = SUCCESS;
-	std::string msg = SuccessMSG;
-
 	printFunc(__func__);
-	try {
+	{
 		Form form("Enrole @ 42", 42, 42);
 		std::memset(&form, 0, sizeof(Form));
 		unsigned int grade_to_sign = form.getGradeToSign();
 		if (grade_to_sign != 42)
 			throw (std::string("Form::getGradeToSign() faild: -> investigate"));
 	}
-	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
-	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg);
 }
 
 
 int	main(void)
 {
-	Test_FormDefaultConstructor(SUCCESS);
+
+	test(FormDefaultConstructor, SUCCESS);
 	nl();
-	Test_FormParameterConstructor_VALID(SUCCESS);
-	Test_FormParameterConstructor_EMPTY_Name(FAIL);
-	Test_FormParameterConstructor_INVALID_GradeToSign_01(FAIL);
-	Test_FormParameterConstructor_INVALID_GradeToSign_02(FAIL);
-	Test_FormParameterConstructor_INVALID_GradeToExec_01(FAIL);
-	Test_FormParameterConstructor_INVALID_GradeToExec_02(FAIL);
+	test(FormParameterConstructor_VALID, SUCCESS);
+	test(FormParameterConstructor_EMPTY_Name, FAIL);
+	test(FormParameterConstructor_INVALID_GradeToSign_01, FAIL);
+	test(FormParameterConstructor_INVALID_GradeToSign_02, FAIL);
+	test(FormParameterConstructor_INVALID_GradeToExec_01, FAIL);
+	test(FormParameterConstructor_INVALID_GradeToExec_02, FAIL);
 	nl();
-	Test_FormCopyConstructor_VALID(SUCCESS);
-	Test_FormCopyConstructor_INVALID_base_class(FAIL);
+	test(FormCopyConstructor_VALID, SUCCESS);
+	test(FormCopyConstructor_INVALID_base_class, FAIL);
 	nl();
-	Test_FormCopyAssignmentOperator_VALID(SUCCESS);
-	Test_FormCopyAssignmentOperator_INVALID_base_class_01(SUCCESS);
-	// Test_FormCopyAssignmentOperator_INVALID_base_class_02(FAIL);
+	test(FormCopyAssignmentOperator_VALID, SUCCESS);
+	test(FormCopyAssignmentOperator_INVALID_base_class_01, SUCCESS);
+	// test(FormCopyAssignmentOperator_INVALID_base_class_02, FAIL);
 	nl();
-	Test_FormGetter_Name_VALID(SUCCESS);
-	Test_FormGetter_Name_INVALID(FAIL);
+	test(FormGetter_Name_VALID, SUCCESS);
+	test(FormGetter_Name_INVALID, FAIL);
 	nl();
-	Test_FormGetter_IsSigned_VALID(SUCCESS);
+	test(FormGetter_IsSigned_VALID, SUCCESS);
 	nl();
-	Test_FormGetter_GetGradeToSign_VALID(SUCCESS);
-	Test_FormGetter_GetGradeToSign_INVALID(FAIL);
+	test(FormGetter_GetGradeToSign_VALID, SUCCESS);
+	test(FormGetter_GetGradeToSign_INVALID, FAIL);
+
 
 	// Form f1("Enroll @ 42", 42, 1);
 	// Bureaucrat moritz("Moritz", 1);
