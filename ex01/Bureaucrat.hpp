@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:28 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/10 20:37:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:18:06 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <string>
 #include <exception>
 #include <ostream>
+#include "authority.h"
 
 class Bureaucrat
 {
@@ -42,9 +43,6 @@ public:
 		const char* what() const throw() override;
 	};
 
-	static constexpr unsigned int HIGHEST_GRADE = 1;
-	static constexpr unsigned int LOWEST_GRADE = 150;
-
 private:
 	const std::string	m_name;
 	unsigned int		m_grade;
@@ -52,6 +50,6 @@ private:
 	bool	isValidGrade(unsigned int grade);
 };
 
-std::ostream& operator<< (std::ostream& os, const Bureaucrat& rhs);
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& rhs);
 
 #endif

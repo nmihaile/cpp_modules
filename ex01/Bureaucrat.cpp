@@ -6,13 +6,13 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:29 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/10 21:03:31 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:50:44 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : m_name("Unnamed_Bureaucrat"), m_grade(Bureaucrat::LOWEST_GRADE)
+Bureaucrat::Bureaucrat() : m_name("Unnamed_Bureaucrat"), m_grade(LOWEST_GRADE)
 {
 }
 
@@ -21,7 +21,7 @@ Bureaucrat::Bureaucrat(const std::string& aname, unsigned int agrade) : m_name(a
 	if (isValidGrade(agrade))
 		m_grade = agrade;
 	else
-		m_grade = Bureaucrat::LOWEST_GRADE;
+		m_grade = LOWEST_GRADE;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : m_name(other.m_name), m_grade(other.m_grade)
@@ -94,12 +94,12 @@ const char* Bureaucrat::GradeTooLowExcpetion::what() const throw()
 
 bool	Bureaucrat::isValidGrade(unsigned int grade)
 {
-	if (grade < Bureaucrat::HIGHEST_GRADE)
+	if (grade < HIGHEST_GRADE)
 	{
 		throw ( GradeTooHighExcpetion() );
 		return (false);
 	}
-	if (grade > Bureaucrat::LOWEST_GRADE)
+	if (grade > LOWEST_GRADE)
 	{
 		throw ( GradeTooLowExcpetion() );
 		return (false);
