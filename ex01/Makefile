@@ -1,6 +1,6 @@
 NAME		=	main
 CC			=	c++
-CPPFLAGS	=	-std=c++11 #-Wall -Wextra -Werror -std=c++11
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
 SRCS		=	main.cpp Form.cpp Bureaucrat.cpp
 OBJS		=	$(SRCS:.cpp=.o)
