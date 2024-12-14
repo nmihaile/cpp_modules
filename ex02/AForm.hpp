@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:09 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 19:27:11 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:45:27 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,19 @@ public:
 		const char* what() const throw() override;
 	};
 
+	class NotSignedException : public std::exception {
+		const char* what() const throw() override;
+	};
+
+protected:
+	bool	validateGrade(const unsigned int& grade) const;
+	bool	checkForm(const Bureaucrat& bureaucrat) const;
+
 private:
 	const std::string	m_name;
 	bool				m_is_signed;
 	const unsigned int	m_grade_to_sign;
 	const unsigned int	m_grade_to_exec;
-
-	bool	validateGrade(const unsigned int& grade) const;
 };
 
 std::ostream& operator<<(std::ostream& os, const AForm& form);

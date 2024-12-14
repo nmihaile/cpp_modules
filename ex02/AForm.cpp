@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 19:25:27 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:50:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,10 @@ const char* AForm::AlreadySignedException::what() const throw() {
 	return ("AForm:: Form already signed!");
 }
 
+const char* AForm::NotSignedException::what() const throw() {
+	return ("AForm:: Form is not signed yet.");
+}
+
 
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -143,6 +147,21 @@ bool	AForm::validateGrade(const unsigned int& grade) const
 	if (grade < HIGHEST_GRADE || grade > LOWEST_GRADE)
 	{
 		throw (InvalidGradeException());
+		return (false);
+	}
+	return (true);
+}
+
+bool	AForm::checkForm(const Bureaucrat& bureaucrat) const
+{
+	if (m_is_signed == false)
+	{
+		throw ( AForm::NotSignedException() );
+		return (false);
+	}
+	if (bureaucrat.getGrade() > m_grade_to_exec)
+	{
+		throw ( AForm::GradeTooLowException() );
 		return (false);
 	}
 	return (true);
