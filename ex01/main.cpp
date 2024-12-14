@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 17:57:04 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 11:34:13 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,16 @@
 #define defaultExceptionMSG std::string("Default exception caught. Please debug further.")
 #define ExceptionPrefix std::string(LIGHTRED) + std::string("Exception cought: ") + std::string(RESET)
 
-typedef struct s_counter
-{
-	size_t	counted;
-	size_t	passed;
-}			t_counter;
-
 void	printFunc(const char *func) { std::cout << LIGHTCYAN << "--[ " << func << " ]--" << RESET << std::endl; }
-void	printDefaultException(void) { std::cout << defaultExceptionMSG << std::endl; }
-void	passed(void) { std::cout << LIGHTGREEN << "[OK] " << RESET << std::endl; }
-void	failed(void) { std::cout << LIGHTRED   << "[KO] " << RESET << std::endl; }
+int		total_count(bool count) { static int c; if (count == true) c++; return (c); }
+int		test_passed(bool count) { static int c; if (count == true) c++; return (c); }
 void	nl(void) { std::cout << std::endl; }
-void	Succeded_or_Failed(bool expected, bool result, std::string msg, t_counter& counter)
+void	Succeded_or_Failed(bool expected, bool result, std::string msg)
 {
+	total_count(true);
 	if (expected == result)
 	{
-		++counter.passed;
+		test_passed(true);
 		std::cout << LIGHTGREEN << "  [OK] " << RESET;
 	}
 	else
@@ -53,17 +47,16 @@ void	Succeded_or_Failed(bool expected, bool result, std::string msg, t_counter& 
 	std::cout << msg << std::endl; // << std::endl
 }
 
-void	test(t_counter& counter, void f(void), bool expected)
+void	test(void f(void), bool expected)
 {
 	bool result = SUCCESS;
 	std::string msg = SuccessMSG;
 
-	++counter.counted;
 	try { f(); }
 	catch (std::exception& e)	{ msg = ExceptionPrefix + e.what();				result = FAIL; }
 	catch (std::string& e)		{ msg = ExceptionPrefix + e;					result = FAIL; }
 	catch (...)					{ msg = ExceptionPrefix + defaultExceptionMSG;	result = FAIL; }
-	Succeded_or_Failed(expected, result, msg, counter);
+	Succeded_or_Failed(expected, result, msg);
 }
 
 /* ************************************************************************** */
@@ -400,59 +393,57 @@ void	Bureaucrat_SignForm_INVALID_InvalidGrade(void)
 
 void	run_tests(void)
 {
-	static t_counter	counter;
-
-	test(counter, FormDefaultConstructor, SUCCESS);
+	test(FormDefaultConstructor, SUCCESS);
 	nl();
-	test(counter, FormParameterConstructor_VALID, SUCCESS);
-	test(counter, FormParameterConstructor_EMPTY_Name, FAIL);
-	test(counter, FormParameterConstructor_INVALID_GradeToSign_01, FAIL);
-	test(counter, FormParameterConstructor_INVALID_GradeToSign_02, FAIL);
-	test(counter, FormParameterConstructor_INVALID_GradeToExec_01, FAIL);
-	test(counter, FormParameterConstructor_INVALID_GradeToExec_02, FAIL);
+	test(FormParameterConstructor_VALID, SUCCESS);
+	test(FormParameterConstructor_EMPTY_Name, FAIL);
+	test(FormParameterConstructor_INVALID_GradeToSign_01, FAIL);
+	test(FormParameterConstructor_INVALID_GradeToSign_02, FAIL);
+	test(FormParameterConstructor_INVALID_GradeToExec_01, FAIL);
+	test(FormParameterConstructor_INVALID_GradeToExec_02, FAIL);
 	nl();
-	test(counter, FormCopyConstructor_VALID, SUCCESS);
-	test(counter, FormCopyConstructor_INVALID_base_class, FAIL);
+	test(FormCopyConstructor_VALID, SUCCESS);
+	test(FormCopyConstructor_INVALID_base_class, FAIL);
 	nl();
-	test(counter, FormCopyAssignmentOperator_VALID, SUCCESS);
-	test(counter, FormCopyAssignmentOperator_INVALID_base_class_01, SUCCESS);
-	// test(counter, FormCopyAssignmentOperator_INVALID_base_class_02, FAIL);
+	test(FormCopyAssignmentOperator_VALID, SUCCESS);
+	test(FormCopyAssignmentOperator_INVALID_base_class_01, SUCCESS);
+	// test(FormCopyAssignmentOperator_INVALID_base_class_02, FAIL);
 	nl();
-	test(counter, FormGetter_Name_VALID, SUCCESS);
-	test(counter, FormGetter_Name_INVALID, FAIL);
+	test(FormGetter_Name_VALID, SUCCESS);
+	test(FormGetter_Name_INVALID, FAIL);
 	nl();
-	test(counter, FormGetter_IsSigned_VALID, SUCCESS);
+	test(FormGetter_IsSigned_VALID, SUCCESS);
 	nl();
-	test(counter, FormGetter_GetGradeToSign_VALID, SUCCESS);
-	test(counter, FormGetter_GetGradeToSign_INVALID, FAIL);
+	test(FormGetter_GetGradeToSign_VALID, SUCCESS);
+	test(FormGetter_GetGradeToSign_INVALID, FAIL);
 	nl();
-	test(counter, FormGetter_GetGradeToExec_VALID, SUCCESS);
-	test(counter, FormGetter_GetGradeToExec_INVALID, FAIL);
+	test(FormGetter_GetGradeToExec_VALID, SUCCESS);
+	test(FormGetter_GetGradeToExec_INVALID, FAIL);
 	nl();
-	test(counter, Form_BeSigned_VALID, SUCCESS);
-	test(counter, Form_BeSigned_INVALID_AlreadySigned, FAIL);
-	test(counter, Form_BeSigned_INVALID_LowGrade, FAIL);
-	test(counter, Form_BeSigned_INVALID_InvalidBureaucratGrade, FAIL);
+	test(Form_BeSigned_VALID, SUCCESS);
+	test(Form_BeSigned_INVALID_AlreadySigned, FAIL);
+	test(Form_BeSigned_INVALID_LowGrade, FAIL);
+	test(Form_BeSigned_INVALID_InvalidBureaucratGrade, FAIL);
 	nl();
-	test(counter, Bureaucrat_SignForm_VALID, SUCCESS);
-	test(counter, Bureaucrat_SignForm_INVALID_GradeTooLow, FAIL);
-	test(counter, Bureaucrat_SignForm_INVALID_AlreadySigned, FAIL);
-	test(counter, Bureaucrat_SignForm_INVALID_InvalidGrade, FAIL);
+	test(Bureaucrat_SignForm_VALID, SUCCESS);
+	test(Bureaucrat_SignForm_INVALID_GradeTooLow, FAIL);
+	test(Bureaucrat_SignForm_INVALID_AlreadySigned, FAIL);
+	test(Bureaucrat_SignForm_INVALID_InvalidGrade, FAIL);
 
 	nl();
-	if (counter.counted == counter.passed)
+	if (total_count(false) == test_passed(false))
 	{
 		std::cout << "  🎉🥳 All tests passed! 🥳🎉" << std::endl;
 		std::cout << LIGHTGREEN << "══════════════════════════════" << RESET << std::endl;
 	}
 	else
 	{
-		std::cout << "  ❌ " << counter.passed << "/" << counter.counted << " tests passed!" << std::endl;
+		std::cout << "  ❌ " << test_passed(false) << "/" << total_count(false) << " tests passed!" << std::endl;
 		std::cout << "     please investigate and debug further…" << std::endl;
 		std::cout << LIGHTRED << "═══════════════════════════════════════════════" << RESET << std::endl;
 	}
 	nl();
-	exit(counter.counted == counter.passed);
+	exit(total_count(false) == test_passed(false));
 }
 
 void	run_story()
