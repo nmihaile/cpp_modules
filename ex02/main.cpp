@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:35:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 18:51:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:28:56 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	print_result()
 	nl();
 	if (res)
 	{
-		std::cout << "  🎉🥳 All tests passed! 🥳🎉" << std::endl;
-		std::cout << LIGHTGREEN << "══════════════════════════════" << RESET << std::endl;
+		std::cout << "  🎉🥳 All " << std::setw(2) << total_count(false) <<" tests passed! 🥳🎉" << std::endl;
+		std::cout << LIGHTGREEN << "══════════════════════════════════" << RESET << std::endl;
 	}
 	else
 	{
@@ -125,6 +125,49 @@ void	ShrubberyCreationForm_writes_file()
 	}
 }
 
+void	ShrubberyCreationForm_is_signed_by_correct_GRADE()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat luke("Luke", 145);
+		ShrubberyCreationForm shrubberyCreationForm("home");
+		luke.signForm(shrubberyCreationForm);
+	}
+}
+
+void	ShrubberyCreationForm_is_executed_by_correct_GRADE()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat luke("Luke", 137);
+		ShrubberyCreationForm shrubberyCreationForm("home");
+		luke.signForm(shrubberyCreationForm);
+		shrubberyCreationForm.execute(luke);
+	}
+}
+
+void	ShrubberyCreationForm_gets_signed_by_Bureaucrat_with_GRADE_TOO_LOW()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat intern("intern", 146);
+		ShrubberyCreationForm shrubberyCreationForm("home");
+		intern.signForm(shrubberyCreationForm);
+	}
+}
+
+void	ShrubberyCreationForm_Executors_GRADE_is_TOO_LOW()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat intern("intern", 138);
+		ShrubberyCreationForm shrubberyCreationForm("home");
+		yoda.signForm(shrubberyCreationForm);
+		shrubberyCreationForm.execute(intern);
+	}
+}
+
 void	ShrubberyCreationForm_fails_to_write_file()
 {
 	printFunc(__func__);
@@ -154,18 +197,6 @@ void	ShrubberyCreationForm_fails_to_write_file()
 			throw ;
 			return ;
 		}
-	}
-}
-
-void	ShrubberyCreationForm_Executors_GRADE_is_TOO_LOW()
-{
-	printFunc(__func__);
-	{
-		Bureaucrat yoda("Yoda", 1);
-		Bureaucrat intern("intern", 150);
-		ShrubberyCreationForm shrubberyCreationForm("home");
-		yoda.signForm(shrubberyCreationForm);
-		shrubberyCreationForm.execute(intern);
 	}
 }
 
@@ -200,10 +231,13 @@ void	run_tests(void)
 
 	test(Instantiate_ShrubberyCreationForm, SUCCEDS);
 	test(ShrubberyCreationForm_writes_file, SUCCEDS);
+	test(ShrubberyCreationForm_is_signed_by_correct_GRADE, SUCCEDS);
+	test(ShrubberyCreationForm_is_executed_by_correct_GRADE, SUCCEDS);
+	test(ShrubberyCreationForm_gets_signed_by_Bureaucrat_with_GRADE_TOO_LOW, FAILS);
+	test(ShrubberyCreationForm_Executors_GRADE_is_TOO_LOW, FAILS);
 	test(ShrubberyCreationForm_fails_to_write_file, FAILS);
 	// we dont leave traces
 	system("[ -e home_shrubbery ] && chmod 644 home_shrubbery && rm -f home_shrubbery");
-	test(ShrubberyCreationForm_Executors_GRADE_is_TOO_LOW, FAILS);
 	test(ShrubberyCreationForm_is_been_executed_but_not_yet_sigend, FAILS);
 	
 	test(ShrubberyCreationForm_is_been_executed_by_Bureaucrat_with_invalid_grade, FAILS);
