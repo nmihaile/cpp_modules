@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:28 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/10 20:37:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 19:59:23 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ public:
 		const char* what() const throw() override;
 	};
 
-	static constexpr unsigned int HIGHEST_GRADE = 1;
-	static constexpr unsigned int LOWEST_GRADE = 150;
+	static const unsigned int HIGHEST_GRADE = 1;
+	static const unsigned int LOWEST_GRADE = 150;
 
 private:
 	const std::string	m_name;
