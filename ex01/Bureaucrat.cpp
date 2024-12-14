@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:29 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 17:06:23 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:31:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	Bureaucrat::decrementGrade()
 		m_grade++;
 }
 
-void	Bureaucrat::signForm(Form& form) const
+void	Bureaucrat::signForm(Form& form)
 {
 	try
 	{
