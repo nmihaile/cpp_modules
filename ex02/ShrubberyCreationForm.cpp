@@ -6,13 +6,14 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 12:29:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 19:10:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:14:56 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string _target) : AForm(_target, 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string _target)
+	: AForm(_target, 145, 137)
 {
 	std::srand(std::time(nullptr));
 }

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 12:29:07 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 18:30:10 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:12:55 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 #include "AForm.hpp"
 #include <fstream>
+#include <iomanip>
+#include <cstring>
 #include <cstdlib>
 #include <ctime>
 
@@ -23,9 +25,9 @@ class ShrubberyCreationForm : public AForm
 {
 public:
 	ShrubberyCreationForm(std::string _target);
-	~ShrubberyCreationForm();
+	~ShrubberyCreationForm() override;
 
-	void	execute(const Bureaucrat& executor) const;
+	void	execute(const Bureaucrat& executor) const override;
 	
 private:
 	bool	write_ASCII_tree() const;
