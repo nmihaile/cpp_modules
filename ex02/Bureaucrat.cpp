@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:29 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 12:11:15 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:48:06 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	Bureaucrat::decrementGrade()
 		m_grade++;
 }
 
-void	Bureaucrat::signForm(AForm& form) const
+void	Bureaucrat::signForm(AForm& form)
 {
 	try
 	{
@@ -92,6 +92,29 @@ void	Bureaucrat::signForm(AForm& form) const
 		return ;
 	}
 	std::cout << this->getName() << " signed \"" << form.getName() << "\"" << std::endl;
+}
+
+void	Bureaucrat::executeForm(const AForm& form)
+{
+	try
+	{
+		form.execute(*this);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch (const std::string& str)
+	{
+		std::cout << str << std::endl;
+	}
+	catch (...)
+	{
+		std::cout << "Bureaucrat::executeForm() : Default exception caught. Please debug…" << std::endl;
+	}
+
+	Test this here
+	
 }
 
 

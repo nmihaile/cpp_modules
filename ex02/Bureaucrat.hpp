@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:28 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 12:10:13 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:43:23 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ public:
 	unsigned int	getGrade() const;
 	void			incrementGrade();
 	void			decrementGrade();
-	void			signForm(AForm& form) const;
+	void			signForm(AForm& form);
+	void			executeForm(const AForm& form);
 
 	class GradeTooHighException : public std::exception {
 		const char* what() const throw() override;
