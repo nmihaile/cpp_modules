@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:29 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 20:48:06 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:33:32 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	Bureaucrat::signForm(AForm& form)
 		throw ;
 		return ;
 	}
+	catch (...) { throw ; }
+
 	std::cout << this->getName() << " signed \"" << form.getName() << "\"" << std::endl;
 }
 
@@ -102,19 +104,29 @@ void	Bureaucrat::executeForm(const AForm& form)
 	}
 	catch (const std::exception& e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << "Bureaucrat: " << "\"" << getName() << "\" " 
+					<< "failed to execute form: " << "\"" << form.getName() << "\""
+					<< " because: " << e.what() << "."
+					<< std::endl;
+		throw ;
+		return ;
 	}
 	catch (const std::string& str)
 	{
-		std::cout << str << std::endl;
+		std::cout << "Bureaucrat: " << "\"" << getName() << "\" " 
+					<< "failed to execute form: " << "\"" << form.getName() << "\""
+					<< " because: " << str << "."
+					<< std::endl;
+		throw ;
+		return ;
 	}
 	catch (...)
 	{
 		std::cout << "Bureaucrat::executeForm() : Default exception caught. Please debug…" << std::endl;
+		throw ;
+		return ;
 	}
-
-	Test this here
-	
+	std::cout << this->getName() << " executed \"" << form.getName() << "\"." << std::endl;
 }
 
 
