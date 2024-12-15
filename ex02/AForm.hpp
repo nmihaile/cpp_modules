@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:09 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 18:45:27 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:19:28 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 #include <climits>
 #include "Bureaucrat.hpp"
 
-#define HIGHEST_GRADE	1
-#define LOWEST_GRADE	150
-
 // Forward Declaration
 class Bureaucrat;
 
 class AForm
 {
 public:
+	static const unsigned int	HIGHEST_GRADE = 1;
+	static const unsigned int	LOWEST_GRADE = 150;
+
 	AForm();
 	AForm(const std::string _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec);
 	AForm(const AForm& other);
