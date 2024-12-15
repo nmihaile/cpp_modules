@@ -6,14 +6,14 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:56:09 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 15:58:02 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:25:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string _target)
-	: AForm(_target, 72, 75)
+	: AForm(_target, REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE)
 {
 	std::srand(std::time(nullptr));
 }

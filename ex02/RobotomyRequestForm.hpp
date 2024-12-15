@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:56:11 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 15:39:05 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:25:25 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 class RobotomyRequestForm : public AForm
 {
 public:
+	static const unsigned int	REQUIRED_SIGN_GRADE = 72;
+	static const unsigned int	REQUIRED_EXEC_GRADE = 75;
+
 	RobotomyRequestForm(std::string _target);
 	~RobotomyRequestForm() override;
 
