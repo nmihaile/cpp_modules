@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:35:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 16:38:30 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:26:51 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	Bureaucrat_executes_ShrubberyCreationForm()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		yoda.signForm(shrubberyCreationForm);
 		yoda.executeForm(shrubberyCreationForm);
@@ -114,7 +114,7 @@ void	Bureaucrat_executes_RobotomyRequestForm()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		yoda.signForm(robotomyRequestForm);
 		yoda.executeForm(robotomyRequestForm);
@@ -135,7 +135,7 @@ void	ShrubberyCreationForm_writes_file()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		yoda.signForm(shrubberyCreationForm);
 		shrubberyCreationForm.execute(yoda);
@@ -155,7 +155,7 @@ void	ShrubberyCreationForm_is_signed_by_correct_GRADE()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat luke("Luke", 145);
+		Bureaucrat luke("Luke", ShrubberyCreationForm::REQUIRED_SIGN_GRADE);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		luke.signForm(shrubberyCreationForm);
 	}
@@ -165,7 +165,7 @@ void	ShrubberyCreationForm_is_executed_by_correct_GRADE()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat luke("Luke", 137);
+		Bureaucrat luke("Luke", ShrubberyCreationForm::REQUIRED_EXEC_GRADE);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		luke.signForm(shrubberyCreationForm);
 		shrubberyCreationForm.execute(luke);
@@ -176,7 +176,7 @@ void	ShrubberyCreationForm_gets_signed_by_Bureaucrat_with_GRADE_TOO_LOW()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat intern("intern", 146);
+		Bureaucrat intern("intern", ShrubberyCreationForm::REQUIRED_SIGN_GRADE + 1);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		intern.signForm(shrubberyCreationForm);
 	}
@@ -186,8 +186,8 @@ void	ShrubberyCreationForm_Executors_GRADE_is_TOO_LOW()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
-		Bureaucrat intern("intern", 138);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		Bureaucrat intern("intern", ShrubberyCreationForm::REQUIRED_EXEC_GRADE + 1);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		yoda.signForm(shrubberyCreationForm);
 		shrubberyCreationForm.execute(intern);
@@ -198,7 +198,7 @@ void	ShrubberyCreationForm_fails_to_write_file()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		yoda.signForm(shrubberyCreationForm);
 
@@ -230,7 +230,7 @@ void	ShrubberyCreationForm_is_been_executed_but_not_yet_sigend()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		shrubberyCreationForm.execute(yoda);
 	}
@@ -240,7 +240,7 @@ void	ShrubberyCreationForm_is_been_executed_by_Bureaucrat_with_invalid_grade()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		yoda.signForm(shrubberyCreationForm);
 		std::memset(&yoda, 0, sizeof(Bureaucrat));
@@ -262,7 +262,7 @@ void	RobotomyRequestForm_is_executed_successful()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		yoda.signForm(robotomyRequestForm);
 		yoda.executeForm(robotomyRequestForm);
@@ -273,7 +273,7 @@ void	RobotomyRequestForm_is_signed_by_correct_GRADE()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat luke("Luke", 72);
+		Bureaucrat luke("Luke", RobotomyRequestForm::REQUIRED_SIGN_GRADE);
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		luke.signForm(robotomyRequestForm);
 	}
@@ -283,8 +283,8 @@ void	RobotomyRequestForm_is_executed_by_correct_GRADE()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
-		Bureaucrat luke("Luke", 75);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		Bureaucrat luke("Luke", RobotomyRequestForm::REQUIRED_EXEC_GRADE);
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		yoda.signForm(robotomyRequestForm);
 		luke.executeForm(robotomyRequestForm);
@@ -295,7 +295,7 @@ void	RobotomyRequestForm_gets_signed_by_Bureaucrat_with_GRADE_TOO_LOW()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat intern("intern", 73);
+		Bureaucrat intern("intern", RobotomyRequestForm::REQUIRED_SIGN_GRADE + 1);
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		intern.signForm(robotomyRequestForm);
 	}
@@ -305,8 +305,8 @@ void	RobotomyRequestForm_Executors_GRADE_is_TOO_LOW()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
-		Bureaucrat intern("intern", 76);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		Bureaucrat intern("intern", RobotomyRequestForm::REQUIRED_EXEC_GRADE + 1);
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		yoda.signForm(robotomyRequestForm);
 		intern.executeForm(robotomyRequestForm);
@@ -317,7 +317,7 @@ void	RobotomyRequestForm_is_been_executed_but_not_yet_sigend()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		yoda.executeForm(robotomyRequestForm);
 	}
@@ -327,7 +327,7 @@ void	RobotomyRequestForm_is_been_executed_by_Bureaucrat_with_invalid_grade()
 {
 	printFunc(__func__);
 	{
-		Bureaucrat yoda("Yoda", 1);
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		yoda.signForm(robotomyRequestForm);
 		std::memset(&yoda, 0, sizeof(Bureaucrat));
@@ -365,8 +365,19 @@ void	run_tests(void)
 	test(RobotomyRequestForm_is_been_executed_but_not_yet_sigend, FAILS);
 	test(RobotomyRequestForm_is_been_executed_by_Bureaucrat_with_invalid_grade, FAILS);
 
-	// system("chmod 644 home_shrubbery && rm -f home_shrubbery");
-	
+
+	// TO TEST::::
+	// ShrubberyCreationForm	-> has valid grade_to_sign
+	// ShrubberyCreationForm	-> has valid grade_to_exec
+	// RobotomyRequestForm		-> has valid grade_to_sign
+	// RobotomyRequestForm		-> has valid grade_to_exec
+
+	// TO IMPLEMENTED::::::
+	// ShrubberyCreationForm -> Orthodox Chononocal Form
+	// RobotomyRequestForm -> Orthodox Chononocal Form
+	// PresidentialPardonForm -> Orthodox Chononocal Form
+
+	system("[ -e home_shrubbery ] && chmod 644 home_shrubbery && rm -f home_shrubbery");	// clean up
 	exit(print_result());
 }
 
