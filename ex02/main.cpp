@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:35:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 17:26:51 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:56:37 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
 #define GREEN			"\033[32m"
@@ -118,6 +119,17 @@ void	Bureaucrat_executes_RobotomyRequestForm()
 		RobotomyRequestForm robotomyRequestForm("R2-D2");
 		yoda.signForm(robotomyRequestForm);
 		yoda.executeForm(robotomyRequestForm);
+	}
+}
+
+void	Bureaucrat_executes_PresidentialPardonForm()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		PresidentialPardonForm presidentialPardonForm("Julian Assange");
+		yoda.signForm(presidentialPardonForm);
+		yoda.executeForm(presidentialPardonForm);
 	}
 }
 
@@ -337,6 +349,143 @@ void	RobotomyRequestForm_is_been_executed_by_Bureaucrat_with_invalid_grade()
 
 /* ************************************************************************** */
 
+void	Instantiate_PresidentialPardonForm()
+{
+	printFunc(__func__);
+	{
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+	}
+}
+
+void	Instantiate_PresidentialPardonForm_via_CopyConstructor()
+{
+	printFunc(__func__);
+	{
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		PresidentialPardonForm duplicate(presidentialPardonForm);
+	}
+}
+
+void	Instantiate_PresidentialPardonForm_via_CopyConstructor_INVALID()
+{
+	printFunc(__func__);
+	{
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		std::memset(reinterpret_cast<void*>(&presidentialPardonForm), 0, sizeof(PresidentialPardonForm));
+		PresidentialPardonForm duplicate(presidentialPardonForm);
+	}
+}
+
+void	PresidentialPardonForm_getTarget_INVALID()
+{
+	printFunc(__func__);
+	{
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		std::memset(reinterpret_cast<void*>(&presidentialPardonForm), 0, sizeof(PresidentialPardonForm));
+		std::string target =  presidentialPardonForm.getTarget();
+	}
+}
+
+void	PresidentialPardonForm_assignemnt_operator_VALID()
+{
+	printFunc(__func__);
+	{
+		PresidentialPardonForm assangeForm("Julian Assange");
+		PresidentialPardonForm snowdenForm("Edward Snowden");
+		snowdenForm = assangeForm;
+	}
+}
+
+void	PresidentialPardonForm_assignemnt_operator_INVALID()
+{
+	printFunc(__func__);
+	{
+		PresidentialPardonForm assangeForm("Julian Assange");
+		PresidentialPardonForm snowdenForm("Edward Snowden");
+		std::memset(reinterpret_cast<void*>(&assangeForm), 0, sizeof(PresidentialPardonForm));
+		snowdenForm = assangeForm;
+	}
+}
+
+void	PresidentialPardonForm_is_executed_successful()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		yoda.signForm(presidentialPardonForm);
+		yoda.executeForm(presidentialPardonForm);
+	}
+}
+
+void	PresidentialPardonForm_is_signed_by_correct_GRADE()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat luke("Luke", PresidentialPardonForm::REQUIRED_SIGN_GRADE);
+		PresidentialPardonForm presidentialPardonForm("Julian Assange");
+		luke.signForm(presidentialPardonForm);
+	}
+}
+
+void	PresidentialPardonForm_is_executed_by_correct_GRADE()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		Bureaucrat luke("Luke", PresidentialPardonForm::REQUIRED_EXEC_GRADE);
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		yoda.signForm(presidentialPardonForm);
+		luke.executeForm(presidentialPardonForm);
+	}
+}
+
+void	PresidentialPardonForm_gets_signed_by_Bureaucrat_with_GRADE_TOO_LOW()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat intern("intern", PresidentialPardonForm::REQUIRED_SIGN_GRADE + 1);
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		intern.signForm(presidentialPardonForm);
+	}
+}
+
+void	PresidentialPardonForm_Executors_GRADE_is_TOO_LOW()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		Bureaucrat intern("intern", PresidentialPardonForm::REQUIRED_EXEC_GRADE + 1);
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		yoda.signForm(presidentialPardonForm);
+		intern.executeForm(presidentialPardonForm);
+	}
+}
+
+void	PresidentialPardonForm_is_been_executed_but_not_yet_sigend()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		yoda.executeForm(presidentialPardonForm);
+	}
+}
+
+void	PresidentialPardonForm_is_been_executed_by_Bureaucrat_with_invalid_grade()
+{
+	printFunc(__func__);
+	{
+		Bureaucrat yoda("Yoda", Bureaucrat::HIGHEST_GRADE);
+		PresidentialPardonForm presidentialPardonForm("Edward Snowden");
+		yoda.signForm(presidentialPardonForm);
+		std::memset(&yoda, 0, sizeof(Bureaucrat));
+		yoda.executeForm(presidentialPardonForm);
+	}
+}
+
+/* ************************************************************************** */
+
 void	run_tests(void)
 {
 	// clean expected files for test
@@ -345,6 +494,7 @@ void	run_tests(void)
 	test(Bureaucrat_executes_ShrubberyCreationForm, SUCCEDS);
 	system("[ -e home_shrubbery ] && chmod 644 home_shrubbery && rm -f home_shrubbery");	// clean up
 	test(Bureaucrat_executes_RobotomyRequestForm, SUCCEDS);
+	test(Bureaucrat_executes_PresidentialPardonForm, SUCCEDS);
 	nl();
 	test(Instantiate_ShrubberyCreationForm, SUCCEDS);
 	test(ShrubberyCreationForm_writes_file, SUCCEDS);
@@ -364,7 +514,20 @@ void	run_tests(void)
 	test(RobotomyRequestForm_Executors_GRADE_is_TOO_LOW, FAILS);
 	test(RobotomyRequestForm_is_been_executed_but_not_yet_sigend, FAILS);
 	test(RobotomyRequestForm_is_been_executed_by_Bureaucrat_with_invalid_grade, FAILS);
-
+	nl();
+	test(Instantiate_PresidentialPardonForm, SUCCEDS);
+	test(Instantiate_PresidentialPardonForm_via_CopyConstructor,SUCCEDS);
+	test(Instantiate_PresidentialPardonForm_via_CopyConstructor_INVALID, FAILS);
+	test(PresidentialPardonForm_getTarget_INVALID, FAILS);
+	test(PresidentialPardonForm_assignemnt_operator_VALID, SUCCEDS);
+	test(PresidentialPardonForm_assignemnt_operator_INVALID, FAILS);
+	test(PresidentialPardonForm_is_executed_successful, SUCCEDS);
+	test(PresidentialPardonForm_is_signed_by_correct_GRADE, SUCCEDS);
+	test(PresidentialPardonForm_is_executed_by_correct_GRADE, SUCCEDS);
+	test(PresidentialPardonForm_gets_signed_by_Bureaucrat_with_GRADE_TOO_LOW, FAILS);
+	test(PresidentialPardonForm_Executors_GRADE_is_TOO_LOW, FAILS);
+	test(PresidentialPardonForm_is_been_executed_but_not_yet_sigend, FAILS);
+	test(PresidentialPardonForm_is_been_executed_by_Bureaucrat_with_invalid_grade, FAILS);
 
 	// TO TEST::::
 	// ShrubberyCreationForm	-> has valid grade_to_sign
@@ -375,7 +538,7 @@ void	run_tests(void)
 	// TO IMPLEMENTED::::::
 	// ShrubberyCreationForm -> Orthodox Chononocal Form
 	// RobotomyRequestForm -> Orthodox Chononocal Form
-	// PresidentialPardonForm -> Orthodox Chononocal Form
+	// ✅ PresidentialPardonForm -> Orthodox Chononocal Form
 
 	system("[ -e home_shrubbery ] && chmod 644 home_shrubbery && rm -f home_shrubbery");	// clean up
 	exit(print_result());
