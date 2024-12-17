@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/17 10:59:20 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:37:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,23 +145,23 @@ void	AForm::beSigned(const Bureaucrat& bureaucrat)
 }
 
 const char*	AForm::GradeTooHighException::what() const throw() {
-	return ("AForm:: Grade to HIGH!");
+	return ("Grade to HIGH!");
 }
 
 const char*	AForm::GradeTooLowException::what() const throw() {
-	return ("AForm:: Grade to LOW!");
+	return ("Grade to LOW!");
 }
 
 const char* AForm::InvalidGradeException::what() const throw() {
-	return ("AForm:: Invalid Grade!");
+	return ("Invalid Grade!");
 }
 
 const char* AForm::AlreadySignedException::what() const throw() {
-	return ("AForm:: Form already signed!");
+	return ("Form already signed!");
 }
 
 const char* AForm::NotSignedException::what() const throw() {
-	return ("AForm:: Form is not signed yet.");
+	return ("Form is not signed yet.");
 }
 
 
