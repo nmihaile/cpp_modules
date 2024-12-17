@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:29 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 18:25:18 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:42:01 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	Bureaucrat::signForm(AForm& form)
 		throw ;
 		return ;
 	}
-	catch (...) { throw ; }
+	catch (...) { throw ; return ; }
 
 	std::cout << this->getName() << " signed \"" << form.getName() << "\"." << std::endl;
 }
