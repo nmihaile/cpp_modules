@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 18:50:16 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:59:20 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 AForm::AForm() :
 	m_name("Undefined_Form"),
+	m_target("Undefined_Target"),
 	m_is_signed(false),
 	m_grade_to_sign(HIGHEST_GRADE),
 	m_grade_to_exec(HIGHEST_GRADE)
@@ -24,11 +25,12 @@ AForm::AForm() :
 	validateGrade(m_grade_to_exec);
 }
 
-AForm::AForm(const std::string _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec) :
-	m_name(_name),
-	m_is_signed(false),
-	m_grade_to_sign(_grade_to_sign),
-	m_grade_to_exec(_grade_to_exec)
+AForm::AForm(const std::string& _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec)
+	:	m_name(_name),
+		m_target("Undefined_Target"),
+		m_is_signed(false),
+		m_grade_to_sign(_grade_to_sign),
+		m_grade_to_exec(_grade_to_exec)
 {
 	if (m_name.empty())
 		throw (std::string("Name can't be empty."));
@@ -36,10 +38,26 @@ AForm::AForm(const std::string _name, unsigned int _grade_to_sign, unsigned int 
 	validateGrade(_grade_to_exec);
 }
 
+AForm::AForm(const std::string& _name, const std::string& _target, unsigned int _grade_to_sign, unsigned int _grade_to_exec)
+	:	m_name(_name),
+		m_target(_target),
+		m_is_signed(false),
+		m_grade_to_sign(_grade_to_sign),
+		m_grade_to_exec(_grade_to_exec)
+{
+	if (m_name.empty())
+		throw (std::string("Name can't be empty."));
+	if (m_target.empty())
+		throw (getName() + std::string(" Target can't be empty."));
+	validateGrade(_grade_to_sign);
+	validateGrade(_grade_to_exec);
+}
+
 // as stated in the subject, a Form should NOT-BE-SIGNED on construction
 // Thats why we set m_is_signed -> FALSE 
 AForm::AForm(const AForm& other) :
-	m_name(other.m_name),
+	m_name(other.getName()),
+	m_target(other.getTarget()),
 	m_is_signed(false),
 	m_grade_to_sign(other.m_grade_to_sign),
 	m_grade_to_exec(other.m_grade_to_exec)
@@ -48,6 +66,8 @@ AForm::AForm(const AForm& other) :
 	validateGrade(m_grade_to_exec);
 	if (m_name.empty())
 		throw (std::string("Name can't be empty."));
+	if (m_target.empty())
+		throw (getName() + std::string(" Target can't be empty."));
 }
 
 AForm::~AForm()
@@ -59,12 +79,12 @@ AForm::~AForm()
 /* ************************************************************************** */
 
 
-AForm& AForm::operator=(const AForm& other)
-{
-	if (this != &other)
-		m_is_signed = other.m_is_signed;
-	return (*this);
-}
+// AForm& AForm::operator=(const AForm& other)
+// {
+// 	if (this != &other)
+// 		m_is_signed = other.m_is_signed;
+// 	return (*this);
+// }
 
 
 /* ************************************************************************** */
@@ -76,6 +96,13 @@ std::string		AForm::getName() const
 	if (m_name.empty())
 		throw (std::string("AForm::getName(): m_name is empty -> debugging required…"));
 	return ( m_name );
+}
+
+std::string		AForm::getTarget() const
+{
+	if (m_target.empty())
+		throw (getName() + std::string("::getTarget(): m_target is empty -> debugging required…"));
+	return ( m_target );
 }
 
 bool			AForm::isSigned() const
@@ -175,6 +202,7 @@ bool	AForm::checkForm(const Bureaucrat& bureaucrat) const
 std::ostream& operator<<(std::ostream& os, const AForm& form)
 {
 	return (os << "Form \"" << form.getName() << "\": "
+			<< "[Target: " << form.getTarget() << "], "
 			<< "[is_signed: " << form.isSigned() << "], "
 			<< "[grade_to_sign: " << form.getGradeToSign() << "], "
 			<< "[grade_to_exec: " << form.getGradeToExec() << "]" << std::endl );

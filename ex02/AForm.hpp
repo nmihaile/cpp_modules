@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:09 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 17:19:28 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:35:32 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ public:
 	static const unsigned int	LOWEST_GRADE = 150;
 
 	AForm();
-	AForm(const std::string _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec);
+	AForm(const std::string& _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec);
+	AForm(const std::string& _name, const std::string& _target, unsigned int _grade_to_sign, unsigned int _grade_to_exec);
 	AForm(const AForm& other);
 	virtual ~AForm();
 
-	AForm& 			operator=(const AForm& other);
-
 	std::string		getName() const;
+	std::string		getTarget() const;
 	bool			isSigned() const;
 	unsigned int	getGradeToSign() const;
 	unsigned int	getGradeToExec() const;
@@ -69,7 +69,10 @@ protected:
 	bool	checkForm(const Bureaucrat& bureaucrat) const;
 
 private:
+	AForm& 			operator=(const AForm& other) = delete;
+
 	const std::string	m_name;
+	const std::string	m_target;
 	bool				m_is_signed;
 	const unsigned int	m_grade_to_sign;
 	const unsigned int	m_grade_to_exec;
