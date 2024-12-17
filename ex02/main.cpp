@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:35:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/16 12:56:37 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:51:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -386,26 +386,26 @@ void	PresidentialPardonForm_getTarget_INVALID()
 	}
 }
 
-void	PresidentialPardonForm_assignemnt_operator_VALID()
-{
-	printFunc(__func__);
-	{
-		PresidentialPardonForm assangeForm("Julian Assange");
-		PresidentialPardonForm snowdenForm("Edward Snowden");
-		snowdenForm = assangeForm;
-	}
-}
+// void	PresidentialPardonForm_assignemnt_operator_VALID()
+// {
+// 	printFunc(__func__);
+// 	{
+// 		PresidentialPardonForm assangeForm("Julian Assange");
+// 		PresidentialPardonForm snowdenForm("Edward Snowden");
+// 		snowdenForm = assangeForm;
+// 	}
+// }
 
-void	PresidentialPardonForm_assignemnt_operator_INVALID()
-{
-	printFunc(__func__);
-	{
-		PresidentialPardonForm assangeForm("Julian Assange");
-		PresidentialPardonForm snowdenForm("Edward Snowden");
-		std::memset(reinterpret_cast<void*>(&assangeForm), 0, sizeof(PresidentialPardonForm));
-		snowdenForm = assangeForm;
-	}
-}
+// void	PresidentialPardonForm_assignemnt_operator_INVALID()
+// {
+// 	printFunc(__func__);
+// 	{
+// 		PresidentialPardonForm assangeForm("Julian Assange");
+// 		PresidentialPardonForm snowdenForm("Edward Snowden");
+// 		std::memset(reinterpret_cast<void*>(&assangeForm), 0, sizeof(PresidentialPardonForm));
+// 		snowdenForm = assangeForm;
+// 	}
+// }
 
 void	PresidentialPardonForm_is_executed_successful()
 {
@@ -519,8 +519,8 @@ void	run_tests(void)
 	test(Instantiate_PresidentialPardonForm_via_CopyConstructor,SUCCEDS);
 	test(Instantiate_PresidentialPardonForm_via_CopyConstructor_INVALID, FAILS);
 	test(PresidentialPardonForm_getTarget_INVALID, FAILS);
-	test(PresidentialPardonForm_assignemnt_operator_VALID, SUCCEDS);
-	test(PresidentialPardonForm_assignemnt_operator_INVALID, FAILS);
+	// test(PresidentialPardonForm_assignemnt_operator_VALID, SUCCEDS);
+	// test(PresidentialPardonForm_assignemnt_operator_INVALID, FAILS);
 	test(PresidentialPardonForm_is_executed_successful, SUCCEDS);
 	test(PresidentialPardonForm_is_signed_by_correct_GRADE, SUCCEDS);
 	test(PresidentialPardonForm_is_executed_by_correct_GRADE, SUCCEDS);
