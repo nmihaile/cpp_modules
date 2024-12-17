@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 11:34:13 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/16 18:35:58 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,8 @@ void	FormCopyAssignmentOperator_VALID(void)
 	{
 		Form base("Enrole @ 42", 42, 42);
 		Form copy;
-		copy = base;
+		// This is now invalid, because I set the operatoe=() to =delete;
+		// copy = base;
 	}
 }
 
@@ -167,7 +168,8 @@ void	FormCopyAssignmentOperator_INVALID_base_class_01(void)
 		std::memset(&inavlid_base, 0, sizeof(Form));
 
 		Form copy;
-		copy = inavlid_base;
+		// This is now invalid, because I set the operatoe=() to =delete;
+		// copy = inavlid_base;
 	}
 }
 
@@ -405,9 +407,9 @@ void	run_tests(void)
 	test(FormCopyConstructor_VALID, SUCCESS);
 	test(FormCopyConstructor_INVALID_base_class, FAIL);
 	nl();
-	test(FormCopyAssignmentOperator_VALID, SUCCESS);
-	test(FormCopyAssignmentOperator_INVALID_base_class_01, SUCCESS);
-	// test(FormCopyAssignmentOperator_INVALID_base_class_02, FAIL);
+	// test(FormCopyAssignmentOperator_VALID, SUCCESS);
+	// test(FormCopyAssignmentOperator_INVALID_base_class_01, SUCCESS);
+	// // test(FormCopyAssignmentOperator_INVALID_base_class_02, FAIL);
 	nl();
 	test(FormGetter_Name_VALID, SUCCESS);
 	test(FormGetter_Name_INVALID, FAIL);
