@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/17 12:37:45 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:16:58 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,5 +205,5 @@ std::ostream& operator<<(std::ostream& os, const AForm& form)
 			<< "[Target: " << form.getTarget() << "], "
 			<< "[is_signed: " << form.isSigned() << "], "
 			<< "[grade_to_sign: " << form.getGradeToSign() << "], "
-			<< "[grade_to_exec: " << form.getGradeToExec() << "]" << std::endl );
+			<< "[grade_to_exec: " << form.getGradeToExec() << "]" );
 }

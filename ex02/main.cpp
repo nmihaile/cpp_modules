@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:35:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/17 14:42:42 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:20:55 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -575,7 +575,11 @@ int	main(int ac, char **av)
 		Bureaucrat ObiWan("Obi-Wan Kenobi", 72);
 		Bureaucrat Luke("Luke Skywalker", 145);
 
-		std::cout << yoda << Leia << ObiWan << Luke << std::endl;
+		std::cout	<< yoda << std::endl
+					<< Leia << std::endl
+					<< ObiWan << std::endl
+					<< Luke << std::endl
+					<< std::endl;
 
 		ShrubberyCreationForm shrubbery("home");
 		std::cout << shrubbery << std::endl;
