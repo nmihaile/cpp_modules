@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:34 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/16 18:35:58 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:15:42 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,7 +457,13 @@ void	run_story()
 	Bureaucrat patrick("Patrick", 42);
 	Bureaucrat intern("Intern", 150);
 	
-	std::cout << enrole;
+	std::cout << "Who will be able to sign the form?" << std::endl;
+	std::cout << enrole << std::endl;
+	std::cout << "[ ] " << moritz << std::endl;
+	std::cout << "[ ] " << patrick << std::endl;
+	std::cout << "[ ] " << intern << std::endl;
+	std::cout << std::endl;
+
 	try
 	{
 		enrole.beSigned(intern);
