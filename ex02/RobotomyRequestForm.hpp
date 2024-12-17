@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:56:11 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 17:25:25 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:49:14 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ public:
 	static const unsigned int	REQUIRED_EXEC_GRADE = 75;
 
 	RobotomyRequestForm(std::string _target);
+	RobotomyRequestForm(const RobotomyRequestForm& other);
 	~RobotomyRequestForm() override;
 
-	void	execute(const Bureaucrat& executor) const override;
+	void		execute(const Bureaucrat& executor) const override;
 
 private:
+	RobotomyRequestForm() = delete;
+	RobotomyRequestForm&	operator=(const RobotomyRequestForm& rhs) = delete;
+
 	static const std::string	drill_sounds[20];
 	static const std::string	drill_colors[6];
 };

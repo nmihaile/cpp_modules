@@ -6,16 +6,27 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:56:09 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 17:25:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:43:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
+// RobotomyRequestForm::RobotomyRequestForm()
+// 	:	AForm("RobotomyRequestForm", REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE),
+// 		m_target("Undefined_target")
+// {
+// }
+
 RobotomyRequestForm::RobotomyRequestForm(std::string _target)
-	: AForm(_target, REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE)
+	:	AForm("RobotomyRequestForm", _target, REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE)
 {
 	std::srand(std::time(nullptr));
+}
+
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other)
+	:	AForm("RobotomyRequestForm", other.getTarget(), other.getGradeToSign(), other.getGradeToExec())
+{
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()
@@ -47,17 +58,17 @@ void	RobotomyRequestForm::execute(const Bureaucrat& executor) const
 
 		std::cout << drill_colors[std::rand() % 6] << drill_sounds[std::rand() % 20] << std::flush;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		std::this_thread::sleep_for(std::chrono::milliseconds( 25 + (rand() % 3) * 25));
 	}
 
 	if (std::rand() % 2 == 0)
 		std::cout	<< RESET << std::endl << "\""
-					<< getName() << "\""
+					<< getTarget() << "\""
 					<< " has been robotomized." << std::endl;
 	else
 		std::cout	<< RESET << std::endl
 					<< "Failed to robotomy target: " << "\""
-					<< getName() << "\"" << std::endl;
+					<< getTarget() << "\"" << std::endl;
 }
 
 
