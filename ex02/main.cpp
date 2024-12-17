@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:35:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/17 10:51:45 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:42:42 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -528,28 +528,109 @@ void	run_tests(void)
 	test(PresidentialPardonForm_Executors_GRADE_is_TOO_LOW, FAILS);
 	test(PresidentialPardonForm_is_been_executed_but_not_yet_sigend, FAILS);
 	test(PresidentialPardonForm_is_been_executed_by_Bureaucrat_with_invalid_grade, FAILS);
-
-	// TO TEST::::
-	// ShrubberyCreationForm	-> has valid grade_to_sign
-	// ShrubberyCreationForm	-> has valid grade_to_exec
-	// RobotomyRequestForm		-> has valid grade_to_sign
-	// RobotomyRequestForm		-> has valid grade_to_exec
-
-	// TO IMPLEMENTED::::::
-	// ShrubberyCreationForm -> Orthodox Chononocal Form
-	// RobotomyRequestForm -> Orthodox Chononocal Form
-	// ✅ PresidentialPardonForm -> Orthodox Chononocal Form
+	nl();
 
 	system("[ -e home_shrubbery ] && chmod 644 home_shrubbery && rm -f home_shrubbery");	// clean up
 	exit(print_result());
 }
 
-int	main()	// int ac, char **av
+int	main(int ac, char **av)
 {
-	// if (ac == 2 && std::strcmp(av[1], "test") == 0)
+	system("[ -e home_shrubbery ] && chmod 644 home_shrubbery && rm -f home_shrubbery");	// clean up
+	if (ac == 2 && std::strcmp(av[1], "test") == 0)
 		run_tests();
-	// else
-	// 	RobotomyRequestForm_is_executed_successful();
+	else if (ac == 2 && std::strcmp(av[1], "story") == 0)
+	{
+
+		std::cout << LIGHTYELLOW << R"(
+                     ________________.  ___     .______
+                    /                | /   \    |   _  \
+                   |   (-----|  |----`/  ^  \   |  |_)  |
+                    \   \    |  |    /  /_\  \  |      /
+               .-----)   |   |  |   /  _____  \ |  |\  \-------.
+               |________/    |__|  /__/     \__\| _| `.________|
+                ____    __    ____  ___     .______    ________.
+                \   \  /  \  /   / /   \    |   _  \  /        |
+                 \   \/    \/   / /  ^  \   |  |_)  ||   (-----`
+                  \            / /  /_\  \  |      /  \   \
+                   \    /\    / /  _____  \ |  |\  \---)   |
+                    \__/  \__/ /__/     \__\|__| `._______/
+
+--------------------------------------------------------------------------------
+
+                A long time ago in a galaxy far, far away...
+
+  In a distant corner of the universe, where the forces of light and darkness
+   clash, a series of bureaucratic challenges unfold. The fate of the galaxy
+ often hinges on the smallest details, and the signing of forms is no exception.
+  Heroes and allies navigate the complexities of official documents, each step
+            crucial in their quest to maintain order and justice...
+
+--------------------------------------------------------------------------------
+		)" << RESET << std::endl;
+
+
+		Bureaucrat yoda("yoda", 1);
+		Bureaucrat Leia("Princess Leia", 25);
+		Bureaucrat ObiWan("Obi-Wan Kenobi", 72);
+		Bureaucrat Luke("Luke Skywalker", 145);
+
+		std::cout << yoda << Leia << ObiWan << Luke << std::endl;
+
+		ShrubberyCreationForm shrubbery("home");
+		std::cout << shrubbery << std::endl;
+		try	{
+			Luke.signForm(shrubbery);
+			Luke.executeForm(shrubbery);
+		}
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+		try	{ ObiWan.signForm(shrubbery); }
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+		try	{ Leia.executeForm(shrubbery); }
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+
+		nl();
+
+		RobotomyRequestForm r2d2("R2-D2");
+		std::cout << r2d2 << std::endl;
+		try	{ Luke.signForm(r2d2); }
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+		try	{
+			ObiWan.signForm(r2d2);
+			Luke.executeForm(r2d2);
+		}
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+		try	{ ObiWan.executeForm(r2d2); }
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+
+		nl();
+
+		PresidentialPardonForm	snowden("Edward Snowden");
+		std::cout << snowden << std::endl;
+		try	{ Luke.signForm(snowden); Luke.executeForm(snowden); }
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+		try	{ ObiWan.signForm(snowden); ObiWan.executeForm(snowden); }
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+		try	{ Leia.signForm(snowden); Leia.executeForm(snowden); }
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+		try	{ yoda.executeForm(snowden); }
+		catch(const std::exception& e)	{ std::cout << e.what() << std::endl; }
+		
+
+		std::cout << LIGHTYELLOW << R"(
+--------------------------------------------------------------------------------
+                  _______ _    _ ______   ______ _   _ _____  
+                 |__   __| |  | |  ____| |  ____| \ | |  __ \ 
+                    | |  | |__| | |__    | |__  |  \| | |  | |
+                    | |  |  __  |  __|   |  __| | . ` | |  | |
+                    | |  | |  | | |____  | |____| |\  | |__| |
+                    |_|  |_|  |_|______| |______|_| \_|_____/ 
+              	
+)" 		<< RESET << std::endl;
+
+	}
+	else
+		std::cout << LIGHTCYAN << "usage: ./main <test|story>" << RESET << std::endl;
 		
 	return (0);
 }
