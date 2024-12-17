@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/14 11:29:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:26:25 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Form::Form() :
 	validateGrade(m_grade_to_exec);
 }
 
-Form::Form(const std::string _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec) :
+Form::Form(const std::string& _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec) :
 	m_name(_name),
 	m_is_signed(false),
 	m_grade_to_sign(_grade_to_sign),
@@ -59,12 +59,12 @@ Form::~Form()
 /* ************************************************************************** */
 
 
-Form& Form::operator=(const Form& other)
-{
-	if (this != &other)
-		m_is_signed = other.m_is_signed;
-	return (*this);
-}
+// Form& Form::operator=(const Form& other)
+// {
+// 	if (this != &other)
+// 		m_is_signed = other.m_is_signed;
+// 	return (*this);
+// }
 
 
 /* ************************************************************************** */

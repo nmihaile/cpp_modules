@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:08:09 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/13 16:01:43 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:26:04 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ class Form
 {
 public:
 	Form();
-	Form(const std::string _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec);
+	Form(const std::string& _name, unsigned int _grade_to_sign, unsigned int _grade_to_exec);
 	Form(const Form& other);
 	~Form();
-
-	Form& 			operator=(const Form& other);
 
 	std::string		getName() const;
 	bool			isSigned() const;
@@ -60,6 +58,8 @@ public:
 	};
 
 private:
+	Form& 			operator=(const Form& other) = delete;
+	
 	const std::string	m_name;
 	bool				m_is_signed;
 	const unsigned int	m_grade_to_sign;
