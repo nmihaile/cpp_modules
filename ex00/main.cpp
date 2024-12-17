@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/10 21:04:41 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:06:46 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void	TestCopyConstructor()
 	try
 	{
 		Bureaucrat copy(m);
-		std::cout << LIGHTGREEN << "Success" << RESET << ", copied: " << copy;
-		std::cout << "From original  : " << m;
+		std::cout << LIGHTGREEN << "Success" << RESET << ", copied: " << copy << std::endl;
+		std::cout << "From original  : " << m << std::endl;
 	}
 	catch(std::exception& e)
 	{

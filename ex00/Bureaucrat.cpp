@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:51:29 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/10 21:03:31 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:04:48 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,5 @@ bool	Bureaucrat::isValidGrade(unsigned int grade)
 
 std::ostream& operator<< (std::ostream& os, const Bureaucrat& rhs)
 {
-	return ( os << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl );
+	return ( os << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() );
 }
