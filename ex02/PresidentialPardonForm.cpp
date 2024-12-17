@@ -6,27 +6,25 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:46:00 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/16 11:56:02 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:23:17 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm()
-:	AForm("PresidentialPardonForm", REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE),
-	m_target("Undefined_target")
-{
-}
+// PresidentialPardonForm::PresidentialPardonForm()
+// :	AForm("PresidentialPardonForm", REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE),
+// 	m_target("Undefined_target")
+// {
+// }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string _target)
-:	AForm("PresidentialPardonForm", REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE),
-	m_target(_target)
+	:	AForm("PresidentialPardonForm", _target, REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE)
 {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other)
-:	AForm(other.getName(), other.REQUIRED_SIGN_GRADE, other.REQUIRED_EXEC_GRADE),
-	m_target(other.getTarget())
+	:	AForm(other.getName(), other.getTarget(), other.REQUIRED_SIGN_GRADE, other.REQUIRED_EXEC_GRADE)
 {
 }
 
@@ -39,41 +37,31 @@ PresidentialPardonForm::~PresidentialPardonForm()
 /* ************************************************************************** */
 
 
-PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& rhs)
-{
-	if (this != &rhs)
-	{
-		AForm::operator=(rhs);
-		try
-		{
-			m_target = rhs.getTarget();
-		}
-		catch(const std::exception& e)
-		{
-			std::cout	<< "PresidentialPardonForm::operator=() assignment failed to set m_target from Rvalue \""
-						<< rhs.getName() << "\" because "
-						<< e.what() << "." << std::endl;
-			throw ;
-		}
-		catch(...)
-		{
-			std::cout	<< "PresidentialPardonForm::operator=() assignment failed to set m_target from Rvalue \""
-						<< rhs.getName() << "\" and got an unknown/default exception type." << std::endl;
-			throw ;
-		}
-	}
-	return (*this);
-}
-
-std::string	PresidentialPardonForm::getTarget(void) const
-{
-	if (m_target.empty())
-	{
-		throw (std::string("PresidentialPardonForm::getTarget(): m_target is empty -> debugging required…"));
-		return (nullptr);
-	}
-	return ( m_target );
-}
+// PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& rhs)
+// {
+// 	if (this != &rhs)
+// 	{
+// 		AForm::operator=(rhs);
+// 		try
+// 		{
+// 			m_target = rhs.getTarget();
+// 		}
+// 		catch(const std::exception& e)
+// 		{
+// 			std::cout	<< "PresidentialPardonForm::operator=() assignment failed to set m_target from Rvalue \""
+// 						<< rhs.getName() << "\" because "
+// 						<< e.what() << "." << std::endl;
+// 			throw ;
+// 		}
+// 		catch(...)
+// 		{
+// 			std::cout	<< "PresidentialPardonForm::operator=() assignment failed to set m_target from Rvalue \""
+// 						<< rhs.getName() << "\" and got an unknown/default exception type." << std::endl;
+// 			throw ;
+// 		}
+// 	}
+// 	return (*this);
+// }
 
 void	PresidentialPardonForm::execute(const Bureaucrat& executor) const
 {

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:46:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 20:53:02 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:16:27 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,11 @@ public:
 	PresidentialPardonForm(const PresidentialPardonForm& other);
 	~PresidentialPardonForm() override;
 
-	PresidentialPardonForm& operator=(const PresidentialPardonForm& rhs);
-
-	std::string	getTarget(void) const;
 	void		execute(const Bureaucrat& executor) const override;
 
 private:
-	PresidentialPardonForm();
-	std::string	m_target;
+	PresidentialPardonForm() =delete;
+	PresidentialPardonForm& operator=(const PresidentialPardonForm& rhs) = delete;
 };
 
 #endif
