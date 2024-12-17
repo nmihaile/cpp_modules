@@ -6,14 +6,14 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 12:29:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 17:24:40 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:33:04 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string _target)
-	: AForm(_target, REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE)
+	: AForm("ShrubberyCreationForm", _target, REQUIRED_SIGN_GRADE, REQUIRED_EXEC_GRADE)
 {
 	std::srand(std::time(nullptr));
 }
@@ -53,7 +53,7 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const
 bool	ShrubberyCreationForm::write_ASCII_tree() const
 {
 	std::fstream	fs;
-	std::string		filename = getName() + "_shrubbery";
+	std::string		filename = getTarget() + "_shrubbery";
 
 	fs.open(filename, std::fstream::out | std::fstream::app);
 	if (fs.is_open() == false)

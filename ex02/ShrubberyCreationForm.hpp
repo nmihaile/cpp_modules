@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 12:29:07 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/15 17:24:36 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:28:05 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ public:
 	void	execute(const Bureaucrat& executor) const override;
 
 private:
+	ShrubberyCreationForm() = delete;
+	ShrubberyCreationForm&	operator=(const ShrubberyCreationForm& rhs) = delete;
+
 	bool	write_ASCII_tree() const;
 
 	static const std::string	m_trees[3];
