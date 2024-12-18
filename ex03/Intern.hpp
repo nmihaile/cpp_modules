@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:39:27 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/18 16:58:25 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:00:52 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #include <string>
 #include <exception>
-#include <functional>
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -36,10 +35,17 @@ public:
 	};
 
 private:
-	static const char											*formSpecifiers[Intern::FORM_COUNT];
-	static const std::function<AForm*(std::string& _target)>	formFactory[Intern::FORM_COUNT];
+	typedef AForm				*(*createFunc)(const std::string&);
+
+	static const std::string	formSpecifiers[Intern::FORM_COUNT];
+	static const createFunc		formFactory[Intern::FORM_COUNT];
+	static AForm				*createSchrubberyCreationForm(const std::string& _target);
+	static AForm				*createRobotomyRequestForm(const std::string& _target);
+	static AForm				*createPresidentialPardonForm(const std::string& _target);
+
 	Intern(const Intern&) = delete;
 	Intern&	operator=(const Intern&) = delete;
+
 };
 
 #endif
