@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:08:21 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/18 17:44:54 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:08:13 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main()
 	rainbow_print(".~ Interns are welcome ~.");
 
 	Intern intern;
-	AForm *form;
+	AForm *form = nullptr;
 
 	rainbow_print("\n-------------------------");
 	try {
@@ -73,9 +73,17 @@ int	main()
 			yoda.executeForm(*form);
 			std::cout << *form << std::endl;
 			delete (form);
+			form = nullptr;
 		}
 	}
-	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+	catch (std::exception& e) {
+		std::cout << LIGHTRED << e.what() << RESET << std::endl;
+	}
+	if (form)
+	{
+		delete (form);
+		form = nullptr;
+	}
 
 	
 	rainbow_print("\n-------------------------");
@@ -88,9 +96,17 @@ int	main()
 			yoda.signForm(*form);
 			yoda.executeForm(*form);
 			delete (form);
+			form = nullptr;
 		}
 	}
-	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+	catch (std::exception& e) {
+		std::cout << LIGHTRED << e.what() << RESET << std::endl;
+	}
+	if (form)
+	{
+		delete (form);
+		form = nullptr;
+	}
 
 	rainbow_print("\n-------------------------");
 	try {
@@ -102,9 +118,17 @@ int	main()
 			yoda.signForm(*form);
 			yoda.executeForm(*form);
 			delete (form);
+			form = nullptr;
 		}
 	}
-	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+	catch (std::exception& e) {
+		std::cout << LIGHTRED << e.what() << RESET << std::endl;
+	}
+	if (form)
+	{
+		delete (form);
+		form = nullptr;
+	}
 
 	rainbow_print("\n-------------------------");
 	try {
@@ -116,9 +140,17 @@ int	main()
 			yoda.signForm(*form);
 			yoda.executeForm(*form);
 			delete (form);
+			form = nullptr;
 		}
 	}
-	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+	catch (std::exception& e) {
+		std::cout << LIGHTRED << e.what() << RESET << std::endl;
+	}
+	if (form)
+	{
+		delete (form);
+		form = nullptr;
+	}
 
 	rainbow_print("\n-------------------------");
 	try {
@@ -130,9 +162,17 @@ int	main()
 			Leia.signForm(*form);
 			Leia.executeForm(*form);
 			delete (form);
+			form = nullptr;
 		}
 	}
-	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+	catch (std::exception& e) {
+		std::cout << LIGHTRED << e.what() << RESET << std::endl;
+	}
+	if (form)
+	{
+		delete (form);
+		form = nullptr;
+	}
 
 	rainbow_print("\n------------------------ ");
 	rainbow_print("THANK YOU -> WE ARE DONE\n");
