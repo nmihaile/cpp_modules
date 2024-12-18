@@ -6,12 +6,13 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:08:21 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/17 19:32:02 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:44:54 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
+#include <exception>
 
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -30,7 +31,10 @@
 #define LIGHTCYAN		"\033[96m"
 #define RESET			"\033[0m"
 
-static const char *rainbow_colors[6] = {
+// RainbowColorCount:
+#define RCC 6
+
+static const char *rainbow_colors[RCC] = {
 	"\033[91m",
 	"\033[93m",
 	"\033[92m",
@@ -45,37 +49,93 @@ void	rainbow_print(std::string str)
 	std::cout << BOLD;
 	for(std::string::iterator it = str.begin(); it < str.end(); ++it)
 	{
-		std::cout << rainbow_colors[col++ % 6] << *it;
+		std::cout << rainbow_colors[col++ % RCC] << *it;
 	}
 	std::cout << RESET <<std::endl;
 }
 
 int	main()
 {
-
-	// std::cout << "Interns are Welcome" << std::endl;
-	rainbow_print(".~ Interns are Welcome ~.");
+	std::cout << std::endl;
+	rainbow_print(".~ Interns are welcome ~.");
 
 	Intern intern;
-
 	AForm *form;
 
-	form = intern.makeForm("robotomy request", "R2-D2");
-
-	std::cout << *form << std::endl;
-
-	delete (form);
-
-	try
-	{
-		form = intern.makeForm("enrole @ 42", "student");
-		std::cout << *form << std::endl;
+	rainbow_print("\n-------------------------");
+	try {
+		form = intern.makeForm("Howdy request", "R2-D2");
+		if (form)
+		{
+			std::cout << *form << std::endl;
+			Bureaucrat yoda("Yoda", 1);
+			yoda.signForm(*form);
+			yoda.executeForm(*form);
+			std::cout << *form << std::endl;
+			delete (form);
+		}
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+
 	
+	rainbow_print("\n-------------------------");
+	try {
+		form = intern.makeForm("robotomy request", "R2-D2");
+		if (form)
+		{
+			std::cout << *form << std::endl;
+			Bureaucrat yoda("Yoda", 1);
+			yoda.signForm(*form);
+			yoda.executeForm(*form);
+			delete (form);
+		}
+	}
+	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
 
+	rainbow_print("\n-------------------------");
+	try {
+		form = intern.makeForm("presidential pardon", "Julian Assange");
+		if (form)
+		{
+			std::cout << *form << std::endl;
+			Bureaucrat yoda("Yoda", 1);
+			yoda.signForm(*form);
+			yoda.executeForm(*form);
+			delete (form);
+		}
+	}
+	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+
+	rainbow_print("\n-------------------------");
+	try {
+		form = intern.makeForm("shrubbery creation", "42_school");
+		if (form)
+		{
+			std::cout << *form << std::endl;
+			Bureaucrat yoda("Yoda", 1);
+			yoda.signForm(*form);
+			yoda.executeForm(*form);
+			delete (form);
+		}
+	}
+	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+
+	rainbow_print("\n-------------------------");
+	try {
+		form = intern.makeForm("presidential pardon", "Edward Snowden");
+		if (form)
+		{
+			std::cout << *form << std::endl;
+			Bureaucrat Leia("Princess Leia", 25);
+			Leia.signForm(*form);
+			Leia.executeForm(*form);
+			delete (form);
+		}
+	}
+	catch (std::exception& e) {	std::cout << LIGHTRED << e.what() << RESET << std::endl;	}
+
+	rainbow_print("\n------------------------ ");
+	rainbow_print("THANK YOU -> WE ARE DONE\n");
+	
 	return (0);
 }
