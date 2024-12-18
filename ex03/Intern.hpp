@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:39:27 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/17 17:35:26 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:58:25 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ public:
 	};
 
 private:
-	static const std::string									formSpecifiers[Intern::FORM_COUNT];
+	static const char											*formSpecifiers[Intern::FORM_COUNT];
 	static const std::function<AForm*(std::string& _target)>	formFactory[Intern::FORM_COUNT];
 	Intern(const Intern&) = delete;
 	Intern&	operator=(const Intern&) = delete;
