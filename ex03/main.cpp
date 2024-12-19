@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:08:21 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/18 20:24:23 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:29:24 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ int	main()
 		yoda.signForm(*form);
 		yoda.executeForm(*form);
 		std::cout << *form << std::endl;
-		delete (form);
-		form = nullptr;
+		freeForm(&form);
 	}
 	catch (std::exception& e) {
 		std::cout << LIGHTRED << e.what() << RESET << std::endl;
@@ -90,12 +89,11 @@ int	main()
 	rainbow_print("\n-------------------------");
 	try {
 		form = intern.makeForm("robotomy request", "R2-D2");
-			std::cout << *form << std::endl;
-			Bureaucrat yoda("Yoda", 1);
-			yoda.signForm(*form);
-			yoda.executeForm(*form);
-			delete (form);
-			form = nullptr;
+		std::cout << *form << std::endl;
+		Bureaucrat yoda("Yoda", 1);
+		yoda.signForm(*form);
+		yoda.executeForm(*form);
+		freeForm(&form);
 	}
 	catch (std::exception& e) {
 		std::cout << LIGHTRED << e.what() << RESET << std::endl;
@@ -105,12 +103,11 @@ int	main()
 	rainbow_print("\n-------------------------");
 	try {
 		form = intern.makeForm("presidential pardon", "Julian Assange");
-			std::cout << *form << std::endl;
-			Bureaucrat yoda("Yoda", 1);
-			yoda.signForm(*form);
-			yoda.executeForm(*form);
-			delete (form);
-			form = nullptr;
+		std::cout << *form << std::endl;
+		Bureaucrat yoda("Yoda", 1);
+		yoda.signForm(*form);
+		yoda.executeForm(*form);
+		freeForm(&form);
 	}
 	catch (std::exception& e) {
 		std::cout << LIGHTRED << e.what() << RESET << std::endl;
@@ -120,12 +117,11 @@ int	main()
 	rainbow_print("\n-------------------------");
 	try {
 		form = intern.makeForm("shrubbery creation", "42_school");
-			std::cout << *form << std::endl;
-			Bureaucrat yoda("Yoda", 1);
-			yoda.signForm(*form);
-			yoda.executeForm(*form);
-			delete (form);
-			form = nullptr;
+		std::cout << *form << std::endl;
+		Bureaucrat yoda("Yoda", 1);
+		yoda.signForm(*form);
+		yoda.executeForm(*form);
+		freeForm(&form);
 	}
 	catch (std::exception& e) {
 		std::cout << LIGHTRED << e.what() << RESET << std::endl;
@@ -135,12 +131,11 @@ int	main()
 	rainbow_print("\n-------------------------");
 	try {
 		form = intern.makeForm("presidential pardon", "Edward Snowden");
-			std::cout << *form << std::endl;
-			Bureaucrat Leia("Princess Leia", 25);
-			Leia.signForm(*form);
-			Leia.executeForm(*form);
-			delete (form);
-			form = nullptr;
+		std::cout << *form << std::endl;
+		Bureaucrat Leia("Princess Leia", 25);
+		Leia.signForm(*form);
+		Leia.executeForm(*form);
+		freeForm(&form);
 	}
 	catch (std::exception& e) {
 		std::cout << LIGHTRED << e.what() << RESET << std::endl;
