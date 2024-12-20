@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/20 20:55:04 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/20 21:45:13 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ScalarConverter::convert(const std::string& str)
 	scalar.sc_type = SC_NONE;
 	detectLiteralType(str, scalar);
 
-	std::cout << "SC_TYPE: " << scalar.sc_type << std::endl;
+	// std::cout << "SC_TYPE: " << scalar.sc_type << std::endl;
 
 	std::cout << "char: ";		printChar(scalar);	std::cout << std::endl;
 	std::cout << "int: ";		printInt(scalar);	std::cout << std::endl;
@@ -36,11 +36,16 @@ void	ScalarConverter::convert(const std::string& str)
 	// std::cout << "double: ";	printInt(scalar);	std::cout << std::endl;
 }
 
-const char* ScalarConverter::InvalidCharConversionException::what() const throw()
+const char* ScalarConverter::OutOfRangeCharException::what() const throw()
 {
 	return ( "stoc: out of range" );
 }
 
+
+const char* ScalarConverter::NoConversionCharException::what() const throw()
+{
+	return ( "stoc: no conversion" );
+}
 
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -56,7 +61,6 @@ void	ScalarConverter::detectLiteralType(const std::string& str, t_scalar& scalar
 	try
 	{
 		scalar.c = ScalarConverter::stoc(str);
-		std::cout << "HALLO" << std::endl;
 		scalar.sc_type = SC_CHAR;
 	}
 	catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
@@ -94,8 +98,10 @@ void	ScalarConverter::detectLiteralType(const std::string& str, t_scalar& scalar
 
 char	ScalarConverter::stoc(const std::string& str)
 {
-	if (str.empty() || str.length() > 1 || !std::isprint(str[0]))
-		throw ( ScalarConverter::InvalidCharConversionException() );
+	if (str.length() > 1)
+		throw ( ScalarConverter::NoConversionCharException() );
+	if (!std::isprint(str[0]))
+		throw ( ScalarConverter::OutOfRangeCharException() );
 	return ( str[0] );
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/20 19:15:59 by nmihaile         ###   ########.fr       */
+/*   Updated: 2024/12/20 21:39:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ public:
 
 	static void	convert(const std::string& str);
 
-	class InvalidCharConversionException : public std::exception {
+	class OutOfRangeCharException : public std::exception {
+		const char* what() const throw() override;
+	};
+
+	class NoConversionCharException : public std::exception {
 		const char* what() const throw() override;
 	};
 
