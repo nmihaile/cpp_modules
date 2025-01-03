@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/03 17:33:44 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:20:29 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ public:
 	};
 
 private:
+	static const std::string	SC_INVALID_INPUT;
 	static const std::string	SC_NON_DISPLAYABLE;
 	static const std::string	SC_IMPOSSIBLE;
 	static const std::string	SC_NANF;

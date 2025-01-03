@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/03 18:04:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:21:28 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ const char* ScalarConverter::NoConversionDoubleException::what() const throw()
 /* ************************************************************************** */
 
 
+const std::string	ScalarConverter::SC_INVALID_INPUT = "Invalid input";
 const std::string	ScalarConverter::SC_NON_DISPLAYABLE = "Non displayable";
 const std::string	ScalarConverter::SC_IMPOSSIBLE = "impossible";
 const std::string	ScalarConverter::SC_NANF = "nanf";
@@ -140,7 +141,7 @@ void	ScalarConverter::printChar(const t_scalar& scalar)
 			std::cout << "Ups";
 			break ;
 		case (SC_INVALID):
-			std::cout << "Invalid Input";
+			std::cout << ScalarConverter::SC_INVALID_INPUT;
 			break ;
 		case (SC_CHAR):
 			std::cout << scalar.c;
@@ -182,7 +183,7 @@ void	ScalarConverter::printInt(const t_scalar& scalar)
 			std::cout << "Ups";
 			break ;
 		case (SC_INVALID):
-			std::cout << "Invalid Input";
+			std::cout << ScalarConverter::SC_INVALID_INPUT;
 			break ;
 		case (SC_CHAR):
 			std::cout << static_cast<int>(scalar.c);
@@ -216,7 +217,7 @@ void	ScalarConverter::printFloat(const t_scalar& scalar)
 			std::cout << "Ups";
 			break ;
 		case (SC_INVALID):
-			std::cout << "Invalid Input";
+			std::cout << ScalarConverter::SC_INVALID_INPUT;
 			break ;
 		case (SC_CHAR):
 			// std::cout.setf(std::ios::dec , std::ios::fixed);
@@ -245,7 +246,7 @@ void	ScalarConverter::printDouble(const t_scalar& scalar)
 			std::cout << "Ups";
 			break ;
 		case (SC_INVALID):
-			std::cout << "Invalid Input";
+			std::cout << ScalarConverter::SC_INVALID_INPUT;
 			break ;
 		case (SC_CHAR):
 			std::cout << std::fixed << std::setprecision(1) << static_cast<double>(scalar.c);
