@@ -6,6 +6,8 @@ CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 SRCS		=	main.cpp ScalarConverter.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
+.SILENT:
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
