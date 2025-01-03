@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/03 18:21:28 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:31:34 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	ScalarConverter::convert(const std::string& str)
 
 	// std::cout << "SC_TYPE: " << scalar.sc_type << std::endl;
 
-	std::cout << "char: ";		printChar(scalar);		std::cout << std::endl;
-	std::cout << "int: ";		printInt(scalar);		std::cout << std::endl;
-	std::cout << "float: ";		printFloat(scalar);		std::cout << std::endl;
-	std::cout << "double: ";	printDouble(scalar);	std::cout << std::endl;
+	std::cout << detectedLiteralColor(scalar, SC_CHAR)		<< "char: " << SC_RESET;	printChar(scalar);		std::cout << std::endl;
+	std::cout << detectedLiteralColor(scalar, SC_INT)		<< "int: " << SC_RESET;		printInt(scalar);		std::cout << std::endl;
+	std::cout << detectedLiteralColor(scalar, SC_FLOAT)		<< "float: " << SC_RESET;	printFloat(scalar);		std::cout << std::endl;
+	std::cout << detectedLiteralColor(scalar, SC_DOUBLE)	<< "double: " << SC_RESET;	printDouble(scalar);	std::cout << std::endl;
 }
 
 const char* ScalarConverter::OutOfRangeCharException::what() const throw()
@@ -79,59 +79,41 @@ void	ScalarConverter::detectLiteralType(const std::string& str, t_scalar& scalar
 {
 	try
 	{
-		// scalar.c = ScalarConverter::stoc(str);
 		ScalarConverter::isChar(str, scalar.c);
 		scalar.sc_type = SC_CHAR;
 	}
 	catch(...) {}
-	// catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
 
 	try
 	{
 		if (scalar.sc_type == SC_NONE)
 		{
-			// scalar.i = std::stoi(str);
 			ScalarConverter::isInt(str, scalar.i);
 			scalar.sc_type = SC_INT;
 		}
 	}
 	catch(...) {}
-	// catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
 
 	try
 	{
 		if (scalar.sc_type == SC_NONE)
 		{
-			// scalar.f = std::stof(str);
 			ScalarConverter::isFloat(str, scalar.f);
 			scalar.sc_type = SC_FLOAT;
 		}
 	}
 	catch(...) {}
-	// catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
 
 	try
 	{
 		if (scalar.sc_type == SC_NONE)
 		{
-			// scalar.d = std::stod(str);
 			ScalarConverter::isDouble(str, scalar.d);
 			scalar.sc_type = SC_DOUBLE;
 		}
 	}
 	catch(...) {}
-	// catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
 }
-
-char	ScalarConverter::stoc(const std::string& str)
-{
-	if (str.length() > 1)
-		throw ( ScalarConverter::NoConversionCharException() );
-	if (!std::isprint(str[0]))
-		throw ( ScalarConverter::OutOfRangeCharException() );
-	return ( str[0] );
-}
-
 
 void	ScalarConverter::printChar(const t_scalar& scalar)
 {
@@ -170,7 +152,7 @@ void	ScalarConverter::printChar(const t_scalar& scalar)
 				std::cout << ScalarConverter::SC_NON_DISPLAYABLE;
 			break ;
 		default:
-			std::cout << "UPS <ScalarConverter::printChar()>: something really went wrong!";
+			std::cout << SC_LIGHTRED<< "UPS <ScalarConverter::printChar()>: something really went wrong!" << SC_RESET;
 			break ;
 	}
 }
@@ -204,7 +186,7 @@ void	ScalarConverter::printInt(const t_scalar& scalar)
 				std::cout << static_cast<int>(scalar.d);
 			break ;
 		default:
-			std::cout << "UPS <ScalarConverter::printInt()>: something really went wrong!";
+			std::cout << SC_LIGHTRED<< "UPS <ScalarConverter::printInt()>: something really went wrong!" << SC_RESET;
 			break ;
 	}
 }
@@ -227,15 +209,20 @@ void	ScalarConverter::printFloat(const t_scalar& scalar)
 			std::cout << std::fixed << std::setprecision(1) << static_cast<float>(scalar.i) << 'f';
 			break ;
 		case (SC_FLOAT):
+			if (std::fmod(scalar.f, 1.0) == 0.0)
+				std::cout << std::fixed << std::setprecision(1);
 			std::cout << scalar.f << 'f';
 			break ;
 		case (SC_DOUBLE):
+			if (std::fmod(scalar.d, 1.0) == 0.0)
+				std::cout << std::fixed << std::setprecision(1);
 			std::cout << static_cast<float>(scalar.d) << 'f';
 			break ;
 		default:
-			std::cout << "UPS <ScalarConverter::printFloat()>: something really went wrong!";
+			std::cout << SC_LIGHTRED<< "UPS <ScalarConverter::printFloat()>: something really went wrong!" << SC_RESET;
 			break ;
 	}
+	std::cout << std::defaultfloat;
 }
 
 void	ScalarConverter::printDouble(const t_scalar& scalar)
@@ -255,15 +242,20 @@ void	ScalarConverter::printDouble(const t_scalar& scalar)
 			std::cout << std::fixed << std::setprecision(1) << static_cast<double>(scalar.i);
 			break ;
 		case (SC_FLOAT):
+			if (std::fmod(scalar.f, 1.0) == 0.0)
+				std::cout << std::fixed << std::setprecision(1);
 			std::cout << static_cast<double>(scalar.f);
 			break ;
 		case (SC_DOUBLE):
+			if (std::fmod(scalar.d, 1.0) == 0.0)
+				std::cout << std::fixed << std::setprecision(1);
 			std::cout << scalar.d;
 			break ;
 		default:
-			std::cout << "UPS <ScalarConverter::printDouble()>: something really went wrong!";
+			std::cout << SC_LIGHTRED<< "UPS <ScalarConverter::printDouble()>: something really went wrong!" << SC_RESET;
 			break ;
 	}
+	std::cout << std::defaultfloat;
 }
 
 bool	ScalarConverter::isNonPrintable(const std::string& str)
@@ -366,4 +358,11 @@ bool	ScalarConverter::isDouble(const std::string& str, double& d)
 
 	throw ( ScalarConverter::NoConversionDoubleException() );
 	return (false);
+}
+
+std::string	ScalarConverter::detectedLiteralColor(t_scalar& scalar, t_sc_type type)
+{
+	if (scalar.sc_type == type)
+		return (SC_LIGHTGREEN);
+	return (SC_RESET);
 }

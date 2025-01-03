@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:25:37 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/03 17:57:40 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:10:52 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(int ac, char **av)
 	if (ac == 2)
 		ScalarConverter::convert(av[1]);
 
-	std::cout << "-----------" << std::endl;
-	ScalarConverter::convert("\n\n\n");
+	// std::cout << "-----------" << std::endl;
+	// ScalarConverter::convert("             1.0f");
 
 
 

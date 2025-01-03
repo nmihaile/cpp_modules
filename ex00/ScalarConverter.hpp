@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/03 18:20:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:26:29 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <iomanip>	// std::setprecision
-// #include <cctype>
+#include <iomanip>		// std::setprecision
+#include <cmath>		// for nan, nanf, inff, inf
 #include <exception>
-#include <cmath>	// for nan, nanf, inff, inf
+
+#define SC_LIGHTRED		"\033[91m"
+#define SC_LIGHTGREEN	"\033[92m"
+#define SC_LIGHTCYAN	"\033[96m"
+#define SC_RESET		"\033[0m"
 
 class ScalarConverter
 {
@@ -79,23 +83,20 @@ private:
 		double		d;
 	}	t_scalar;
 
-	static void		detectLiteralType(const std::string& str, t_scalar& scalar);
+	static void			detectLiteralType(const std::string& str, t_scalar& scalar);
 	
-	static char		stoc(const std::string& str);
+	static void			printChar(const t_scalar& scalar);
+	static void			printInt(const t_scalar& scalar);
+	static void			printFloat(const t_scalar& scalar);
+	static void			printDouble(const t_scalar& scalar);
 
-	static void		printChar(const t_scalar& scalar);
-	static void		printInt(const t_scalar& scalar);
-	static void		printFloat(const t_scalar& scalar);
-	static void		printDouble(const t_scalar& scalar);
+	static bool			isNonPrintable(const std::string& str);
+	static bool			isChar(const std::string& str, char& c);
+	static bool			isInt(const std::string& str, int& i);
+	static bool			isFloat(const std::string& str, float& f);
+	static bool			isDouble(const std::string& str, double& d);
 
-	static bool		isNonPrintable(const std::string& str);
-	static bool		isChar(const std::string& str, char& c);
-	static bool		isInt(const std::string& str, int& i);
-	static bool		isFloat(const std::string& str, float& f);
-	static bool		isDouble(const std::string& str, double& d);
-
-	// static bool			isChar(const std::string& str);
-
+	static std::string	detectedLiteralColor(t_scalar& scalar, t_sc_type type);
 };
 
 #endif
