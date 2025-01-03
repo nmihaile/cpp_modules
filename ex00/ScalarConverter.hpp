@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2024/12/20 21:39:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:33:44 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 
 #include <iostream>
 #include <string>
-#include <cctype>
+#include <sstream>
+#include <iomanip>	// std::setprecision
+// #include <cctype>
 #include <exception>
+#include <cmath>	// for nan, nanf, inff, inf
 
 class ScalarConverter
 {
@@ -31,6 +34,18 @@ public:
 	};
 
 	class NoConversionCharException : public std::exception {
+		const char* what() const throw() override;
+	};
+
+	class NoConversionIntException : public std::exception {
+		const char* what() const throw() override;
+	};
+
+	class NoConversionFloatException : public std::exception {
+		const char* what() const throw() override;
+	};
+
+	class NoConversionDoubleException : public std::exception {
 		const char* what() const throw() override;
 	};
 
@@ -63,13 +78,22 @@ private:
 		double		d;
 	}	t_scalar;
 
-	static void			detectLiteralType(const std::string& str, t_scalar& scalar);
+	static void		detectLiteralType(const std::string& str, t_scalar& scalar);
 	
-	static char			stoc(const std::string& str);
-	static void			printChar(const t_scalar& scalar);
-	static void			printInt(const t_scalar& scalar);
+	static char		stoc(const std::string& str);
 
-	static bool			isChar(const std::string& str);
+	static void		printChar(const t_scalar& scalar);
+	static void		printInt(const t_scalar& scalar);
+	static void		printFloat(const t_scalar& scalar);
+	static void		printDouble(const t_scalar& scalar);
+
+	static bool		isNonPrintable(const std::string& str);
+	static bool		isChar(const std::string& str, char& c);
+	static bool		isInt(const std::string& str, int& i);
+	static bool		isFloat(const std::string& str, float& f);
+	static bool		isDouble(const std::string& str, double& d);
+
+	// static bool			isChar(const std::string& str);
 
 };
 
