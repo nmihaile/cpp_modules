@@ -7,7 +7,7 @@ SRCS		=	main.cpp ScalarConverter.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 TNAME		=	test
-TSRCS		=	test.cpp
+TSRCS		=	tester.cpp
 TOBJS		=	$(TSRCS:.cpp=.o)
 
 all: $(NAME)
