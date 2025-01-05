@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/03 19:26:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:15:58 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 #include <iomanip>		// std::setprecision
 #include <cmath>		// for nan, nanf, inff, inf
 #include <exception>
+#include <stdexcept>
 
-#define SC_LIGHTRED		"\033[91m"
-#define SC_LIGHTGREEN	"\033[92m"
-#define SC_LIGHTCYAN	"\033[96m"
-#define SC_RESET		"\033[0m"
+#define SC_LIGHTRED			"\033[91m"
+#define SC_LIGHTGREEN		"\033[92m"
+#define SC_LIGHTCYAN		"\033[96m"
+#define SC_RESET			"\033[0m"
 
 class ScalarConverter
 {
@@ -33,32 +34,25 @@ public:
 
 	static void	convert(const std::string& str);
 
-	class OutOfRangeCharException : public std::exception {
-		const char* what() const throw() override;
-	};
-
 	class NoConversionCharException : public std::exception {
-		const char* what() const throw() override;
+		public: const char* what() const throw() override;
 	};
 
 	class NoConversionIntException : public std::exception {
-		const char* what() const throw() override;
+		public: const char* what() const throw() override;
 	};
 
 	class NoConversionFloatException : public std::exception {
-		const char* what() const throw() override;
+		public: const char* what() const throw() override;
 	};
 
 	class NoConversionDoubleException : public std::exception {
-		const char* what() const throw() override;
+		public: const char* what() const throw() override;
 	};
 
 private:
-	static const std::string	SC_INVALID_INPUT;
 	static const std::string	SC_NON_DISPLAYABLE;
 	static const std::string	SC_IMPOSSIBLE;
-	static const std::string	SC_NANF;
-	static const std::string	SC_NAN;
 
 	ScalarConverter() = delete;
 	ScalarConverter(const ScalarConverter& other) = delete;
@@ -68,6 +62,7 @@ private:
 	{
 		SC_NONE,
 		SC_INVALID,
+		SC_ERROR,
 		SC_CHAR,
 		SC_INT,
 		SC_FLOAT,
@@ -77,11 +72,14 @@ private:
 	typedef struct s_scalar
 	{
 		t_sc_type	sc_type;
-		char		c;
-		int			i;
-		float		f;
-		double		d;
-	}	t_scalar;
+		union
+		{
+			double	d;
+			float	f;
+			int		i;
+			char	c;
+		}			value;
+	}				t_scalar;
 
 	static void			detectLiteralType(const std::string& str, t_scalar& scalar);
 	
@@ -90,11 +88,10 @@ private:
 	static void			printFloat(const t_scalar& scalar);
 	static void			printDouble(const t_scalar& scalar);
 
-	static bool			isNonPrintable(const std::string& str);
-	static bool			isChar(const std::string& str, char& c);
-	static bool			isInt(const std::string& str, int& i);
-	static bool			isFloat(const std::string& str, float& f);
-	static bool			isDouble(const std::string& str, double& d);
+	static void			detectChar(const std::string& str, t_scalar& scalar);
+	static void			detectInt(const std::string& str, t_scalar& scalar);
+	static void			detectFloat(const std::string& str, t_scalar& scalar);
+	static void			detectDouble(const std::string& str, t_scalar& scalar);
 
 	static std::string	detectedLiteralColor(t_scalar& scalar, t_sc_type type);
 };

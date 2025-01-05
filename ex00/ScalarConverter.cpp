@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/03 19:31:34 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:25:00 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,34 @@ ScalarConverter::~ScalarConverter()
 void	ScalarConverter::convert(const std::string& str)
 {
 	t_scalar	scalar;
-
 	scalar.sc_type = SC_NONE;
-	detectLiteralType(str, scalar);
 
-	if (scalar.sc_type == SC_NONE)
-		scalar.sc_type = SC_INVALID;
 
-	// std::cout << "SC_TYPE: " << scalar.sc_type << std::endl;
+	try
+	{
+		detectLiteralType(str, scalar);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << SC_LIGHTRED << "ERROR: " << SC_RESET << e.what() << std::endl;
+		return ;
+	}
+	
+
+	// if (scalar.sc_type == SC_ERROR)
+	// 	return ;
+
+	// if (scalar.sc_type == SC_NONE)
+	// {
+	// 	std::cout << ScalarConverter::SC_INVALID_INPUT << std::endl; 
+	// 	return ;
+	// }
 
 	std::cout << detectedLiteralColor(scalar, SC_CHAR)		<< "char: " << SC_RESET;	printChar(scalar);		std::cout << std::endl;
 	std::cout << detectedLiteralColor(scalar, SC_INT)		<< "int: " << SC_RESET;		printInt(scalar);		std::cout << std::endl;
 	std::cout << detectedLiteralColor(scalar, SC_FLOAT)		<< "float: " << SC_RESET;	printFloat(scalar);		std::cout << std::endl;
 	std::cout << detectedLiteralColor(scalar, SC_DOUBLE)	<< "double: " << SC_RESET;	printDouble(scalar);	std::cout << std::endl;
 }
-
-const char* ScalarConverter::OutOfRangeCharException::what() const throw()
-{
-	return ( "conversion to char: out of range" );
-}
-
 
 const char* ScalarConverter::NoConversionCharException::what() const throw()
 {
@@ -69,85 +77,94 @@ const char* ScalarConverter::NoConversionDoubleException::what() const throw()
 /* ************************************************************************** */
 
 
-const std::string	ScalarConverter::SC_INVALID_INPUT = "Invalid input";
 const std::string	ScalarConverter::SC_NON_DISPLAYABLE = "Non displayable";
 const std::string	ScalarConverter::SC_IMPOSSIBLE = "impossible";
-const std::string	ScalarConverter::SC_NANF = "nanf";
-const std::string	ScalarConverter::SC_NAN = "nan";
 
 void	ScalarConverter::detectLiteralType(const std::string& str, t_scalar& scalar)
 {
+
+	if (str.empty())
+	{
+		throw ( std::invalid_argument("Invalid argument: empty string") );
+		return ;
+	}
+
 	try
 	{
-		ScalarConverter::isChar(str, scalar.c);
+		ScalarConverter::detectChar(str, scalar);
 		scalar.sc_type = SC_CHAR;
+		return ;
 	}
-	catch(...) {}
+	catch(const std::out_of_range& e) {
+		scalar.sc_type = SC_ERROR;
+		throw ;
+	}
+	catch(...) { }
 
 	try
 	{
 		if (scalar.sc_type == SC_NONE)
 		{
-			ScalarConverter::isInt(str, scalar.i);
+			ScalarConverter::detectInt(str, scalar);
 			scalar.sc_type = SC_INT;
+			return ;
 		}
 	}
-	catch(...) {}
+	catch(...) { }
 
 	try
 	{
 		if (scalar.sc_type == SC_NONE)
 		{
-			ScalarConverter::isFloat(str, scalar.f);
+			ScalarConverter::detectFloat(str, scalar);
 			scalar.sc_type = SC_FLOAT;
+			return ;
 		}
 	}
-	catch(...) {}
+	catch(...) { }
 
 	try
 	{
 		if (scalar.sc_type == SC_NONE)
 		{
-			ScalarConverter::isDouble(str, scalar.d);
+			ScalarConverter::detectDouble(str, scalar);
 			scalar.sc_type = SC_DOUBLE;
+			return ;
 		}
 	}
-	catch(...) {}
+	catch(...) { }
+
+	if (scalar.sc_type == SC_NONE)
+		throw ( std::invalid_argument("Invalid input") );
+	
 }
 
 void	ScalarConverter::printChar(const t_scalar& scalar)
 {
 	switch (scalar.sc_type)
 	{
-		case (SC_NONE):
-			std::cout << "Ups";
-			break ;
-		case (SC_INVALID):
-			std::cout << ScalarConverter::SC_INVALID_INPUT;
-			break ;
 		case (SC_CHAR):
-			std::cout << scalar.c;
+			std::cout << "'" << scalar.value.c << "'";
 			break ;
 		case (SC_INT):
-			if (scalar.i >= ' ' && scalar.i < 127)
-			// if (std::isprint(static_cast<char>(scalar.i)))
-				std::cout << static_cast<char>(scalar.i);
+			if (std::isprint(static_cast<char>(scalar.value.i)))
+				std::cout << "'" << static_cast<char>(scalar.value.i) << "'";
 			else
 				std::cout << ScalarConverter::SC_NON_DISPLAYABLE;
 			break ;
 		case (SC_FLOAT):
-			if (std::isnan(scalar.f) || std::isinf(scalar.f))
+			if (std::isnan(scalar.value.f) || std::isinf(scalar.value.f))
 				std::cout << ScalarConverter::SC_IMPOSSIBLE;
-			else if (scalar.f >= ' ' && scalar.f < 127)
-				std::cout << static_cast<char>(scalar.f);
+			else if (std::isprint(static_cast<char>(scalar.value.f)))
+				std::cout << "'" << static_cast<char>(scalar.value.f) << "'";
 			else
 				std::cout << ScalarConverter::SC_NON_DISPLAYABLE;
 			break ;
 		case (SC_DOUBLE):
-			if (std::isnan(scalar.d) || std::isinf(scalar.d))
+			if (std::isnan(scalar.value.d) || std::isinf(scalar.value.d))
 				std::cout << ScalarConverter::SC_IMPOSSIBLE;
-			else if (scalar.d >= ' ' && scalar.d < 127)
-				std::cout << static_cast<char>(scalar.d);
+			else if (std::isprint(static_cast<char>(scalar.value.d)))
+				std::cout << "'" << static_cast<char>(scalar.value.d) << "'";
 			else
 				std::cout << ScalarConverter::SC_NON_DISPLAYABLE;
 			break ;
@@ -161,29 +178,23 @@ void	ScalarConverter::printInt(const t_scalar& scalar)
 {
 	switch (scalar.sc_type)
 	{
-		case (SC_NONE):
-			std::cout << "Ups";
-			break ;
-		case (SC_INVALID):
-			std::cout << ScalarConverter::SC_INVALID_INPUT;
-			break ;
 		case (SC_CHAR):
-			std::cout << static_cast<int>(scalar.c);
+			std::cout << static_cast<int>(scalar.value.c);
 			break ;
 		case (SC_INT):
-			std::cout << scalar.i;
+			std::cout << scalar.value.i;
 			break ;
 		case (SC_FLOAT):
-			if (std::isnan(scalar.f) || std::isinf(scalar.f))
+			if (std::isnan(scalar.value.f) || std::isinf(scalar.value.f))
 				std::cout << ScalarConverter::SC_IMPOSSIBLE;
 			else
-				std::cout << static_cast<int>(scalar.f);
+				std::cout << static_cast<int>(scalar.value.f);
 			break ;
 		case (SC_DOUBLE):
-			if (std::isnan(scalar.d) || std::isinf(scalar.d))
+			if (std::isnan(scalar.value.d) || std::isinf(scalar.value.d))
 				std::cout << ScalarConverter::SC_IMPOSSIBLE;
 			else
-				std::cout << static_cast<int>(scalar.d);
+				std::cout << static_cast<int>(scalar.value.d);
 			break ;
 		default:
 			std::cout << SC_LIGHTRED<< "UPS <ScalarConverter::printInt()>: something really went wrong!" << SC_RESET;
@@ -193,171 +204,144 @@ void	ScalarConverter::printInt(const t_scalar& scalar)
 
 void	ScalarConverter::printFloat(const t_scalar& scalar)
 {
+	std::streamsize		oPrecision	= std::cout.precision();
+	std::ios::fmtflags	oFlags		= std::cout.flags();
+
 	switch (scalar.sc_type)
 	{
-		case (SC_NONE):
-			std::cout << "Ups";
-			break ;
-		case (SC_INVALID):
-			std::cout << ScalarConverter::SC_INVALID_INPUT;
-			break ;
 		case (SC_CHAR):
-			// std::cout.setf(std::ios::dec , std::ios::fixed);
-			std::cout << std::fixed << std::setprecision(1) << static_cast<float>(scalar.c) << 'f';
+			std::cout << std::fixed << std::setprecision(1) << static_cast<float>(scalar.value.c) << 'f';
 			break ;
 		case (SC_INT):
-			std::cout << std::fixed << std::setprecision(1) << static_cast<float>(scalar.i) << 'f';
+			std::cout << std::fixed << std::setprecision(1) << static_cast<float>(scalar.value.i) << 'f';
 			break ;
 		case (SC_FLOAT):
-			if (std::fmod(scalar.f, 1.0) == 0.0)
+			if (std::fmod(scalar.value.f, 1.0) == 0.0)
 				std::cout << std::fixed << std::setprecision(1);
-			std::cout << scalar.f << 'f';
+			std::cout << scalar.value.f << 'f';
 			break ;
 		case (SC_DOUBLE):
-			if (std::fmod(scalar.d, 1.0) == 0.0)
+			if (std::fmod(scalar.value.d, 1.0) == 0.0)
 				std::cout << std::fixed << std::setprecision(1);
-			std::cout << static_cast<float>(scalar.d) << 'f';
+			std::cout << static_cast<float>(scalar.value.d) << 'f';
 			break ;
 		default:
 			std::cout << SC_LIGHTRED<< "UPS <ScalarConverter::printFloat()>: something really went wrong!" << SC_RESET;
 			break ;
 	}
-	std::cout << std::defaultfloat;
+
+	std::cout.flags(oFlags);
+	std::cout.precision(oPrecision);
 }
 
 void	ScalarConverter::printDouble(const t_scalar& scalar)
 {
+	std::streamsize		oPrecision	= std::cout.precision();
+	std::ios::fmtflags	oFlags		= std::cout.flags();
+
 	switch (scalar.sc_type)
 	{
-		case (SC_NONE):
-			std::cout << "Ups";
-			break ;
-		case (SC_INVALID):
-			std::cout << ScalarConverter::SC_INVALID_INPUT;
-			break ;
 		case (SC_CHAR):
-			std::cout << std::fixed << std::setprecision(1) << static_cast<double>(scalar.c);
+			std::cout << std::fixed << std::setprecision(1) << static_cast<double>(scalar.value.c);
 			break ;
 		case (SC_INT):
-			std::cout << std::fixed << std::setprecision(1) << static_cast<double>(scalar.i);
+			std::cout << std::fixed << std::setprecision(1) << static_cast<double>(scalar.value.i);
 			break ;
 		case (SC_FLOAT):
-			if (std::fmod(scalar.f, 1.0) == 0.0)
+			if (std::fmod(scalar.value.f, 1.0) == 0.0)
 				std::cout << std::fixed << std::setprecision(1);
-			std::cout << static_cast<double>(scalar.f);
+			std::cout << static_cast<double>(scalar.value.f);
 			break ;
 		case (SC_DOUBLE):
-			if (std::fmod(scalar.d, 1.0) == 0.0)
+			if (std::fmod(scalar.value.d, 1.0) == 0.0)
 				std::cout << std::fixed << std::setprecision(1);
-			std::cout << scalar.d;
+			std::cout << scalar.value.d;
 			break ;
 		default:
 			std::cout << SC_LIGHTRED<< "UPS <ScalarConverter::printDouble()>: something really went wrong!" << SC_RESET;
 			break ;
 	}
-	std::cout << std::defaultfloat;
+
+	std::cout.flags(oFlags);
+	std::cout.precision(oPrecision);
 }
 
-bool	ScalarConverter::isNonPrintable(const std::string& str)
+void	ScalarConverter::detectChar(const std::string& str, t_scalar& scalar)
 {
-	if (str.length() == 1 && !std::isprint(static_cast<unsigned char>(str[0])))
-		return (true);
-	return (false);
-}
-
-bool	ScalarConverter::isChar(const std::string& str, char& c)
-{
-	if (str.length() == 1 && std::isprint(static_cast<unsigned char>(str[0]))) {
-		c = str[0];
-		return (true);
+	if (str.length() == 1 && !std::isdigit(str[0])) {
+		if ( std::isprint(static_cast<unsigned char>(str[0])) )
+		{
+			scalar.value.c = str[0];
+			return ;
+		}
+		throw ( std::out_of_range("conversion to char: out of range") );		
 	}
 	throw ( ScalarConverter::NoConversionCharException() );
-	return (false);
 }
 
-bool	ScalarConverter::isInt(const std::string& str, int& i)
+void	ScalarConverter::detectInt(const std::string& str, t_scalar& scalar)
 {
-	if (str.empty())
-	{
-		throw ( ScalarConverter::NoConversionIntException() );
-		return (false);
-	}
-
-	int	value;
 	std::stringstream ss(str);
 
-	ss >> value;
-	if ( !ss.fail() && ss.eof() ) {
-		i = value;
-		return (true);
-	}
+	ss >> scalar.value.i;
+	if ( !ss.fail() && ss.eof() )
+		return ;
 
 	throw ( ScalarConverter::NoConversionIntException() );
-	return (false);
 }
 
-bool	ScalarConverter::isFloat(const std::string& str, float& f)
+void	ScalarConverter::detectFloat(const std::string& str, t_scalar& scalar)
 {
 	if (str == "nanf" || str.empty()) {
-		f = NAN;
-		return (true);
-	} else if (str == "inff") {
-		f = INFINITY;
-		return (true);
+		scalar.value.f = NAN;
+		return ;
+	} else if (str == "inff" || str == "+inff") {
+		scalar.value.f = INFINITY;
+		return ;
 	} else if (str == "-inff") {
-		f = -INFINITY;
-		return (true);
+		scalar.value.f = -INFINITY;
+		return ;
 	} else if (str.find_last_of('.') == std::string::npos) {
 		throw ( ScalarConverter::NoConversionFloatException() );
-		return (false);
+		return ;
 	}
 
 	if (str.back() == 'f')
 	{
-		float 				value;
 		std::string			num = str.substr(0, str.size() - 1);
 		std::stringstream	ss(num);
 
-		ss >> value;
+		ss >> scalar.value.f;
 		if (!ss.fail() && ss.eof())
-		{
-			f = value;
-			return (true);
-		}
+			return ;
 	}
 
 	throw ( ScalarConverter::NoConversionFloatException() );
-	return (false);
 }
 
-bool	ScalarConverter::isDouble(const std::string& str, double& d)
+void	ScalarConverter::detectDouble(const std::string& str, t_scalar& scalar)
 {
 	if (str == "nan" || str.empty()) {
-		d = NAN;
-		return (true);
-	} else if (str == "inf") {
-		d = INFINITY;
-		return (true);
+		scalar.value.d = NAN;
+		return ;
+	} else if (str == "inf" || str == "+inf") {
+		scalar.value.d = INFINITY;
+		return ;
 	} else if (str == "-inf") {
-		d = -INFINITY;
-		return (true);
+		scalar.value.d = -INFINITY;
+		return ;
 	} else if (str.find_last_of('.') == std::string::npos) {
 		throw ( ScalarConverter::NoConversionDoubleException() );
-		return (false);
+		return ;
 	}
 
-	double 				value;
 	std::stringstream	ss(str);
 
-	ss >> value;
+	ss >> scalar.value.d;
 	if (!ss.fail() && ss.eof())
-	{
-		d = value;
-		return (true);
-	}
+		return ;
 
 	throw ( ScalarConverter::NoConversionDoubleException() );
-	return (false);
 }
 
 std::string	ScalarConverter::detectedLiteralColor(t_scalar& scalar, t_sc_type type)
