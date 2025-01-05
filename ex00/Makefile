@@ -1,13 +1,13 @@
 
 NAME		=	convert
 CC			=	c++
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -g
 
 SRCS		=	main.cpp ScalarConverter.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 TNAME		=	test
-TSRCS		=	tester.cpp
+TSRCS		=	tester.cpp ScalarConverter.cpp
 TOBJS		=	$(TSRCS:.cpp=.o)
 
 all: $(NAME)
