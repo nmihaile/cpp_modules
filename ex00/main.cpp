@@ -6,16 +6,19 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:25:37 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/05 19:31:10 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:52:30 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include "ScalarConverter.hpp"
 
 int	main(int ac, char **av)
 {
 	if (ac == 2)
 		ScalarConverter::convert(av[1]);
+	else
+		std::cout << "usage: ./convert [argument]" << std::endl;
 
 	// ./convert $'\x00'
 	// ./convert $'\x8F'

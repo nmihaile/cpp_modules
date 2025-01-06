@@ -40,21 +40,22 @@ void	runTests(void)
 		{"*", "char: '*'\nint: 42\nfloat: 42.0f\ndouble: 42.0\n"},
 		{"042", "char: '*'\nint: 42\nfloat: 42.0f\ndouble: 42.0\n"},
 		{"123", "char: '{'\nint: 123\nfloat: 123.0f\ndouble: 123.0\n"},
+		{"~", "char: '~'\nint: 126\nfloat: 126.0f\ndouble: 126.0\n"},
 
 		{"123.45f", "char: '{'\nint: 123\nfloat: 123.45f\ndouble: 123.45\n"},
 		{"123.45", "char: '{'\nint: 123\nfloat: 123.45f\ndouble: 123.45\n"},
 		{"125.456", "char: '}'\nint: 125\nfloat: 125.456f\ndouble: 125.456\n"},
 
-		{"2147483647", "char: Non displayable\nint: 2147483647\nfloat: 2147483648.0f\ndouble: 2147483647.0\n"},		// float is off => has +1 => because of loss of precision
+		{"2147483647", "char: impossible\nint: 2147483647\nfloat: 2147483648.0f\ndouble: 2147483647.0\n"},		// float is off => has +1 => because of loss of precision
 		{"2147483648", "ERROR: Invalid input\n"},
-		{"-2147483648", "char: Non displayable\nint: -2147483648\nfloat: -2147483648.0f\ndouble: -2147483648.0\n"},
+		{"-2147483648", "char: impossible\nint: -2147483648\nfloat: -2147483648.0f\ndouble: -2147483648.0\n"},
 		{"-2147483649", "ERROR: Invalid input\n"},
 
 		{ "\x42", "char: 'B'\nint: 66\nfloat: 66.0f\ndouble: 66.0\n"},
-		{ "\x01", "ERROR: conversion to char: out of range\n"},
-		{ "\x19", "ERROR: conversion to char: out of range\n"},
-		{ "\x8F", "ERROR: conversion to char: out of range\n"},
-		{ "\xFF", "ERROR: conversion to char: out of range\n"},
+		{ "\x01", "ERROR: conversion to char <1>: out of range <32, 126>\n"},
+		{ "\x1F", "ERROR: conversion to char <31>: out of range <32, 126>\n"},
+		{ "\x7F", "ERROR: conversion to char <127>: out of range <32, 126>\n"},
+		{ "\xFF", "ERROR: conversion to char <-1>: out of range <32, 126>\n"},
 		{ "\x00", "ERROR: Invalid argument: empty string\n"},
 
 		{ "abc", "ERROR: Invalid input\n"},
@@ -71,8 +72,9 @@ void	runTests(void)
 		{ "1  ", "ERROR: Invalid input\n"},
 		{ "  1", "char: Non displayable\nint: 1\nfloat: 1.0f\ndouble: 1.0\n"},
 
-		{ "456.", "char: Non displayable\nint: 456\nfloat: 456.0f\ndouble: 456.0\n"},
-		{ "456.f", "char: Non displayable\nint: 456\nfloat: 456.0f\ndouble: 456.0\n"},
+		{ "456", "char: impossible\nint: 456\nfloat: 456.0f\ndouble: 456.0\n"},
+		{ "456.", "char: impossible\nint: 456\nfloat: 456.0f\ndouble: 456.0\n"},
+		{ "456.f", "char: impossible\nint: 456\nfloat: 456.0f\ndouble: 456.0\n"},
 		{ "456.a", "ERROR: Invalid input\n"},
 		{ ".789", "char: Non displayable\nint: 0\nfloat: 0.789f\ndouble: 0.789\n"},
 		{ ".789f", "char: Non displayable\nint: 0\nfloat: 0.789f\ndouble: 0.789\n"},
@@ -87,10 +89,19 @@ void	runTests(void)
 		{ "nan", "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan\n"},
 		{ "inf", "char: impossible\nint: impossible\nfloat: inff\ndouble: inf\n"},
 		{ "+inf", "char: impossible\nint: impossible\nfloat: inff\ndouble: inf\n"},
-		{ "-inf", "char: impossible\nint: impossible\nfloat: -inff\ndouble: -inf\n"}
+		{ "-inf", "char: impossible\nint: impossible\nfloat: -inff\ndouble: -inf\n"},
+
+		{ std::to_string(std::numeric_limits<int>::max()), "char: impossible\nint: 2147483647\nfloat: 2147483648.0f\ndouble: 2147483647.0\n"},
+		{ std::to_string(std::numeric_limits<int>::min()), "char: impossible\nint: -2147483648\nfloat: -2147483648.0f\ndouble: -2147483648.0\n"},
+
+		{ std::to_string(std::numeric_limits<float>::max()) + "f", "char: impossible\nint: impossible\nfloat: 340282346638528859811704183484516925440.0f\ndouble: 340282346638528859811704183484516925440.0\n"},
+		{ std::to_string(std::numeric_limits<float>::lowest()) + "f", "char: impossible\nint: impossible\nfloat: -340282346638528859811704183484516925440.0f\ndouble: -340282346638528859811704183484516925440.0\n"},
+
+		{ std::to_string(std::numeric_limits<double>::max()), "char: impossible\nint: impossible\nfloat: inff\ndouble: 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0\n"},
+		{ std::to_string(std::numeric_limits<double>::lowest()), "char: impossible\nint: impossible\nfloat: -inff\ndouble: -179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0\n"}
 	};
 
-	size_t size = sizeof(tests) / sizeof(TestCase);
+	size_t size = sizeof(tests) / sizeof(tests[0]);
 
 	for (size_t i = 0; i < size; ++i)
 	{
