@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/05 20:15:58 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/06 21:51:07 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 #include <string>
 #include <sstream>
 #include <iomanip>		// std::setprecision
-#include <cmath>		// for nan, nanf, inff, inf
+#include <limits>		// for nan, nanf, inff, inf
+#include <cmath>		// fmod
 #include <exception>
 #include <stdexcept>
 
-#define SC_LIGHTRED			"\033[91m"
-#define SC_LIGHTGREEN		"\033[92m"
-#define SC_LIGHTCYAN		"\033[96m"
+#define SC_LIGHTRED			"\033[1;91m"
+#define SC_LIGHTGREEN		"\033[1;92m"
+#define SC_LIGHTCYAN		"\033[1;96m"
 #define SC_RESET			"\033[0m"
 
 class ScalarConverter

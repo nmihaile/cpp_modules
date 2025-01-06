@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/05 20:25:00 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/06 22:03:02 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,14 @@ void	ScalarConverter::printChar(const t_scalar& scalar)
 		case (SC_INT):
 			if (std::isprint(static_cast<char>(scalar.value.i)))
 				std::cout << "'" << static_cast<char>(scalar.value.i) << "'";
+			else if (scalar.value.i > std::numeric_limits<char>::max() || scalar.value.i < std::numeric_limits<char>::min())
+				std::cout << ScalarConverter::SC_IMPOSSIBLE;
 			else
 				std::cout << ScalarConverter::SC_NON_DISPLAYABLE;
 			break ;
 		case (SC_FLOAT):
-			if (std::isnan(scalar.value.f) || std::isinf(scalar.value.f))
+			if (std::isnan(scalar.value.f) || std::abs(scalar.value.f) == std::numeric_limits<float>::infinity() ||
+				scalar.value.f > std::numeric_limits<char>::max() || scalar.value.f < std::numeric_limits<char>::min())
 				std::cout << ScalarConverter::SC_IMPOSSIBLE;
 			else if (std::isprint(static_cast<char>(scalar.value.f)))
 				std::cout << "'" << static_cast<char>(scalar.value.f) << "'";
@@ -161,7 +164,8 @@ void	ScalarConverter::printChar(const t_scalar& scalar)
 				std::cout << ScalarConverter::SC_NON_DISPLAYABLE;
 			break ;
 		case (SC_DOUBLE):
-			if (std::isnan(scalar.value.d) || std::isinf(scalar.value.d))
+			if (std::isnan(scalar.value.d) || std::abs(scalar.value.d) == std::numeric_limits<double>::infinity() ||
+				scalar.value.d > std::numeric_limits<char>::max() || scalar.value.d < std::numeric_limits<char>::min())
 				std::cout << ScalarConverter::SC_IMPOSSIBLE;
 			else if (std::isprint(static_cast<char>(scalar.value.d)))
 				std::cout << "'" << static_cast<char>(scalar.value.d) << "'";
@@ -185,13 +189,15 @@ void	ScalarConverter::printInt(const t_scalar& scalar)
 			std::cout << scalar.value.i;
 			break ;
 		case (SC_FLOAT):
-			if (std::isnan(scalar.value.f) || std::isinf(scalar.value.f))
+			if (std::isnan(scalar.value.f) || std::abs(scalar.value.f) == std::numeric_limits<float>::infinity() ||
+				scalar.value.f > std::numeric_limits<int>::max() || scalar.value.f < std::numeric_limits<int>::min())
 				std::cout << ScalarConverter::SC_IMPOSSIBLE;
 			else
 				std::cout << static_cast<int>(scalar.value.f);
 			break ;
 		case (SC_DOUBLE):
-			if (std::isnan(scalar.value.d) || std::isinf(scalar.value.d))
+			if (std::isnan(scalar.value.d) || std::abs(scalar.value.d) == std::numeric_limits<double>::infinity() ||
+				scalar.value.d > std::numeric_limits<int>::max() || scalar.value.d < std::numeric_limits<int>::min())
 				std::cout << ScalarConverter::SC_IMPOSSIBLE;
 			else
 				std::cout << static_cast<int>(scalar.value.d);
@@ -268,13 +274,12 @@ void	ScalarConverter::printDouble(const t_scalar& scalar)
 
 void	ScalarConverter::detectChar(const std::string& str, t_scalar& scalar)
 {
-	if (str.length() == 1 && !std::isdigit(str[0])) {
+	scalar.value.c = str[0];
+	if (str.length() == 1 && !std::isdigit(str[0]))
+	{
 		if ( std::isprint(static_cast<unsigned char>(str[0])) )
-		{
-			scalar.value.c = str[0];
 			return ;
-		}
-		throw ( std::out_of_range("conversion to char: out of range") );		
+		throw ( std::out_of_range("conversion to char <" + std::to_string(scalar.value.c) + ">: out of range <32, 126>") );		
 	}
 	throw ( ScalarConverter::NoConversionCharException() );
 }
@@ -293,13 +298,13 @@ void	ScalarConverter::detectInt(const std::string& str, t_scalar& scalar)
 void	ScalarConverter::detectFloat(const std::string& str, t_scalar& scalar)
 {
 	if (str == "nanf" || str.empty()) {
-		scalar.value.f = NAN;
+		scalar.value.f = std::numeric_limits<float>::quiet_NaN();
 		return ;
 	} else if (str == "inff" || str == "+inff") {
-		scalar.value.f = INFINITY;
+		scalar.value.f = std::numeric_limits<float>::infinity();
 		return ;
 	} else if (str == "-inff") {
-		scalar.value.f = -INFINITY;
+		scalar.value.f = -std::numeric_limits<float>::infinity();
 		return ;
 	} else if (str.find_last_of('.') == std::string::npos) {
 		throw ( ScalarConverter::NoConversionFloatException() );
@@ -322,13 +327,13 @@ void	ScalarConverter::detectFloat(const std::string& str, t_scalar& scalar)
 void	ScalarConverter::detectDouble(const std::string& str, t_scalar& scalar)
 {
 	if (str == "nan" || str.empty()) {
-		scalar.value.d = NAN;
+		scalar.value.d = std::numeric_limits<double>::quiet_NaN();
 		return ;
 	} else if (str == "inf" || str == "+inf") {
-		scalar.value.d = INFINITY;
+		scalar.value.d = std::numeric_limits<double>::infinity();
 		return ;
 	} else if (str == "-inf") {
-		scalar.value.d = -INFINITY;
+		scalar.value.d = -std::numeric_limits<double>::infinity();
 		return ;
 	} else if (str.find_last_of('.') == std::string::npos) {
 		throw ( ScalarConverter::NoConversionDoubleException() );
