@@ -6,6 +6,7 @@
 #include <vector>
 #include "ScalarConverter.hpp"
 
+#define BLUE			"\033[34m"
 #define LIGHTRED		"\033[91m"
 #define LIGHTGREEN		"\033[92m"
 #define LIGHTCYAN		"\033[96m"
@@ -139,8 +140,8 @@ void	runTests(void)
 
 int	main(void)
 {
-	std::cout << "Testing ScalarConverter …" << std::endl;
-	std::cout << "-------------------------\n" << std::endl;
+	std::cout << BLUE << "Testing ScalarConverter …"  << RESET << std::endl;
+	std::cout << BLUE << "-------------------------\n"  << RESET << std::endl;
 
 	runTests();
 
