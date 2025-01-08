@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:17:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/08 19:42:56 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/08 19:59:09 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	main(int ac, char **av)
 		std::cout << "usage: ./test [<int> number_of_tests] [<bool> print_identification]" << std::endl;
 		return (0);
 	}
-	if (ac == 3)
+	if (ac == 3 && (std::string("true").compare(av[2]) == 0 || std::string("TRUE").compare(av[2]) == 0 || std::string("1").compare(av[2]) == 0))
 		print_identification = true;
 
 	std::cout << BLUE << "TEST BY POINTER" << RESET << std::endl;
