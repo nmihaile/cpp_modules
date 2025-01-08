@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:14:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/06 21:51:07 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:59:48 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>		// std::setprecision
-#include <limits>		// for nan, nanf, inff, inf
+#include <limits>		// for nan, nanf, inff, inf, digits10
 #include <cmath>		// fmod
 #include <exception>
 #include <stdexcept>
@@ -80,6 +80,7 @@ private:
 			int		i;
 			char	c;
 		}			value;
+		int			decimalplaces;
 	}				t_scalar;
 
 	static void			detectLiteralType(const std::string& str, t_scalar& scalar);
@@ -93,6 +94,10 @@ private:
 	static void			detectInt(const std::string& str, t_scalar& scalar);
 	static void			detectFloat(const std::string& str, t_scalar& scalar);
 	static void			detectDouble(const std::string& str, t_scalar& scalar);
+
+	static void			catchDecimalPlaces(const std::string& str, t_scalar& scalar);
+	static void			setPrecisionFloat(const float value_f, const t_scalar& scalar);
+	static void			setPrecisionDouble(const double value_d, const t_scalar& scalar);
 
 	static std::string	detectedLiteralColor(t_scalar& scalar, t_sc_type type);
 };
