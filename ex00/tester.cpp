@@ -106,7 +106,9 @@ void	runTests(void)
 		{ "1.0000005", "char: Non displayable\nint: 1\nfloat: 1.000000f\ndouble: 1.0000005\n" },
 		{ "1.000000000000005", "char: Non displayable\nint: 1\nfloat: 1.0f\ndouble: 1.000000000000005\n" },
 		{ "1.0000000000000005", "char: Non displayable\nint: 1\nfloat: 1.0f\ndouble: 1.000000000000000\n" },
-		{ "1.00000000000000005", "char: Non displayable\nint: 1\nfloat: 1.0f\ndouble: 1.0\n" }
+		{ "1.00000000000000005", "char: Non displayable\nint: 1\nfloat: 1.0f\ndouble: 1.0\n" },
+		{ "1.0000005f", "char: Non displayable\nint: 1\nfloat: 1.000000f\ndouble: 1.0000005\n" },
+		{ "1.00000005f", "char: Non displayable\nint: 1\nfloat: 1.0f\ndouble: 1.0\n" }
 	};
 
 	size_t size = sizeof(tests) / sizeof(tests[0]);
