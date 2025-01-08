@@ -20,4 +20,4 @@ fclean: clean
 re: fclean all
 
 t: $(NAME)
-	./$(NAME)
+	@./$(NAME)
