@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:00:58 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/08 19:56:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:30:12 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,16 @@ Base*	generate(void)
 	static std::mt19937							gen(rd());
 	static std::uniform_int_distribution<int>	dis(0, 2);
 
-	Base*	obj;
-
 	switch (dis(gen))
 	{
 		case (0):
-			obj = new A;
-			break ;
+			return ( new A );
 		case (1):
-			obj = new B;
-			break ;
+			return ( new B );
 		case (2):
-			obj = new C;
-			break ;
-		default:
-			obj = nullptr;
+			return ( new C );
 	}
-	return ( obj );
+	return ( nullptr );
 }
 
 void	identify(Base* p)
@@ -73,4 +66,3 @@ void	identify(Base& p)
 	}
 	catch(...) { }
 }
-
