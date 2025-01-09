@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:17:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/08 19:59:09 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:08:59 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void	test_by_reference(size_t count)
 int	main(int ac, char **av)
 {
 	bool	print_identification = false;
+	size_t	count = 0;
+
 	if (ac == 1)
 	{
 		std::cout << "usage: ./test [<int> number_of_tests] [<bool> print_identification]" << std::endl;
@@ -122,11 +124,14 @@ int	main(int ac, char **av)
 	if (ac == 3 && (std::string("true").compare(av[2]) == 0 || std::string("TRUE").compare(av[2]) == 0 || std::string("1").compare(av[2]) == 0))
 		print_identification = true;
 
+	try	{ count = std::stoi(av[1]); }
+	catch(const std::exception& e) { std::cerr << e.what() << '\n'; return (1); }
+
 	std::cout << BLUE << "TEST BY POINTER" << RESET << std::endl;
-	test(test_by_pointer, static_cast<size_t>(std::stoi(av[1])), print_identification);
+	test(test_by_pointer, static_cast<size_t>(count), print_identification);
 	rainbow_print("\n~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	std::cout << BLUE << "TEST BY REFERENCE" << RESET << std::endl;
-	test(test_by_reference, static_cast<size_t>(std::stoi(av[1])), print_identification);
+	test(test_by_reference, static_cast<size_t>(count), print_identification);
 
 	return (0);
 }
