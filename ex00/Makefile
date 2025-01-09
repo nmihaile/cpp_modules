@@ -1,6 +1,6 @@
 
 NAME		=	convert
-CC			=	c++
+CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
 SRCS		=	main.cpp ScalarConverter.cpp
@@ -13,7 +13,7 @@ TOBJS		=	$(TSRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CPPFLAGS) $(OBJS) -o $(NAME)
+	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -26,7 +26,7 @@ fclean: clean
 re: fclean all
 
 test: $(TOBJS)
-	@$(CC) $(CPPFLAGS) $(TOBJS) -o $(TNAME)
+	@$(CPP) $(CPPFLAGS) $(TOBJS) -o $(TNAME)
 
 t: test
 	@./$(TNAME)

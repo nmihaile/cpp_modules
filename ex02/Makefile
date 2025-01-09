@@ -1,6 +1,6 @@
 
 NAME		=	test
-CC			=	c++
+CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
 SRCS		=	main.cpp Base.cpp utils.cpp
@@ -9,7 +9,7 @@ OBJS		=	$(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CPPFLAGS) $(OBJS) -o $(NAME)
+	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS)
