@@ -1,0 +1,11 @@
+*
+
+!.gitignore
+
+!ex00
+
+!Makefile
+!*.h
+!*.hpp
+!*.tpp
+!*.cpp
