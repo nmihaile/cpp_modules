@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:37:43 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/13 17:04:21 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:21:40 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,4 @@ void	print_test_result(std::string msg)
 
 		exit(1);
 	}
-
-
 }
