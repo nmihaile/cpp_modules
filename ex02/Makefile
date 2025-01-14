@@ -20,4 +20,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+t: fclean $(NAME)
+	@./$(NAME)
+
 re: fclean all
