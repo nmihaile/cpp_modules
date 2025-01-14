@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:01:51 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/11 20:24:42 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:48:25 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,13 @@ size_t	max_tester(std::string descr, T a, T b, T expected_max)
 {
 	return test(descr, test_max(a, b, expected_max));
 }
+
+/* ************************************************************************** */
+
+template <typename T>
+size_t	cmp_ptr_tester(std::string descr, T& (f)(T&, T&), T* a, T* b, T* expected)
+{
+	T& r = f(*a, *b);
+	return test(descr, &r == expected);
+}
+	// std::cout << "PTR => " << a << " | " << b << " | " << expected << std::endl;

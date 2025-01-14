@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 14:10:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/11 20:34:47 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:50:52 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,20 @@ static void	printHeader(std::string str)
 	std::cout << BLUE << str << RESET << std::endl;
 }
 
-size_t	test(std::string descr, bool success)
+size_t	count(bool do_count)
 {
 	static size_t count;
 
-	++count;
+	if (do_count)
+		++count;
+	return (count);
+}
 
-	std::cout	<< LIGHTCYAN << "[" << std::setw(2) << std::setfill('0') << std::right << count << "] " << RESET
+size_t	test(std::string descr, bool success)
+{
+	count(true);
+
+	std::cout	<< LIGHTCYAN << "[" << std::setw(2) << std::setfill('0') << std::right << count(false) << "] " << RESET
 				<< std::setw(20) << std::setfill(' ') << std::left << descr << " ";
 
 	if (success)
@@ -31,11 +38,11 @@ size_t	test(std::string descr, bool success)
 	else
 	{
 		std::cout << LIGHTRED << "[KO] " << RESET << std::endl;
-		std::cout << LIGHTRED << "     Failed at test: " << count << RESET << std::endl;
+		std::cout << LIGHTRED << "     Failed at test: " << count(false) << RESET << std::endl;
 		exit (1);
 	}
 
-	return (count);
+	return (count(false));
 }
 
 
@@ -106,6 +113,12 @@ void	runTests()
 	count = min_tester<std::string>("empty STD::STRING", std::string(), std::string(), std::string());
 	count = min_tester<std::string>("empty vs non-empty STD::STRING", std::string(), std::string("non-empty"), std::string());
 
+	int a, b;
+
+	a = 40;	b = 42;
+	count = cmp_ptr_tester<int>("cmp ptr a < b", min<int>, &a, &b, &a);
+	a = 42;	b = 42;
+	count = cmp_ptr_tester<int>("cmp ptr a == b", min<int>, &a, &b, &b);
 
 /* ************************************************************************** */
 	printHeader("\n******************************");
@@ -137,6 +150,11 @@ void	runTests()
 	count = max_tester<float>("MAX FLOAT -ZERO", -0.0f, 0.00f, -0.00f);
 	count = max_tester<float>("MAX FLOAT -ZERO", -0.0f, 0.00f, 0.00f);
 	count = max_tester<std::string>("empty STD::STRING", std::string(), std::string(), std::string());
+
+	a = 52;	b = 42;
+	count = cmp_ptr_tester<int>("cmp ptr a > b", max<int>, &a, &b, &a);
+	a = 42;	b = 42;
+	count = cmp_ptr_tester<int>("cmp ptr a == b", max<int>, &a, &b, &b);
 
 	std::cout << LIGHTGREEN << "\n=> ALL tests passed " << count << "/" << count << " 🥳\n" << RESET << std::endl;	
 }
