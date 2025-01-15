@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:44:59 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/15 15:59:54 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:27:28 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 size_t	test_count(bool do_count);
 size_t	test_passed(bool do_count);
-void	print_test_result(std::string msg);
+void	print_test_result(std::string msg, std::string expected);
 
 #include "tester.tpp"
 
