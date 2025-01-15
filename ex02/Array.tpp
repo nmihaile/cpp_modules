@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:10:32 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/15 15:36:30 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:04:55 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ Array<T>&	Array<T>::operator=(const Array& rhs)
 template <typename T>
 T&	Array<T>::operator[](unsigned int idx)
 {
-	if (idx >= m_capacity)
-		throw ( std::out_of_range("Index out of range") );
 	if (m_items == nullptr)
 		throw ( std::runtime_error("Array is not initialized") );
+	if (idx >= m_capacity)
+		throw ( std::out_of_range("Index out of range") );
 	return (m_items[idx]);
 }
 
