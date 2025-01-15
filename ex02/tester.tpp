@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:49:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/15 16:05:48 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:06:39 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	test(void (*test_func)(T input), T input, std::string expected)
 	if (buff.str() == expected)
 	{
 		test_passed(true);
-		std::cout << LIGHTGREEN << "[" << test_count(false) << "] ";
+		std::cout << LIGHTGREEN << "[" << test_count(false) << "] " << RESET;
 		return ;
 	}
 
