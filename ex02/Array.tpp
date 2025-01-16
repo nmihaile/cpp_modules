@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:10:32 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/15 19:07:58 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:50:24 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ public:
 	~Array();
 
 	Array&			operator=(const Array& rhs);
-	T&				operator[](unsigned int idx);
+	T&				operator[](const unsigned int idx);
+	const T&		operator[](const unsigned int idx) const;
 	unsigned int	size(void);
 
 private:
-	unsigned int	m_capacity;
+	unsigned int	m_size;
 	T*				m_items;
 };
 
@@ -36,26 +37,26 @@ private:
 
 
 template <typename T>
-Array<T>::Array() : m_capacity(0), m_items(nullptr)
+Array<T>::Array() : m_size(0), m_items(nullptr)
 {
 }
 
 // Here it is important to use the () after new T[n]() which call the
 // default constructor of obs or inits primitive types as int and flotas to 0
 template <typename T>
-Array<T>::Array(unsigned int n) : m_capacity(n), m_items(nullptr)
+Array<T>::Array(unsigned int n) : m_size(n), m_items(nullptr)
 {
-	if (m_capacity > 0)
+	if (m_size > 0)
 		m_items = new T[n]();
 }
 
 template <typename T>
-Array<T>::Array(const Array& other) : m_capacity(other.m_capacity), m_items(nullptr)
+Array<T>::Array(const Array& other) : m_size(other.m_size), m_items(nullptr)
 {
-	if (m_capacity > 0)
+	if (m_size > 0)
 	{
-		m_items = new T[m_capacity];
-		for (unsigned int it = 0; it < m_capacity; ++it)
+		m_items = new T[m_size];
+		for (unsigned int it = 0; it < m_size; ++it)
 			m_items[it] = other.m_items[it];
 	}
 }
@@ -82,20 +83,29 @@ Array<T>&	Array<T>::operator=(const Array& rhs)
 			m_items = nullptr;
 		}
 
-		m_capacity	= rhs.m_capacity;
-		if (m_capacity > 0)
+		m_size	= rhs.m_size;
+		if (m_size > 0)
 		{
-			m_items		= new T[rhs.m_capacity];
-			for (unsigned int it = 0; it < m_capacity; ++it)
+			m_items		= new T[rhs.m_size];
+			for (unsigned int it = 0; it < m_size; ++it)
 				m_items[it] = rhs.m_items[it];
 		}
 	}
+	return (*this);
 }
 
 template <typename T>
 T&	Array<T>::operator[](unsigned int idx)
 {
-	if (idx >= m_capacity)
+	if (idx >= m_size)
+		throw ( std::out_of_range("Index out of range") );
+	return (m_items[idx]);
+}
+
+template <typename T>
+const T&	Array<T>::operator[](const unsigned int idx) const
+{
+	if (idx >= m_size)
 		throw ( std::out_of_range("Index out of range") );
 	return (m_items[idx]);
 }
@@ -103,5 +113,5 @@ T&	Array<T>::operator[](unsigned int idx)
 template <typename T>
 unsigned int	Array<T>::size(void)
 {
-	return ( m_capacity );
+	return ( m_size );
 }
