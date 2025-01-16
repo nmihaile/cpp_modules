@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 14:10:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/14 12:50:52 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:00:56 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,14 @@ void	runTests()
 	count = max_tester<double>("MAX DOUBLE", 1.25, 2.75, 2.75);
 	count = max_tester<long long>("MAX LONG LONG", 9223372036854775807LL, -9223372036854775807LL, 9223372036854775807LL);
 	count = max_tester<std::string>("MAX STD::STRING", std::string("aaaa"), std::string("bbbb"), std::string("bbbb"));
-	p1 = new int(45);
-	p2 = new int (55);
+	// p1 = new int(45);
+	// p2 = new int (55);
+	int int_arr[2] = {45, 55};
+	p1 = &int_arr[0];
+	p2 = &int_arr[1];
 	count = max_tester<int*>("MAX POINTER", p1, p2, p2);
-	delete(p1);
-	delete(p2);
+	// delete(p1);
+	// delete(p2);
 
 /* ************************************************************************** */
 	printHeader("\nADVANCED MAX TESTS");

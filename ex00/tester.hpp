@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:56:18 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/11 20:33:49 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:54:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <limits>
 #include "whatever.hpp"
 
 #define BLUE			"\033[34m"
