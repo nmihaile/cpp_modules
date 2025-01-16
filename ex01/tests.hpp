@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:10:23 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/13 18:19:44 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:03:17 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <cmath>
 #include <sstream>
 #include <iomanip>
+#include <limits>
 #include "iter.hpp"
 #include "tester.hpp"
 
