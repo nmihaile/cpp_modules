@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:44:58 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/15 17:28:48 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:36:29 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ size_t	test_passed(bool do_count)
 	if (do_count)
 		++count;
 	return (count);
+}
+
+std::string	replace_underscores(std::string str)
+{
+	for (std::string::iterator it = str.begin(); it < str.end(); ++it)
+		if (*it == '_')
+			*it = ' ';
+	return (str);
 }
 
 void	print_test_result(std::string msg, std::string expected)
