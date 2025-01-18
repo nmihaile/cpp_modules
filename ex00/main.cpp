@@ -6,13 +6,14 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:41:12 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 13:08:32 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:36:41 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
 #include <list>
 #include <array>
+#include <deque>
 #include "easyfind.hpp"
 #include "tester.hpp"
 
@@ -171,6 +172,57 @@ void	test_find_in_huge_array(void)
 }
 
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+
+void	test_find_existing_element_in_deque(void)
+{
+	std::deque<int>				arr = { 40, 41, 42, 43, 44 };
+	std::deque<int>::iterator	it = easyfind<std::deque<int>>(arr, 42);
+	std::cout << *it;
+}
+
+void	test_find_first_element_in_deque(void)
+{
+	std::vector<int>			arr = { 40, 41, 42, 43, 44 };
+	std::vector<int>::iterator	it = easyfind<std::vector<int>>(arr, 40);
+	std::cout << *it;
+}
+
+void	test_find_last_element_in_deque(void)
+{
+	std::vector<int>			arr = { 40, 41, 42, 43, 44 };
+	std::vector<int>::iterator	it = easyfind<std::vector<int>>(arr, 44);
+	std::cout << *it;
+}
+
+void	test_find_nonexistent_element_in_deque(void)
+{
+	std::deque<int>			arr = { 30, 31, 32, 33, 34 };
+	std::deque<int>::iterator	it = easyfind<std::deque<int>>(arr, 42);
+	std::cout << *it;
+}
+
+void	test_find_in_empty_deque(void)
+{
+	std::deque<int>			arr;
+	std::deque<int>::iterator	it = easyfind<std::deque<int>>(arr, 42);
+	std::cout << *it;
+}
+
+void	test_find_in_huge_deque(void)
+{
+	std::deque<int>			arr;
+	// arr.reserve(2000000);
+	for (size_t it = 0; it < 20000000; ++it)
+		arr.emplace_back(it);
+	std::deque<int>::iterator	first = easyfind<std::deque<int>>(arr, 0);
+	std::deque<int>::iterator	last = easyfind<std::deque<int>>(arr, 19999999);
+	std::cout << *first << " " << *last;
+}
+
+
 int	main(void)
 {
 
@@ -198,6 +250,15 @@ int	main(void)
 	TEST(test_find_nonexisting_element_in_array, "element not found\n");
 	TEST(test_find_in_empty_array, "element not found\n");
 	TEST(test_find_in_huge_array, "0 1999999");
+
+	printDivider();
+
+	TEST(test_find_existing_element_in_deque, "42");
+	TEST(test_find_first_element_in_deque, "40");
+	TEST(test_find_last_element_in_deque, "44");
+	TEST(test_find_nonexistent_element_in_deque, "element not found\n");
+	TEST(test_find_in_empty_deque, "element not found\n");
+	TEST(test_find_in_huge_deque, "0 19999999");
 
 	return (0);
 }
