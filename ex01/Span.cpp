@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:07 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 16:40:01 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:44:58 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ Span::Span(unsigned int n) : m_capacity(n), m_size(0), m_items(nullptr)
 {
 	if (m_capacity > 0)
 		m_items = new int[m_capacity]();
+}
+
+Span::Span(const Span& other)
+{
+	if (this != &other)
+		*this = other;
 }
 
 Span::~Span()
@@ -34,7 +40,10 @@ Span&	Span::operator=(const Span& rhs)
 	if (this != &rhs)
 	{
 		if (m_items)
+		{
 			delete[](m_items);
+			m_items = nullptr;
+		}
 		m_capacity = rhs.m_capacity;
 		m_size = rhs.m_size;
 

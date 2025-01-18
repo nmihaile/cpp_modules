@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:22:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 16:39:37 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:45:10 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	main(void)
 {
-	Span sp(5);// = Span(5);
+	Span sp = Span(5);
 
 	sp.addNumber(6);
 	sp.addNumber(3);
