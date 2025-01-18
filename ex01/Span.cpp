@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:07 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 16:36:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:40:01 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	Span::addNumber(int n)
 	m_items[m_size++] = n;
 }
 
-unsigned int	Span::shortesSpan(void)
+unsigned int	Span::shortestSpan(void)
 {
 	if (m_size <= 1)
 		throw ( std::logic_error("Not enough elements to calculate a span.") );

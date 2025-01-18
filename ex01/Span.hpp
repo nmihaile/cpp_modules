@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 16:36:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:39:56 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ class Span
 {
 public:
 	Span(unsigned int n);
+	Span(const Span& other);
 	~Span();
 
 	Span&			operator=(const Span& rhs);
 	void			addNumber(int n);
-	unsigned int	shortesSpan(void);
+	unsigned int	shortestSpan(void);
 	
 private:
 	Span() = delete;
-	Span(const Span& other) = delete;
 	
 	unsigned int	m_capacity;
 	unsigned int	m_size;
