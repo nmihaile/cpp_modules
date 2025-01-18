@@ -3,7 +3,7 @@ NAME		=	main
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
-SRCS		=	main.cpp
+SRCS		=	main.cpp Span.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -22,6 +22,5 @@ fclean: clean
 
 re: fclean all
 
-t: fclean
+t: fclean $(NAME)
 	@./$(NAME)
-	
