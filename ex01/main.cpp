@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:22:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 16:45:10 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:47:50 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	sp.addNumber(9);
 	sp.addNumber(11);
 	std::cout << sp.shortestSpan() << std::endl;
-	// std::cout << sp.longestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
 
 	return (0);
 }

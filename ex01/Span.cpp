@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:07 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 16:44:58 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:47:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,20 @@ unsigned int	Span::shortestSpan(void)
 	return (sp);
 }
 
+unsigned int	Span::longestSpan(void)
+{
+	if (m_size <= 1)
+		throw ( std::logic_error("Not enough elements to calculate a span.") );
+
+	unsigned int	sp = std::numeric_limits<unsigned int>::min();
+	for (unsigned int i = 1; i < m_size; ++i)
+	{
+		unsigned int diff = (m_items[i] > m_items[i - 1])
+							? (m_items[i] - m_items[i - 1])
+							: (m_items[i - 1] - m_items[i]);
+		if (diff > sp)
+			sp = diff;
+	}
+	
+	return (sp);
+}

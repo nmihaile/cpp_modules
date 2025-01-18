@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 16:39:56 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:46:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ public:
 	Span&			operator=(const Span& rhs);
 	void			addNumber(int n);
 	unsigned int	shortestSpan(void);
+	unsigned int	longestSpan(void);
 	
 private:
 	Span() = delete;
