@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/19 21:12:23 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:45:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include <numeric>
+#include <iterator>
 
 class Span
 {
@@ -27,7 +28,11 @@ public:
 	~Span();
 
 	Span&			operator=(const Span& rhs);
+	
 	void			addNumber(int n);
+	template <typename T>
+	void			addRange(typename T::iterator first, typename T::iterator last);
+	
 	unsigned int	shortestSpan(void);
 	unsigned int	longestSpan(void) const;
 	
@@ -37,5 +42,7 @@ private:
 	unsigned int		m_capacity;
 	std::vector<int>	m_vec;
 };
+
+#include "Span.tpp"
 
 #endif
