@@ -6,28 +6,23 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:07 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/18 16:47:45 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:08:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
-Span::Span(unsigned int n) : m_capacity(n), m_size(0), m_items(nullptr)
+Span::Span(unsigned int n) : m_capacity(n)
 {
-	if (m_capacity > 0)
-		m_items = new int[m_capacity]();
+	m_vec.reserve(n);
 }
 
-Span::Span(const Span& other)
+Span::Span(const Span& other) : m_capacity(other.m_capacity), m_vec(other.m_vec)
 {
-	if (this != &other)
-		*this = other;
 }
 
 Span::~Span()
 {
-	if (m_items)
-		delete[](m_items);
 }
 
 
@@ -39,63 +34,39 @@ Span&	Span::operator=(const Span& rhs)
 {
 	if (this != &rhs)
 	{
-		if (m_items)
-		{
-			delete[](m_items);
-			m_items = nullptr;
-		}
 		m_capacity = rhs.m_capacity;
-		m_size = rhs.m_size;
-
-		if (m_capacity > 0)
-		{
-			m_items = new int[m_capacity];
-			for (unsigned int i = 0; i < m_size; ++i)
-				m_items[i] = rhs.m_items[i];
-		}
+		m_vec.reserve(m_capacity);
+		m_vec = rhs.m_vec;
 	}
 	return (*this);
 }
 
 void	Span::addNumber(int n)
 {
-	if (m_size >= m_capacity)
+	if (m_vec.size() >= m_capacity)
 		throw ( std::overflow_error("Span has reached its capacity, cannot add more elements.") );
-	m_items[m_size++] = n;
+	m_vec.emplace_back(n);
 }
 
 unsigned int	Span::shortestSpan(void)
 {
-	if (m_size <= 1)
+	if (m_vec.size() <= 1)
 		throw ( std::logic_error("Not enough elements to calculate a span.") );
 
-	unsigned int	sp = std::numeric_limits<unsigned int>::max();
-	for (unsigned int i = 1; i < m_size; ++i)
-	{
-		unsigned int diff = (m_items[i] > m_items[i - 1])
-							? (m_items[i] - m_items[i - 1])
-							: (m_items[i - 1] - m_items[i]);
-		if (diff < sp)
-			sp = diff;
-	}
+	std::vector<int>	sorted = m_vec;
+	std::sort(sorted.begin(), sorted.end());
+
+	std::vector<unsigned int>	diffs(sorted.size() - 1);
+	std::adjacent_difference(sorted.begin(), sorted.end(), diffs.begin());
 	
-	return (sp);
+	return (*std::min_element(diffs.begin(), diffs.end()));
 }
 
-unsigned int	Span::longestSpan(void)
+unsigned int	Span::longestSpan(void) const
 {
-	if (m_size <= 1)
+	if (m_vec.size() <= 1)
 		throw ( std::logic_error("Not enough elements to calculate a span.") );
 
-	unsigned int	sp = std::numeric_limits<unsigned int>::min();
-	for (unsigned int i = 1; i < m_size; ++i)
-	{
-		unsigned int diff = (m_items[i] > m_items[i - 1])
-							? (m_items[i] - m_items[i - 1])
-							: (m_items[i - 1] - m_items[i]);
-		if (diff > sp)
-			sp = diff;
-	}
-	
-	return (sp);
+	std::pair<std::vector<int>::const_iterator, std::vector<int>::const_iterator> bounds = std::minmax_element(m_vec.begin(), m_vec.end());
+	return ( *bounds.second - *bounds.first );
 }
