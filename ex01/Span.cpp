@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:07 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/20 12:27:54 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:47:59 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,18 @@ unsigned int	Span::shortestSpan(void)
 	std::vector<int>	sorted = m_vec;
 	std::sort(sorted.begin(), sorted.end());
 	
-	std::vector<unsigned int>	diffs(sorted.size() - 1);
+	std::vector<unsigned int>	diffs(sorted.size());
 	std::adjacent_difference(sorted.begin(), sorted.end(), diffs.begin());
 
 	return (*std::min_element(diffs.begin() + 1, diffs.end()));
 }
+// diffs needs to be of size sorted.size(), AND NOT sorted.size() - 1
+// so that std::adjacent_difference adds all span values of the original m_vec.
+// Because it adds the first element of sorted as diff (from nowhere to the first
+// value is interpreted to be a span in std::adjacent_difference, but not in our execise).
+// Becasue of the additional value, we need diffs to be of size of sorted.size(), so that
+// std::adjacent_difference adds also the last span of sorted to diffs.
+
 
 // unsigned int	Span::shortestSpan(void)
 // {
@@ -70,15 +77,16 @@ unsigned int	Span::shortestSpan(void)
 // 	std::vector<int>	sorted = m_vec;
 // 	std::sort(sorted.begin(), sorted.end());
 
-// 	unsigned int	shortest = std::numeric_limits<unsigned int>::max();
-// 	for (unsigned int i = 1; i < m_capacity; ++i)
+// 	unsigned int	shortest = static_cast<unsigned int>(sorted[1] - sorted[0]);
+// 	for (unsigned int i = 1; i < sorted.size(); ++i)
 // 		shortest =	std::min(
 // 						shortest,
-// 						static_cast<unsigned int>(std::abs(sorted[i] - sorted[i - 1]))
+// 						static_cast<unsigned int>(sorted[i] - sorted[i - 1])
 // 					);	
 	
 // 	return (shortest);
 // }
+
 
 unsigned int	Span::longestSpan(void) const
 {
