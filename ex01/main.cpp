@@ -6,12 +6,15 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:22:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/20 12:32:23 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:58:15 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
+#include <array>
+#include <deque>
+#include <list>
 #include <random>
 #include "Span.hpp"
 #include "tester.hpp"
@@ -159,6 +162,87 @@ void	test_same_values_for_shortes_and_longest(void)
 	std::cout << sp.longestSpan() << std::endl;
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+void	test_addRange_from_array(void)
+{
+	Span					sp(100);
+	std::array<int, 100>	arr;
+
+	for (int i = 0; i < 100; ++i)
+		arr[i] = i * i;
+	
+	sp.addRange(arr.begin(), arr.end());
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+}
+
+void	test_addRange_from_deque(void)
+{
+	Span			sp(100);
+	std::deque<int>	dq;
+
+	for (int i = 0; i < 100; ++i)
+		if ( i % 2 == 0)
+			dq.emplace_front(i * i);
+		else
+			dq.emplace_back(i * i);
+	
+	sp.addRange(dq.begin(), dq.end());
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+}
+
+void	test_addRange_from_list(void)
+{
+	Span			sp(100);
+	std::list<int>	lst;
+
+	for (int i = 0; i < 100; ++i)
+		if ( i % 2 == 0)
+			lst.push_front(i * i);
+		else
+			lst.push_back(i * i);
+	
+	sp.addRange(lst.begin(), lst.end());
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+}
+
+void	test_partial_filled_span_add_valid_range()
+{
+	Span 				sp(100);
+	std::vector<int>	vec;
+	for (int i = 0; i < 50; ++i)
+	{
+		sp.addNumber( rnd() );
+		vec.emplace_back( rnd() );
+	}
+	sp.addRange(vec.begin(), vec.end());
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+}
+
+void	test_partial_filled_span_add_invalid_range()
+{
+	Span 				sp(100);
+	std::vector<int>	vec;
+	for (int i = 0; i < 51; ++i)
+	{
+		sp.addNumber( rnd() );
+		vec.emplace_back( rnd() );
+	}
+	sp.addRange(vec.begin(), vec.end());
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+}
+
 int	main(void)
 {
 
@@ -175,6 +259,12 @@ int	main(void)
 	TEST(test_very_huge_range_1000000, "0\n1234567196\n");
 	TEST(test_same_values_in_span, "0\n0\n");
 	TEST(test_same_values_for_shortes_and_longest, "10\n10\n");
+
+	TEST(test_addRange_from_array, "1\n9801\n");
+	TEST(test_addRange_from_deque, "1\n9801\n");
+	TEST(test_addRange_from_list, "1\n9801\n");
+	TEST(test_partial_filled_span_add_valid_range, "163363\n1202164588\n");
+	TEST(test_partial_filled_span_add_invalid_range, "Adding this range exceeds Span capacity.\n");
 
 	print_test_result();
 	
