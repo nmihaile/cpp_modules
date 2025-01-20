@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:07 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/19 21:08:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:27:54 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,30 @@ unsigned int	Span::shortestSpan(void)
 
 	std::vector<int>	sorted = m_vec;
 	std::sort(sorted.begin(), sorted.end());
-
+	
 	std::vector<unsigned int>	diffs(sorted.size() - 1);
 	std::adjacent_difference(sorted.begin(), sorted.end(), diffs.begin());
-	
-	return (*std::min_element(diffs.begin(), diffs.end()));
+
+	return (*std::min_element(diffs.begin() + 1, diffs.end()));
 }
+
+// unsigned int	Span::shortestSpan(void)
+// {
+// 	if (m_vec.size() <= 1)
+// 		throw ( std::logic_error("Not enough elements to calculate a span.") );
+
+// 	std::vector<int>	sorted = m_vec;
+// 	std::sort(sorted.begin(), sorted.end());
+
+// 	unsigned int	shortest = std::numeric_limits<unsigned int>::max();
+// 	for (unsigned int i = 1; i < m_capacity; ++i)
+// 		shortest =	std::min(
+// 						shortest,
+// 						static_cast<unsigned int>(std::abs(sorted[i] - sorted[i - 1]))
+// 					);	
+	
+// 	return (shortest);
+// }
 
 unsigned int	Span::longestSpan(void) const
 {

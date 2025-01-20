@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/20 11:11:37 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:20:37 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <numeric>
 #include <iterator>
+#include <limits>
 
 class Span
 {
