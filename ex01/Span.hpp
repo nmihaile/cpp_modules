@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:23:08 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/20 10:23:28 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:11:37 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ class Span
 {
 public:
 	Span(unsigned int n);
-	template <typename T>
-	Span(typename T::iterator first, typename T::iterator last);
+	template <typename InputIterator>
+	Span(InputIterator first, InputIterator last);
 	Span(const Span& other);
 	~Span();
 
 	Span&			operator=(const Span& rhs);
 	
 	void			addNumber(int n);
-	template <typename T>
-	void			addRange(typename T::iterator first, typename T::iterator last);
+	template <typename InputIterator>
+	void			addRange(InputIterator first, InputIterator last);
 	
 	unsigned int	shortestSpan(void);
 	unsigned int	longestSpan(void) const;
