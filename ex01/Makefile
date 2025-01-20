@@ -3,7 +3,7 @@ NAME		=	main
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
-SRCS		=	main.cpp Span.cpp
+SRCS		=	main.cpp Span.cpp tester.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
