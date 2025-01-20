@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:22:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/20 15:58:15 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:46:11 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #include <deque>
 #include <list>
 #include <random>
+#include <limits>
 #include "Span.hpp"
 #include "tester.hpp"
 
 int	rnd()
 {
-	static std::random_device				rd;
 	static std::mt19937						gen(1234567890);
 	static std::uniform_int_distribution<>	dist(0, 1234567890);
 
@@ -243,6 +243,56 @@ void	test_partial_filled_span_add_invalid_range()
 	std::cout << sp.longestSpan() << std::endl;
 }
 
+void	test_add_empty_range(void)
+{
+	Span				sp(50);
+	std::vector<int>	vec;
+	
+	sp.addRange(vec.begin(), vec.end());
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+}
+
+void	test_construct_span_from_empty_range(void)
+{
+	std::vector<int>	vec;
+	
+	Span				sp(vec.begin(), vec.end());
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+}
+
+void	test_shortestSpan_more_than_max_int(void)
+{	
+	Span	sp(3);
+	sp.addNumber(-10);
+	sp.addNumber(std::numeric_limits<int>::max());
+
+	std::cout << sp.shortestSpan() << std::endl;
+}
+
+void	test_shortestSpan_min_int_to_max_int(void)
+{	
+	Span	sp(3);
+	sp.addNumber(std::numeric_limits<int>::min());
+	sp.addNumber(std::numeric_limits<int>::max());
+
+	std::cout << sp.shortestSpan() << std::endl;
+}
+
+void	test_sparse_range(void)
+{	
+	Span	sp(3);
+	sp.addNumber(std::numeric_limits<int>::min());
+	sp.addNumber(0);
+	sp.addNumber(std::numeric_limits<int>::max());
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+}
+
 int	main(void)
 {
 
@@ -265,6 +315,12 @@ int	main(void)
 	TEST(test_addRange_from_list, "1\n9801\n");
 	TEST(test_partial_filled_span_add_valid_range, "163363\n1202164588\n");
 	TEST(test_partial_filled_span_add_invalid_range, "Adding this range exceeds Span capacity.\n");
+
+	TEST(test_add_empty_range, "Attempted to use an empty range with the Span.\n");
+	TEST(test_construct_span_from_empty_range, "Attempted to use an empty range with the Span.\n");
+	TEST(test_shortestSpan_more_than_max_int, "2147483657\n");
+	TEST(test_shortestSpan_min_int_to_max_int, "4294967295\n");
+	TEST(test_sparse_range, "2147483647\n4294967295\n");
 
 	print_test_result();
 	
