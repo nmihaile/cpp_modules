@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 19:55:13 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/22 10:37:38 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:42:26 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,59 @@ void	test_copy_assignement_operator_overload(void)
 		std::cout << *it << printSpace<MutantStack<int>::iterator>(it, copy.end());
 }
 
+void	test_empty_MutantStack_iterators(void)
+{
+	MutantStack<int> ms;
+	MutantStack<int>::iterator					it		= ms.begin();
+	MutantStack<int>::reverse_iterator			rit		= ms.rbegin();
+	MutantStack<int>::reverse_iterator			rite	= ms.rend();
+	MutantStack<int>::const_reverse_iterator	crit	= ms.crbegin();
+	MutantStack<int>::const_reverse_iterator	crite	= ms.crend();
+
+	if (it == ms.end() &&
+		it == rit.base() && it == rite.base() &&
+		it == crit.base() && it == crite.base())
+		std::cout << "Success: all iterators point to the same place.";
+	else
+		std::cout << "Error: iterators are different for empty MutantStack";
+}
+
+void	test_mixed_push_and_pop(void)
+{
+	MutantStack<int> ms;
+	ms.push(1);	ms.push(2); ms.pop(); ms.push(3); ms.push(4); ms.pop(); ms.push(5);
+	ms.push(6); ms.pop(); ms.push(7); ms.push(8); ms.pop(); ms.push(9); ms.push(10); ms.pop();
+
+	for (MutantStack<int>::iterator it = ms.begin(); it < ms.end(); ++it)
+		std::cout << *it << printSpace<MutantStack<int>::iterator>(it, ms.end());
+}
+
+void	test_persistent_iterator_modification(void)
+{
+	MutantStack<int> ms;
+	ms.push(1);	ms.push(2); ms.push(3); ms.push(4); ms.push(5);
+	ms.push(6); ms.push(7); ms.push(8); ms.push(9); ms.push(10);
+
+	for (MutantStack<int>::iterator it = ms.begin(); it < ms.end(); ++it)
+		*it *= 10;
+
+	for (MutantStack<int>::iterator it = ms.begin(); it < ms.end(); ++it)
+		std::cout << *it << printSpace<MutantStack<int>::iterator>(it, ms.end());
+}
+
+void	test_persistent_reverse_iterator_modification(void)
+{
+	MutantStack<int> ms;
+	ms.push(1);	ms.push(2); ms.push(3); ms.push(4); ms.push(5);
+	ms.push(6); ms.push(7); ms.push(8); ms.push(9); ms.push(10);
+
+	for (MutantStack<int>::iterator it = ms.begin(); it < ms.end(); ++it)
+		*it *= 10;
+
+	for (MutantStack<int>::iterator it = ms.begin(); it < ms.end(); ++it)
+		std::cout << *it << printSpace<MutantStack<int>::iterator>(it, ms.end());
+}
+
 int	main(void)
 {
 
@@ -186,7 +239,11 @@ int	main(void)
 	TEST(test_const_iterator, "1 2 3 4 5 6");
 	TEST(test_const_reverse_iterator, "6 5 4 3 2 1");
 	TEST(test_copy_constructor, "1 2 3 4 5 6");
-	TEST(test_copy_assignement_operator_overload, "1 2 3 4 5 6"); //What is teh correct output for this test, will it append or what???
+	TEST(test_copy_assignement_operator_overload, "1 2 3 4 5 6");
+	TEST(test_empty_MutantStack_iterators, "Success: all iterators point to the same place.");
+	TEST(test_mixed_push_and_pop, "1 3 5 7 9");
+	TEST(test_persistent_iterator_modification, "10 20 30 40 50 60 70 80 90 100");
+	TEST(test_persistent_reverse_iterator_modification, "10 20 30 40 50 60 70 80 90 100");
 
 	print_test_result();
 
