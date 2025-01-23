@@ -3,7 +3,7 @@ NAME		=	btc
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
-SRCS		=	main.cpp
+SRCS		=	main.cpp utils.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
