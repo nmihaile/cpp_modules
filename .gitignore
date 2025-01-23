@@ -3,6 +3,7 @@
 !.gitignore
 
 !ex00
+!ex00/test
 
 !Makefile
 !*.h
