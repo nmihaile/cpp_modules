@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/23 12:32:51 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:36:10 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ public:
 
 	BitcoinExchange&	operator=(const BitcoinExchange& rhs);
 
-	bool	loadPricetable(void);
+	void	loadPriceTable(void);
 
 private:
 	std::map<t_time_point, uint64_t>	price_table;

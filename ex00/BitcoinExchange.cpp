@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/23 12:21:16 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:36:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& rhs)
 	{
 		// TODO: handle dailyBtcPrices 
 	}
+	return (*this);
 }
 
 
@@ -41,7 +42,7 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& rhs)
 /* ************************************************************************** */
 
 
-bool	BitcoinExchange::loadPricetable(void)
+void	BitcoinExchange::loadPriceTable(void)
 {
 	std::fstream	fs;
 
