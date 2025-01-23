@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:49:15 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/23 12:36:01 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:06:40 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	main(int ac, char **av)
 {
 	if (ac != 2)
-		exit_with_msg("usage: ./btc <input.txt>");
+		exit_with_msg("usage: ./btc <input.txt>", 0);
 
 	BitcoinExchange	btcEx;
 
