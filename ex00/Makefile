@@ -29,7 +29,7 @@ fclean: clean
 re: fclean all
 
 t:
-	@./$(NAME)
+	@./$(NAME) t
 
 rt: fclean all t
 
