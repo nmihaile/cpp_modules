@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 17:36:27 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 18:51:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,21 @@ void	BitcoinExchange::loadPriceTable(std::string _dataFile)
 void	BitcoinExchange::evaluateInputFile(std::string _inputFile)
 {
 	std::ifstream fs = openFile(_inputFile);
+
+	BitcoinExchange::Input	input;
+	input.line_nbr = 1;
+	std::getline(fs, input.line);
+	if (input.line != "date | value")
+		throw ( std::runtime_error("Invalid header in " + _inputFile + ", expected: date,exchange_rate" + input.getLineNbr()) );
+
+	while (std::getline(fs, input.line))
+	{
+		++input.line_nbr;
+		if (!input.line.empty())
+			evaluateEntry(input);
+	}
+
+	fs.close();
 }
 
 
@@ -74,7 +89,7 @@ void	BitcoinExchange::evaluateInputFile(std::string _inputFile)
 
 void	BitcoinExchange::processEntry(BitcoinExchange::Input& input)
 {
-	splitCSVData(input);
+	splitEntry(input, ',');
 
 	if (input.date.empty())
 		throw ( std::runtime_error("Invalid input: empty date: <" + input.line + ">" + input.getLineNbr()) );
@@ -84,10 +99,46 @@ void	BitcoinExchange::processEntry(BitcoinExchange::Input& input)
 	m_price_table[strToTimePoint(input).time_since_epoch().count()] = strToPrice(input);
 }
 
-void	BitcoinExchange::splitCSVData(BitcoinExchange::Input& input)
+void	BitcoinExchange::evaluateEntry(BitcoinExchange::Input& input)
 {
+	t_time_point	time_point;
+	uint64_t		amount;
 
-	std::size_t	pos = input.line.find(',');
+	try
+	{
+		splitEntry(input, '|');
+		if (input.date.empty())
+			throw ( std::runtime_error("Invalid input: empty date: <" + input.line + ">") );
+		if (input.price.empty())
+			throw ( std::runtime_error("Invalid input: empty price: <" + input.line + ">") );
+
+		validate_date(input);
+		validate_price(input);
+
+		time_point	= strToTimePoint(input);
+		amount		= strToPrice(input);
+
+		if (amount > 1000 * 100)
+			throw ( std::runtime_error("Invalid amount greater than 1000: <" + input.line + ">") );
+
+	}
+	catch(const std::exception& e)
+	{
+		std::string e_str(e.what());
+		e_str.erase(e_str.begin() + e_str.find_first_of('\n'), e_str.end());
+		std::cout	<< BTCEX_LIGHTRED << "Invalid entry " << BTCEX_RESET
+					// << "<" + input.line + "> "
+					<< BTCEX_GRAY << e_str << " "
+					<< BTCEX_LIGHTRED << "at line: " << BTCEX_LIGHTCYAN << input.line_nbr << '\n';
+		return ;
+	}
+
+
+}
+
+void	BitcoinExchange::splitEntry(BitcoinExchange::Input& input, char delimiter)
+{
+	std::size_t	pos = input.line.find(delimiter);
 	if (pos == std::string::npos)
 		throw ( std::runtime_error("Invalid input: delimiter missing: <" + input.line + ">" + input.getLineNbr()) );
 

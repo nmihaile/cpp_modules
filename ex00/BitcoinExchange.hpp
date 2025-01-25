@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 17:32:34 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 18:30:19 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 #include <sstream>
 #include <cctype>
 #include <algorithm>
+#include <iostream>
+
+#define BTCEX_GRAY "\033[90m"
+#define BTCEX_LIGHTRED "\033[91m"
+#define BTCEX_LIGHTCYAN "\033[96m"
+#define BTCEX_RESET "\033[0m"
 
 class BitcoinExchange
 {
@@ -51,7 +57,8 @@ private:
 	std::map<long long, uint64_t>	m_price_table;
 
 	void			processEntry(BitcoinExchange::Input& input);
-	void			splitCSVData(BitcoinExchange::Input& input);
+	void			evaluateEntry(BitcoinExchange::Input& input);
+	void			splitEntry(BitcoinExchange::Input& input, char delimiter);
 
 	std::ifstream	openFile(const std::string _file);
 	t_time_point	strToTimePoint(BitcoinExchange::Input& input);

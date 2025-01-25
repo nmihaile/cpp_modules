@@ -29,7 +29,7 @@ fclean: clean
 re: fclean all
 
 t:
-	@./$(NAME) t
+	@./$(NAME) input.txt
 
 rt: fclean all t
 
