@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 12:38:45 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:51:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,22 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& rhs)
 /* ************************************************************************** */
 
 
-void	BitcoinExchange::loadPriceTable(void)
+void	BitcoinExchange::loadPriceTable(std::string _dataFile)
 {
 	std::ifstream	fs;
 
-	fs.open("data.csv");
+	m_dataFile = _dataFile;
+
+	fs.open(m_dataFile);
 	if (fs.is_open() == false)
-		throw ( std::runtime_error("Failed to open data.csv, provide a valid data.csv file with read permissions.") );
+		throw ( std::runtime_error("Failed to open " + m_dataFile + ", provide a valid " + m_dataFile + " file with read permissions.") );
 	if (fs.good() == false)
-		throw ( std::runtime_error("The file data.csv is not in a good state.") );
+		throw ( std::runtime_error("The file " + m_dataFile + " is not in a good state.") );
 
 	std::string	line;
 	std::getline(fs, line);
 	if (line != "date,exchange_rate")
-		throw ( std::runtime_error("Invalid header in data.csv, expected: date,exchange_rate") );
+		throw ( std::runtime_error("Invalid header in " + m_dataFile + ", expected: date,exchange_rate") );
 
 	while (std::getline(fs, line))
 		if (!line.empty() && line[0] != '\n')
@@ -76,7 +78,7 @@ void	BitcoinExchange::processEntry(t_str_pair pair, std::string& line)
 	if (pair.price.empty())
 		throw ( std::runtime_error("Invalid input: empty price: <" + line + ">") );
 	
-	price_table[strToTimePoint(pair.date, line).time_since_epoch().count()] = strToPrice(pair.price);
+	m_price_table[strToTimePoint(pair.date, line).time_since_epoch().count()] = strToPrice(pair.price);
 }
 
 BitcoinExchange::t_str_pair		BitcoinExchange::splitCSVData(std::string& line)

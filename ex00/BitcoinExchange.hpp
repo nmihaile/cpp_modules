@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 12:17:00 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:50:21 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ public:
 
 	BitcoinExchange&	operator=(const BitcoinExchange& rhs);
 
-	void	loadPriceTable(void);
+	void	loadPriceTable(std::string _dataFile);
 
 private:
 	typedef struct s_str_pair
@@ -44,7 +44,9 @@ private:
 		std::string	date;
 		std::string	price;
 	} t_str_pair;
-	std::map<long long, uint64_t>	price_table;
+
+	std::string						m_dataFile;
+	std::map<long long, uint64_t>	m_price_table;
 
 	void			processEntry(t_str_pair pair, std::string& line);
 	t_str_pair		splitCSVData(std::string& line);
