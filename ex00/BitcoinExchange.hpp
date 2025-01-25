@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 14:50:49 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 15:23:51 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 #include <sstream>
 #include <cctype>
 #include <algorithm>
-
-#include <iostream>
 
 class BitcoinExchange
 {
@@ -56,10 +54,11 @@ private:
 	void			splitCSVData(BitcoinExchange::Input& input);
 
 	t_time_point	strToTimePoint(BitcoinExchange::Input& input);
-	uint64_t		strToPrice(std::string& str);
+	uint64_t		strToPrice(BitcoinExchange::Input& input);
 	void			trimWhitespaces(std::string& str);
 
 	bool			validate_date(BitcoinExchange::Input& input);
+	bool			validate_price(BitcoinExchange::Input& input);
 };
 
 #endif

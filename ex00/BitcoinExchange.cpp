@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 15:06:56 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:20:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	BitcoinExchange::processEntry(BitcoinExchange::Input& input)
 	if (input.price.empty())
 		throw ( std::runtime_error("Invalid input: empty price: <" + input.line + ">" + input.getLineNbr()) );
 	
-	m_price_table[strToTimePoint(input).time_since_epoch().count()] = strToPrice(input.price);
+	m_price_table[strToTimePoint(input).time_since_epoch().count()] = strToPrice(input);
 }
 
 void	BitcoinExchange::splitCSVData(BitcoinExchange::Input& input)
@@ -128,10 +128,21 @@ BitcoinExchange::t_time_point	BitcoinExchange::strToTimePoint(BitcoinExchange::I
 	return (std::chrono::system_clock::from_time_t(tt));
 }
 
-uint64_t	BitcoinExchange::strToPrice(std::string& str)
+uint64_t	BitcoinExchange::strToPrice(BitcoinExchange::Input& input)
 {
-	(void) str;
-	return (0);
+	validate_price(input);
+
+	std::stringstream	ss(input.price);
+	float				fvalue;
+
+	ss >> fvalue;
+	if (ss.fail())
+		throw( std::runtime_error("Failed to convert price: <" + input.price + ">" + input.getLineNbr()) );
+	
+	uint64_t	value;
+	value = static_cast<uint64_t>(fvalue * 100);
+
+	return (value);
 }
 
 void	BitcoinExchange::trimWhitespaces(std::string& str)
@@ -173,6 +184,17 @@ bool	BitcoinExchange::validate_date(BitcoinExchange::Input& input)
 	is = std::stringstream(input.date.substr(8, 2));	int day;	is >> day;
 	if (day < 1 || day > 31)
 		throw ( std::runtime_error("Invalid day in date: <" + input.line + ">" + input.getLineNbr()) );
+
+	return (true);
+}
+
+// The subject informs: either a float or a positive integer
+// for the input_db: between 0 and 1000
+bool	BitcoinExchange::validate_price(BitcoinExchange::Input& input)
+{
+	for (std::string::iterator it = input.price.begin(); it < input.price.end(); ++it)
+		if (!std::isdigit(*it) && !(*it == '.'))
+			throw ( std::runtime_error("Invalid price: <" + input.line + ">" + input.getLineNbr()) );
 
 	return (true);
 }
