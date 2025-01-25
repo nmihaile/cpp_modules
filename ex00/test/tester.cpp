@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:41:11 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/23 16:30:26 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:08:43 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	test(void (*test_func)(void), std::string expected, const std::string& func
 	test_count(true);
 
 	std::cout	<< LIGHTCYAN << "[" << std::setw(2) << std::setfill('0') << std::right << test_count(false) << "] " << RESET
-				<< std::setw(45) << std::setfill(' ') << std::left << replace_underscores(funcName) << " -> "  << std::flush;
+				<< std::setw(45) << std::setfill(' ') << std::left << replace_underscores(funcName) << GRAY << " -> " << RESET  << std::flush;
 
 	std::string	result = captureStdout(test_func);
 

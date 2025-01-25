@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:41:12 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/23 16:30:11 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:08:37 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <sstream>
 #include <string>
 
+#define GRAY			"\033[90m"
 #define BLUE			"\033[34m"
 #define LIGHTRED		"\033[91m"
 #define LIGHTGREEN		"\033[92m"
