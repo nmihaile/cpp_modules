@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/24 13:23:34 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:17:00 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <stdexcept>
 #include <iomanip>
 #include <sstream>
+#include <cctype>
+#include <algorithm>
 
 #include <iostream>
 
@@ -45,9 +47,11 @@ private:
 	std::map<long long, uint64_t>	price_table;
 
 	void			processEntry(t_str_pair pair, std::string& line);
-	t_str_pair		splitCSVData(std::string& str);
-	t_time_point	strToTimePoint(std::string& str, std::string& line);
+	t_str_pair		splitCSVData(std::string& line);
+	t_time_point	strToTimePoint(const std::string& str, const std::string& line);
 	uint64_t		strToPrice(std::string& str);
+
+	bool			validate_date(const std::string& str, const std::string& line);
 };
 
 #endif

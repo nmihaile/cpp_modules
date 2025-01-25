@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/24 15:41:36 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:38:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	BitcoinExchange::loadPriceTable(void)
 
 	fs.open("data.csv");
 	if (fs.is_open() == false)
-		throw ( std::runtime_error("Failed to open price data, provide a valid data.csv file.") );
+		throw ( std::runtime_error("Failed to open data.csv, provide a valid data.csv file with read permissions.") );
 	if (fs.good() == false)
 		throw ( std::runtime_error("The file data.csv is not in a good state.") );
 
@@ -58,7 +58,8 @@ void	BitcoinExchange::loadPriceTable(void)
 		throw ( std::runtime_error("Invalid header in data.csv, expected: date,exchange_rate") );
 
 	while (std::getline(fs, line))
-		processEntry(splitCSVData(line), line);
+		if (!line.empty() && line[0] != '\n')
+			processEntry(splitCSVData(line), line);
 
 	fs.close();
 }
@@ -78,24 +79,31 @@ void	BitcoinExchange::processEntry(t_str_pair pair, std::string& line)
 	price_table[strToTimePoint(pair.date, line).time_since_epoch().count()] = strToPrice(pair.price);
 }
 
-BitcoinExchange::t_str_pair		BitcoinExchange::splitCSVData(std::string& str)
+BitcoinExchange::t_str_pair		BitcoinExchange::splitCSVData(std::string& line)
 {
 	t_str_pair	pair;
 
-	std::size_t	pos = str.find(',');
-	if (pos == std::string::npos)
-		throw ( std::runtime_error("Invalid input: dilimiter missing: <" + str + ">") );
+	// delete all isspaces of line
+	line.erase(std::remove_if(line.begin(), line.end(), [](char c){
+		return (std::isspace(c));
+	}), line.end());
 
-	pair.date = str.substr(0, pos);
-	pair.price = str.substr(pos + 1);
+	std::size_t	pos = line.find(',');
+	if (pos == std::string::npos)
+		throw ( std::runtime_error("Invalid input: delimiter missing: <" + line + ">") );
+
+	pair.date = line.substr(0, pos);
+	pair.price = line.substr(pos + 1);
 
 	return (pair);
 }
 
-BitcoinExchange::t_time_point	BitcoinExchange::strToTimePoint(std::string& str, std::string& line)
+BitcoinExchange::t_time_point	BitcoinExchange::strToTimePoint(const std::string& str, const std::string& line)
 {
 	std::tm	time = {};
 	std::stringstream is(str);
+
+	validate_date(str, line);
 
 	// convert str to tm
 	is >> std::get_time(&time, "%Y-%m-%d");
@@ -120,4 +128,34 @@ uint64_t	BitcoinExchange::strToPrice(std::string& str)
 {
 	(void) str;
 	return (0);
+}
+
+bool	BitcoinExchange::validate_date(const std::string& str, const std::string& line)
+{
+	if (str.length() != 10)
+		throw ( std::runtime_error("Invalid length of date: <" + line + ">") );
+
+	for (std::string::const_iterator it = str.cbegin(); it < str.cend(); ++it)
+	{
+		if (it == str.cbegin() + 4 || it == str.cbegin() + 7)
+		{
+			if (*it !=  '-')
+				throw ( std::runtime_error("Inavlid date, requires dash between year, month and day: <" + line + ">") );
+			++it;
+		}
+		if (std::isdigit(*it) == false)
+			throw ( std::runtime_error("Invalid date, non digit found: <" + line + ">") );
+	}
+
+	std::stringstream	is;
+
+	is = std::stringstream(str.substr(5, 2));	int month;	is >> month;
+	if (month < 1 || month > 12)
+		throw ( std::runtime_error("Invalid month in date: <" + line + ">") );
+
+	is = std::stringstream(str.substr(8, 2));	int day;	is >> day;
+	if (day < 1 || day > 31)
+		throw ( std::runtime_error("Invalid day in date: <" + line + ">") );
+
+	return (true);
 }
