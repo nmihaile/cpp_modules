@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 13:47:32 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 14:50:49 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ private:
 
 	void			processEntry(BitcoinExchange::Input& input);
 	void			splitCSVData(BitcoinExchange::Input& input);
+
 	t_time_point	strToTimePoint(BitcoinExchange::Input& input);
 	uint64_t		strToPrice(std::string& str);
+	void			trimWhitespaces(std::string& str);
 
 	bool			validate_date(BitcoinExchange::Input& input);
 };

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 13:53:39 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 15:06:56 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,6 @@ void	BitcoinExchange::processEntry(BitcoinExchange::Input& input)
 
 void	BitcoinExchange::splitCSVData(BitcoinExchange::Input& input)
 {
-	// delete all isspaces of line
-	input.line.erase(std::remove_if(input.line.begin(), input.line.end(), [](char c){
-		return (std::isspace(c));
-	}), input.line.end());
 
 	std::size_t	pos = input.line.find(',');
 	if (pos == std::string::npos)
@@ -100,6 +96,10 @@ void	BitcoinExchange::splitCSVData(BitcoinExchange::Input& input)
 
 	input.date = input.line.substr(0, pos);
 	input.price = input.line.substr(pos + 1);
+
+	// delete leadind and tailing whitespaces of input.line
+	trimWhitespaces(input.date);
+	trimWhitespaces(input.price);
 }
 
 BitcoinExchange::t_time_point	BitcoinExchange::strToTimePoint(BitcoinExchange::Input& input)
@@ -132,6 +132,19 @@ uint64_t	BitcoinExchange::strToPrice(std::string& str)
 {
 	(void) str;
 	return (0);
+}
+
+void	BitcoinExchange::trimWhitespaces(std::string& str)
+{
+	std::string::iterator	start	= str.begin();
+	std::string::iterator	end		= str.end();
+
+	while (start != end && std::isspace(*start))
+		++start;
+	while (end != start && std::isspace(*(end - 1)))
+		--end;
+	
+	str = std::string(start, end);
 }
 
 bool	BitcoinExchange::validate_date(BitcoinExchange::Input& input)
