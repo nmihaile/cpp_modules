@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:50:17 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 13:49:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 15:09:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,54 @@ void	test_invalid_date_month_to_low(void)
 	system("rm -f month_low_data.csv");
 }
 
+void	test_empty_lines_in_data_csv(void)
+{
+	system("echo \"date,exchange_rate\n\n2009-01-01,500\n\n2009-01-02,600\n\n\n\n\n\n\n2009-01-03,700\n\" > empty_lines_in_data.csv");
+	try
+	{
+		BitcoinExchange btcEx;
+		btcEx.loadPriceTable("empty_lines_in_data.csv");
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+	system("rm -f empty_lines_in_data.csv");
+}
+
+void	test_whitespaces_in_data_csv_01(void)
+{
+	system("echo \"date,exchange_rate\n2009-01-01 \t\v\f\r,500\n2009-01-02,600\n2009-01-03,700\n\" > whitespaces_in_data.csv");
+	try
+	{
+		BitcoinExchange btcEx;
+		btcEx.loadPriceTable("whitespaces_in_data.csv");
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+	system("rm -f whitespaces_in_data.csv");
+}
+
+void	test_whitespaces_in_data_csv_02(void)
+{
+	system("echo \"date,exchange_rate\n2 0\t0\v9\f-\r0 1-0 1 ,500\n2009-01-02,6002009-01-03,700\n\" > whitespaces_in_data.csv");
+	try
+	{
+		BitcoinExchange btcEx;
+		btcEx.loadPriceTable("whitespaces_in_data.csv");
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+	system("rm -f whitespaces_in_data.csv");
+}
+
+void	test_whitespaces_in_data_csv_03(void)
+{
+	system("echo \"date,exchange_rate\n2009-01-01,500\n2009-01-02,60 \t\v\f\r0\n2009-01-03,700\n\" > whitespaces_in_data.csv");
+	try
+	{
+		BitcoinExchange btcEx;
+		btcEx.loadPriceTable("whitespaces_in_data.csv");
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+	system("rm -f whitespaces_in_data.csv");
+}
+
 int	main(void)
 {
 
@@ -203,6 +251,10 @@ int	main(void)
 	TEST(test_invalid_date_month_to_high, "Invalid month in date: <2009-13-01,500>\n(line: 2)\n");
 	TEST(test_invalid_date_day_to_low, "Invalid day in date: <2009-12-00,500>\n(line: 2)\n");
 	TEST(test_invalid_date_month_to_low, "Invalid month in date: <2009-00-01,500>\n(line: 2)\n");
+	TEST(test_empty_lines_in_data_csv, "");
+	TEST(test_whitespaces_in_data_csv_01, "");
+	TEST(test_whitespaces_in_data_csv_02, "Invalid length of date: <2 0\t0\v9\f-\r0 1-0 1 ,500>\n(line: 2)\n");
+// TEST(test_whitespaces_in_data_csv_03, "");
 
 	print_test_result();
 
