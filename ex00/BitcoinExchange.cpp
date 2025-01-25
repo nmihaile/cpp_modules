@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 17:20:16 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:36:27 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,13 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& rhs)
 
 void	BitcoinExchange::loadPriceTable(std::string _dataFile)
 {
-	std::ifstream	fs;
-
-	m_dataFile = _dataFile;
-
-	fs.open(m_dataFile);
-	if (fs.is_open() == false)
-		throw ( std::runtime_error("Failed to open " + m_dataFile + ", provide a valid " + m_dataFile + " file with read permissions.") );
-	if (fs.good() == false)
-		throw ( std::runtime_error("The file " + m_dataFile + " is not in a good state.") );
+	std::ifstream fs = openFile(_dataFile);
 
 	BitcoinExchange::Input	input;
 	input.line_nbr = 1;
 	std::getline(fs, input.line);
 	if (input.line != "date,exchange_rate")
-		throw ( std::runtime_error("Invalid header in " + m_dataFile + ", expected: date,exchange_rate" + input.getLineNbr()) );
+		throw ( std::runtime_error("Invalid header in " + _dataFile + ", expected: date,exchange_rate" + input.getLineNbr()) );
 
 	while (std::getline(fs, input.line))
 	{
@@ -68,6 +60,11 @@ void	BitcoinExchange::loadPriceTable(std::string _dataFile)
 	}
 
 	fs.close();
+}
+
+void	BitcoinExchange::evaluateInputFile(std::string _inputFile)
+{
+	std::ifstream fs = openFile(_inputFile);
 }
 
 
@@ -100,6 +97,19 @@ void	BitcoinExchange::splitCSVData(BitcoinExchange::Input& input)
 	// delete leadind and tailing whitespaces of input.line
 	trimWhitespaces(input.date);
 	trimWhitespaces(input.price);
+}
+
+std::ifstream	BitcoinExchange::openFile(const std::string _file)
+{
+	std::ifstream	fs;
+
+	fs.open(_file);
+	if (fs.is_open() == false)
+		throw ( std::runtime_error("Failed to open " + _file + ", provide a valid file " + _file + " with read permissions.") );
+	if (fs.good() == false)
+		throw ( std::runtime_error("The file " + _file + " is not in a good state.") );
+
+	return (fs);
 }
 
 BitcoinExchange::t_time_point	BitcoinExchange::strToTimePoint(BitcoinExchange::Input& input)

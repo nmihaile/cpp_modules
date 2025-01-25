@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:50:17 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 17:02:39 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:37:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,8 +273,8 @@ int	main(void)
 {
 
 	TEST(test_instantiating_btcEx, "");
-	TEST(test_open_data_csv_missing_file, "Failed to open missing_data.csv, provide a valid missing_data.csv file with read permissions.\n");
-	TEST(test_open_data_csv_without_permissions, "Failed to open data.csv, provide a valid data.csv file with read permissions.\n");
+	TEST(test_open_data_csv_missing_file, "Failed to open missing_data.csv, provide a valid file missing_data.csv with read permissions.\n");
+	TEST(test_open_data_csv_without_permissions, "Failed to open data.csv, provide a valid file data.csv with read permissions.\n");
 	TEST(test_inavlid_header_of_data_csv, "Invalid header in header_data.csv, expected: date,exchange_rate\n(line: 1)\n");
 	TEST(test_missing_delimiter, "Invalid input: delimiter missing: <2009-01-021000>\n(line: 2)\n");
 	TEST(test_empty_date, "Invalid input: empty date: <,1000>\n(line: 2)\n");

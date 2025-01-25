@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 15:23:51 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:32:34 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ public:
 	BitcoinExchange&	operator=(const BitcoinExchange& rhs);
 
 	void	loadPriceTable(std::string _dataFile);
+	void	evaluateInputFile(std::string _inputFile);
 
 private:
 	class Input
@@ -47,12 +48,12 @@ private:
 		const std::string	getLineNbr(void);
 	};
 
-	std::string						m_dataFile;
 	std::map<long long, uint64_t>	m_price_table;
 
 	void			processEntry(BitcoinExchange::Input& input);
 	void			splitCSVData(BitcoinExchange::Input& input);
 
+	std::ifstream	openFile(const std::string _file);
 	t_time_point	strToTimePoint(BitcoinExchange::Input& input);
 	uint64_t		strToPrice(BitcoinExchange::Input& input);
 	void			trimWhitespaces(std::string& str);
