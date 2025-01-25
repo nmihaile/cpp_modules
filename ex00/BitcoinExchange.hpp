@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 12:50:21 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 13:47:32 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,25 @@ public:
 	void	loadPriceTable(std::string _dataFile);
 
 private:
-	typedef struct s_str_pair
+	class Input
 	{
+	public:
+		std::string	line;
 		std::string	date;
 		std::string	price;
-	} t_str_pair;
+		std::size_t	line_nbr;
+		const std::string	getLineNbr(void);
+	};
 
 	std::string						m_dataFile;
 	std::map<long long, uint64_t>	m_price_table;
 
-	void			processEntry(t_str_pair pair, std::string& line);
-	t_str_pair		splitCSVData(std::string& line);
-	t_time_point	strToTimePoint(const std::string& str, const std::string& line);
+	void			processEntry(BitcoinExchange::Input& input);
+	void			splitCSVData(BitcoinExchange::Input& input);
+	t_time_point	strToTimePoint(BitcoinExchange::Input& input);
 	uint64_t		strToPrice(std::string& str);
 
-	bool			validate_date(const std::string& str, const std::string& line);
+	bool			validate_date(BitcoinExchange::Input& input);
 };
 
 #endif
