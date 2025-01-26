@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 18:30:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/25 19:17:46 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 #define BTCEX_GRAY "\033[90m"
 #define BTCEX_LIGHTRED "\033[91m"
+#define BTCEX_LIGHTGREEN "\033[92m"
 #define BTCEX_LIGHTCYAN "\033[96m"
 #define BTCEX_RESET "\033[0m"
 
@@ -44,6 +45,12 @@ public:
 	void	evaluateInputFile(std::string _inputFile);
 
 private:
+	typedef enum e_monetary_type
+	{
+		BTCEX_PRICE,
+		BTCEX_AMOUNT
+	}	t_monetary_type;
+	
 	class Input
 	{
 	public:
@@ -62,11 +69,12 @@ private:
 
 	std::ifstream	openFile(const std::string _file);
 	t_time_point	strToTimePoint(BitcoinExchange::Input& input);
-	uint64_t		strToPrice(BitcoinExchange::Input& input);
+	uint64_t		strToPrice(BitcoinExchange::Input& input, t_monetary_type mtype);
 	void			trimWhitespaces(std::string& str);
 
 	bool			validate_date(BitcoinExchange::Input& input);
 	bool			validate_price(BitcoinExchange::Input& input);
+	bool			validate_amount(BitcoinExchange::Input& input);
 };
 
 #endif
