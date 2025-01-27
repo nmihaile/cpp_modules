@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:22:04 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/27 15:06:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:48:29 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <sstream>
 #include <ctime>
 #include <stdexcept>
+#include <iomanip>
 
 class Date
 {

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:22:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/27 17:12:37 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:50:29 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ std::string	Date::toString(void) const
 {
 	std::stringstream	ss;
 
-	ss << m_date.tm_year << '-' << (m_date.tm_mon + 1) << '-' << m_date.tm_mday;
+	ss	<< std::setw(4) << std::setfill('0') <<  m_date.tm_year + 1900 << '-'
+		<< std::setw(2) << (m_date.tm_mon + 1) << '-'
+		<< std::setw(2) << m_date.tm_mday;
 	return (ss.str());
 }
 
