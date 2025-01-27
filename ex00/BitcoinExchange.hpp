@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 19:17:46 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:18:41 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <cctype>
 #include <algorithm>
 #include <iostream>
+#include "Date.hpp"
 
 #define BTCEX_GRAY "\033[90m"
 #define BTCEX_LIGHTRED "\033[91m"
@@ -55,24 +56,25 @@ private:
 	{
 	public:
 		std::string	line;
-		std::string	date;
-		std::string	price;
+		std::string	date_str;
+		std::string	monetary_str;
 		std::size_t	line_nbr;
+
+		Date	date;
+
 		const std::string	getLineNbr(void);
 	};
 
-	std::map<long long, uint64_t>	m_price_table;
+	std::map<std::time_t, uint64_t>	m_price_table;
 
 	void			processEntry(BitcoinExchange::Input& input);
 	void			evaluateEntry(BitcoinExchange::Input& input);
 	void			splitEntry(BitcoinExchange::Input& input, char delimiter);
 
 	std::ifstream	openFile(const std::string _file);
-	t_time_point	strToTimePoint(BitcoinExchange::Input& input);
 	uint64_t		strToPrice(BitcoinExchange::Input& input, t_monetary_type mtype);
 	void			trimWhitespaces(std::string& str);
 
-	bool			validate_date(BitcoinExchange::Input& input);
 	bool			validate_price(BitcoinExchange::Input& input);
 	bool			validate_amount(BitcoinExchange::Input& input);
 };

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/26 11:16:31 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:17:12 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,37 @@ void	BitcoinExchange::processEntry(BitcoinExchange::Input& input)
 {
 	splitEntry(input, ',');
 
-	if (input.date.empty())
+	if (input.date_str.empty())
 		throw ( std::runtime_error("Invalid input: empty date: <" + input.line + ">" + input.getLineNbr()) );
-	if (input.price.empty())
+	if (input.monetary_str.empty())
 		throw ( std::runtime_error("Invalid input: empty price: <" + input.line + ">" + input.getLineNbr()) );
 	
-	m_price_table[strToTimePoint(input).time_since_epoch().count()] = strToPrice(input, BTCEX_PRICE);
+	try
+	{
+		input.date = Date(input.date_str);
+	}
+	catch(const std::exception& e)
+	{
+		throw ( std::invalid_argument("Invalid input: " + std::string(e.what()) + " <" + input.line + ">" + input.getLineNbr()) );
+	}
+
+	m_price_table[input.date.toUnixTimestamp()] = strToPrice(input, BTCEX_PRICE);
 }
 
 void	BitcoinExchange::evaluateEntry(BitcoinExchange::Input& input)
 {
-	t_time_point	time_point;
-	uint64_t		amount;
+	// time_t		timestamp;
+	uint64_t	amount;
 
 	try
 	{
 		splitEntry(input, '|');
-		if (input.date.empty())
+		if (input.date_str.empty())
 			throw ( std::runtime_error("empty date: <" + input.line + ">") );
-		if (input.price.empty())
+		if (input.monetary_str.empty())
 			throw ( std::runtime_error("empty amount: <" + input.line + ">") );
 
-		time_point	= strToTimePoint(input);
+		// timestamp	= strToUnixTimestamp(input);
 		amount		= strToPrice(input, BTCEX_AMOUNT);
 
 		if (amount > 1000 * 100)
@@ -143,12 +152,12 @@ void	BitcoinExchange::splitEntry(BitcoinExchange::Input& input, char delimiter)
 	if (pos == std::string::npos)
 		throw ( std::runtime_error("Invalid input: delimiter missing: <" + input.line + ">" + input.getLineNbr()) );
 
-	input.date = input.line.substr(0, pos);
-	input.price = input.line.substr(pos + 1);
+	input.date_str = input.line.substr(0, pos);
+	input.monetary_str = input.line.substr(pos + 1);
 
 	// delete leadind and tailing whitespaces of input.line
-	trimWhitespaces(input.date);
-	trimWhitespaces(input.price);
+	trimWhitespaces(input.date_str);
+	trimWhitespaces(input.monetary_str);
 }
 
 std::ifstream	BitcoinExchange::openFile(const std::string _file)
@@ -164,32 +173,6 @@ std::ifstream	BitcoinExchange::openFile(const std::string _file)
 	return (fs);
 }
 
-BitcoinExchange::t_time_point	BitcoinExchange::strToTimePoint(BitcoinExchange::Input& input)
-{
-	std::tm	time = {};
-
-	validate_date(input);
-
-	// convert str to tm
-	std::stringstream is(input.date);
-	is >> std::get_time(&time, "%Y-%m-%d");
-	if (is.fail())
-		throw ( std::runtime_error("Inavlid date format: expected YYYY-MM-DD: <" + input.line + ">" + input.getLineNbr()) );
-
-	// validate parsed Date
-	char	buff[11] = {};
-	std::strftime(buff, 11, "%Y-%m-%d", &time);
-	if (buff != input.date)
-		throw ( std::runtime_error("Failed to convert date to time: <" + input.date + ">" + input.getLineNbr()) );
-
-	// convert to time_t and return as time_point
-	std::time_t	tt = std::mktime(&time);
-	if (tt == -1)
-		throw ( std::runtime_error("Failed to convert to time_t: <" + input.date + ">" + input.getLineNbr()) );
-
-	return (std::chrono::system_clock::from_time_t(tt));
-}
-
 uint64_t	BitcoinExchange::strToPrice(BitcoinExchange::Input& input, t_monetary_type mtype)
 {
 	if (mtype == BTCEX_PRICE)
@@ -197,12 +180,12 @@ uint64_t	BitcoinExchange::strToPrice(BitcoinExchange::Input& input, t_monetary_t
 	else
 		validate_amount(input);
 
-	std::stringstream	ss(input.price);
+	std::stringstream	ss(input.monetary_str);
 	float				fvalue;
 
 	ss >> fvalue;
 	if (ss.fail())
-		throw( std::runtime_error("Failed to convert price: <" + input.price + ">" + input.getLineNbr()) );
+		throw( std::runtime_error("Failed to convert price: <" + input.monetary_str + ">" + input.getLineNbr()) );
 	
 	uint64_t	value;
 	value = static_cast<uint64_t>(fvalue * 100.0f);
@@ -223,40 +206,11 @@ void	BitcoinExchange::trimWhitespaces(std::string& str)
 	str = std::string(start, end);
 }
 
-bool	BitcoinExchange::validate_date(BitcoinExchange::Input& input)
-{
-	if (input.date.length() != 10)
-		throw ( std::runtime_error("Invalid length of date: <" + input.line + ">" + input.getLineNbr()) );
-
-	for (std::string::iterator it = input.date.begin(); it < input.date.end(); ++it)
-	{
-		if (it == input.date.begin() + 4 || it == input.date.begin() + 7)
-		{
-			if (*it !=  '-')
-				throw ( std::runtime_error("Inavlid date, requires dash between year, month and day: <" + input.line + ">" + input.getLineNbr()) );
-			++it;
-		}
-		if (std::isdigit(*it) == false)
-			throw ( std::runtime_error("Invalid date, non digit found: <" + input.line + ">" + input.getLineNbr()) );
-	}
-
-	std::stringstream	is;
-	is = std::stringstream(input.date.substr(5, 2));	int month;	is >> month;
-	if (month < 1 || month > 12)
-		throw ( std::runtime_error("Invalid month in date: <" + input.line + ">" + input.getLineNbr()) );
-
-	is = std::stringstream(input.date.substr(8, 2));	int day;	is >> day;
-	if (day < 1 || day > 31)
-		throw ( std::runtime_error("Invalid day in date: <" + input.line + ">" + input.getLineNbr()) );
-
-	return (true);
-}
-
 // The subject informs: either a float or a positive integer
 // for the input_db: between 0 and 1000
 bool	BitcoinExchange::validate_price(BitcoinExchange::Input& input)
 {
-	for (std::string::iterator it = input.price.begin(); it < input.price.end(); ++it)
+	for (std::string::iterator it = input.monetary_str.begin(); it < input.monetary_str.end(); ++it)
 		if (!std::isdigit(*it) && !(*it == '.'))
 			throw ( std::runtime_error("Invalid price: <" + input.line + ">" + input.getLineNbr()) );
 
@@ -265,10 +219,10 @@ bool	BitcoinExchange::validate_price(BitcoinExchange::Input& input)
 
 bool	BitcoinExchange::validate_amount(BitcoinExchange::Input& input)
 {
-	if (input.price[0] == '-')
+	if (input.monetary_str[0] == '-')
 		throw ( std::runtime_error("Invalid input: negative amount: <" + input.line + ">" + input.getLineNbr()) );
 
-	for (std::string::iterator it = input.price.begin(); it < input.price.end(); ++it)
+	for (std::string::iterator it = input.monetary_str.begin(); it < input.monetary_str.end(); ++it)
 		if (!std::isdigit(*it) && !(*it == '.'))
 			throw ( std::runtime_error("Invalid amount: <" + input.line + ">" + input.getLineNbr()) );
 
