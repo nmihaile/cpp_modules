@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/27 17:57:21 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:17:55 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ MonetaryValue::MonetaryValue() : m_value(0)
 {
 }
 
-MonetaryValue::MonetaryValue(uint64_t& _value) : m_value(_value)
+MonetaryValue::MonetaryValue(uint64_t _value) : m_value(_value)
 {
 }
 
@@ -41,6 +41,12 @@ MonetaryValue&	MonetaryValue::operator=(const MonetaryValue& rhs)
 	return (*this);
 }
 
+uint64_t	MonetaryValue::operator*=(const uint64_t& rhs)
+{
+	m_value = (m_value * rhs) / 100;
+	return (m_value);
+}
+
 uint64_t	MonetaryValue::getValueCents(void) const
 {
 	return (m_value);
@@ -54,7 +60,7 @@ double		MonetaryValue::getValueDouble(void) const
 std::string	MonetaryValue::getValueStr(void) const
 {
 	std::ostringstream	os;
-	os << m_value / 100 << std::setw(2) << std::setfill('0') << m_value % 100;
+	os << (m_value / 100) << '.' << std::setw(2) << std::setfill('0') << (m_value % 100);
 	return (os.str());
 }
 
@@ -87,5 +93,5 @@ void	MonetaryValue::parseMonetaryValueStr(std::string& _value)
 	if (parsedValue < 0)
 		throw ( std::runtime_error("negative monetary value not allowd") );
 		
-	m_value = static_cast<uint64_t>(parsedValue * 100.0);
+	m_value = static_cast<uint64_t>(parsedValue * 100.00);
 }
