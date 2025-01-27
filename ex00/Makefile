@@ -3,11 +3,11 @@ NAME		=	btc
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -g
 
-SRCS		=	main.cpp utils.cpp BitcoinExchange.cpp
+SRCS		=	main.cpp utils.cpp BitcoinExchange.cpp Date.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 TNAME		=	btctest
-TSRCS		=	test/test.cpp test/tester.cpp utils.cpp BitcoinExchange.cpp
+TSRCS		=	test/test.cpp test/tester.cpp utils.cpp BitcoinExchange.cpp Date.cpp
 TOBJS		=	$(TSRCS:.cpp=.o)
 
 all: $(NAME)

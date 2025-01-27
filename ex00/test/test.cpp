@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:50:17 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 17:37:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:46:58 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,17 +279,17 @@ int	main(void)
 	TEST(test_missing_delimiter, "Invalid input: delimiter missing: <2009-01-021000>\n(line: 2)\n");
 	TEST(test_empty_date, "Invalid input: empty date: <,1000>\n(line: 2)\n");
 	TEST(test_empty_price, "Invalid input: empty price: <2009-01-04,>\n(line: 2)\n");
-	TEST(test_invalid_date_format_01_ordering, "Invalid month in date: <2009-30-01,500>\n(line: 2)\n");
-	TEST(test_invalid_date_format_02_short_year, "Invalid length of date: <09-01-01,500>\n(line: 2)\n");
-	TEST(test_invalid_date_format_03_non_digit, "Invalid date, non digit found: <2009-0a-01,500>\n(line: 2)\n");
-	TEST(test_invalid_date_format_04_no_dashes, "Inavlid date, requires dash between year, month and day: <2009-01_01,500>\n(line: 2)\n");
-	TEST(test_invalid_date_day_to_high, "Invalid day in date: <2009-01-32,500>\n(line: 2)\n");
-	TEST(test_invalid_date_month_to_high, "Invalid month in date: <2009-13-01,500>\n(line: 2)\n");
-	TEST(test_invalid_date_day_to_low, "Invalid day in date: <2009-12-00,500>\n(line: 2)\n");
-	TEST(test_invalid_date_month_to_low, "Invalid month in date: <2009-00-01,500>\n(line: 2)\n");
+	TEST(test_invalid_date_format_01_ordering, "Invalid input: month out of range 01-12 <2009-30-01,500>\n(line: 2)\n");
+	TEST(test_invalid_date_format_02_short_year, "Invalid input: wrong length of date (expecet format YYYY-MM-DD) <09-01-01,500>\n(line: 2)\n");
+	TEST(test_invalid_date_format_03_non_digit, "Invalid input: wrong delimiter in date <2009-0a-01,500>\n(line: 2)\n");
+	TEST(test_invalid_date_format_04_no_dashes, "Invalid input: wrong delimiter in date <2009-01_01,500>\n(line: 2)\n");
+	TEST(test_invalid_date_day_to_high, "Invalid input: day out of range 01-31 <2009-01-32,500>\n(line: 2)\n");
+	TEST(test_invalid_date_month_to_high, "Invalid input: month out of range 01-12 <2009-13-01,500>\n(line: 2)\n");
+	TEST(test_invalid_date_day_to_low, "Invalid input: day out of range 01-31 <2009-12-00,500>\n(line: 2)\n");
+	TEST(test_invalid_date_month_to_low, "Invalid input: month out of range 01-12 <2009-00-01,500>\n(line: 2)\n");
 	TEST(test_empty_lines_in_data_csv, "");
 	TEST(test_whitespaces_in_data_csv_01, "");
-	TEST(test_whitespaces_in_data_csv_02, "Invalid length of date: <2 0\t0\v9\f-\r0 1-0 1 ,500>\n(line: 2)\n");
+	TEST(test_whitespaces_in_data_csv_02, "Invalid input: wrong length of date (expecet format YYYY-MM-DD) <2 0\t0\v9\f-\r0 1-0 1 ,500>\n(line: 2)\n");
 	TEST(test_whitespaces_in_data_csv_03, "Invalid price: <2009-01-02,60 \t\v\f\r0>\n(line: 3)\n");
 	TEST(test_invalid_price_characters_01, "Invalid price: <2009-01-02,6a00>\n(line: 3)\n");
 	TEST(test_invalid_price_characters_02, "Invalid price: <2009-01-02,60.1k5>\n(line: 3)\n");
