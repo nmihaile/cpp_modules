@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/27 19:17:55 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:59:32 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,16 @@ MonetaryValue&	MonetaryValue::operator=(const MonetaryValue& rhs)
 	return (*this);
 }
 
-uint64_t	MonetaryValue::operator*=(const uint64_t& rhs)
+MonetaryValue&	MonetaryValue::operator*=(const MonetaryValue& rhs)
 {
-	m_value = (m_value * rhs) / 100;
-	return (m_value);
+	m_value = (m_value * rhs.m_value) / 100;
+	return (*this);
+}
+
+MonetaryValue	MonetaryValue::operator*(const MonetaryValue& rhs)
+{
+	uint64_t result = (m_value * rhs.m_value) / 100;
+	return ( MonetaryValue(result) );
 }
 
 uint64_t	MonetaryValue::getValueCents(void) const

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:59 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/27 19:12:00 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:00:48 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ public:
 	~MonetaryValue();
 
 	MonetaryValue&	operator=(const MonetaryValue& rhs);
-	uint64_t		operator*=(const uint64_t& rhs);
+	MonetaryValue&	operator*=(const MonetaryValue& rhs);
+	MonetaryValue	operator*(const MonetaryValue& rhs);
 
-	uint64_t	getValueCents(void) const;
-	double		getValueDouble(void) const;
-	std::string	getValueStr(void) const;
+	uint64_t		getValueCents(void) const;
+	double			getValueDouble(void) const;
+	std::string		getValueStr(void) const;
 	
 private:
 	uint64_t	m_value;
