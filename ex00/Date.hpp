@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:22:04 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/27 18:48:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:14:01 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ public:
 	Date&		operator=(const Date& rhs);
 	std::time_t	toUnixTimestamp();
 	std::string	toString(void) const;
+
+	bool		isLeapYear() const;
 	
 private:
 	std::tm		m_date;
 
 	void	parseDateStr(std::string& _date);
 	bool	validateDate() const;
-	bool	isLeapYear(int year) const;
 };
 
 #endif

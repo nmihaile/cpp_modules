@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:22:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/28 12:42:38 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:14:57 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ std::string	Date::toString(void) const
 		<< std::setw(2) << (m_date.tm_mon + 1) << '-'
 		<< std::setw(2) << m_date.tm_mday;
 	return (ss.str());
+}
+
+bool	Date::isLeapYear() const
+{
+	int _year = m_date.tm_year + 1900;
+	return (( _year % 4 == 0 && (_year % 100 != 0 || _year % 400 == 0) ));
 }
 
 
@@ -102,17 +108,11 @@ bool	Date::validateDate() const
 	if (m_date.tm_mon < 0 || m_date.tm_mon > 11)
 		throw ( std::invalid_argument("month out of range 01-12") );
 
-	if (isLeapYear(m_date.tm_year))
+	if (isLeapYear())
 		days_in_month[1] = 29;
 
 	if (m_date.tm_mday < 1 || m_date.tm_mday > days_in_month[m_date.tm_mon])
 		throw ( std::invalid_argument("day out of range 01-" + std::to_string(days_in_month[m_date.tm_mon])) );
 
 	return (true);
-}
-
-bool	Date::isLeapYear(int year) const
-{
-	year += 1900;
-	return (( year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) ));
 }
