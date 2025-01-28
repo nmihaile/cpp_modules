@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:22:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/27 18:51:52 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:42:38 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,5 @@ bool	Date::validateDate() const
 bool	Date::isLeapYear(int year) const
 {
 	year += 1900;
-	return (( year % 4 == 0 && (year % 100 != 0 && year % 400 == 0) ));
+	return (( year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) ));
 }
