@@ -6,12 +6,18 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:49:15 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/25 17:26:05 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:46:35 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.hpp"
 #include "BitcoinExchange.hpp"
+
+void	exit_with_msg(std::string msg, int exit_code)
+{
+	std::cout << msg << std::endl;
+	exit(exit_code);
+}
 
 int	main(int ac, char **av)
 {
@@ -26,7 +32,7 @@ int	main(int ac, char **av)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "\033[91m" << e.what() << "\033[0m" << '\n';
+		std::cout << "\033[91m" << e.what() << "\033[0m" << '\n';
 		exit(1);
 	}	
 
