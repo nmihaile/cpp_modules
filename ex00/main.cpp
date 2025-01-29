@@ -6,11 +6,10 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:49:15 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/28 17:49:27 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:03:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.hpp"
 #include "BitcoinExchange.hpp"
 
 void	exit_with_msg(std::string msg, int exit_code)
