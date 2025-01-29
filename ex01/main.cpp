@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:03:18 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 15:20:54 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:12:06 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@ int	main(int ac, char **av)
 	if (ac != 2)	
 		exit_with_msg("usage: ./RPN \"expression\"", 0);
 
-	RPN	rpn;
-	std::cout << rpn.evaluate(av[1]) << std::endl;
+	try
+	{
+		RPN	rpn;
+		std::cout << rpn.evaluate(av[1]) << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 
 	return (0);
 }
