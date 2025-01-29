@@ -23,7 +23,9 @@ fclean: clean
 re: fclean all
 
 t: $(NAME)
-	@./$(NAME) "1 2 +"
+# @./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
+	@./$(NAME) "7 7 * 7 -"
+# @./$(NAME) "1 2 +"
 
 rt: fclean all t
 
