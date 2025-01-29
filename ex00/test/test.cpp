@@ -6,14 +6,16 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:50:17 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/28 15:16:02 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:59:30 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
+#include <cstdint>
 #include "tester.hpp"
 #include "../BitcoinExchange.hpp"
 #include "../Date.hpp"
+#include "../MonetaryValue.hpp"
 
 void	test_instantiating_btcEx(void)
 {
@@ -310,6 +312,29 @@ void	test_Date_class_leap_years(void)
 	}
 }
 
+void	test_MonetaryValue_operator_overloads(void)
+{
+	try
+	{
+		MonetaryValue val1(static_cast<uint64_t>(200));
+		MonetaryValue val2(static_cast<uint64_t>(300));
+		MonetaryValue val3 = val1 * val2;
+		std::cout << val3.getValueStr();
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+}
+
+void	test_MonetaryValue_copyConstructor(void)
+{
+	try
+	{
+		MonetaryValue val1(static_cast<uint64_t>(245));
+		MonetaryValue val2(val1);
+		std::cout << val2.getValueStr();
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+}
+
 int	main(void)
 {
 
@@ -337,6 +362,8 @@ int	main(void)
 	TEST(test_MonetaryValue_multiple_decimal_points, "Invalid input: found multiple decimal points, only one allowed <2009-01-02,123.45.678>\n(line: 3)\n");
 	TEST(test_valid_MonetaryValue_characters, "");
 	TEST(test_Date_class_leap_years, "..................................................................................................................................................");
+	TEST(test_MonetaryValue_operator_overloads, "6.00");
+	TEST(test_MonetaryValue_copyConstructor, "2.45");
 
 	print_test_result();
 
