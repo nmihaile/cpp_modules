@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 12:03:18 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 15:20:54 by nmihaile         ###   ########.fr       */
+/*   Created: 2025/01/29 12:13:43 by nmihaile          #+#    #+#             */
+/*   Updated: 2025/01/29 15:22:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "RPN.hpp"
 
-void	exit_with_msg(std::string msg, int exit_code)
+RPN::RPN()
 {
-	std::cout << msg << std::endl;
-	exit(exit_code);
 }
 
-int	main(int ac, char **av)
+RPN::~RPN()
 {
-	if (ac != 2)	
-		exit_with_msg("usage: ./RPN \"expression\"", 0);
+}
 
-	RPN	rpn;
-	std::cout << rpn.evaluate(av[1]) << std::endl;
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+
+long long	RPN::evaluate(std::string expression)
+{
+	(void)expression;
 	return (0);
 }

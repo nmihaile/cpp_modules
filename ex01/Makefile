@@ -3,7 +3,7 @@ NAME		=	RPN
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
-SRCS		=	main.cpp
+SRCS		=	main.cpp RPN.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -23,7 +23,7 @@ fclean: clean
 re: fclean all
 
 t: $(NAME)
-	@./$(NAME)
+	@./$(NAME) "1 2 +"
 
 rt: fclean all t
 
