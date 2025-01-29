@@ -1,7 +1,7 @@
 
 NAME		=	btc
 CPP			=	c++
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -g
+CPPFLAGS	=	-Wall -Wextra -Werror -Ofast -std=c++11
 
 SRCS		=	main.cpp BitcoinExchange.cpp Date.cpp MonetaryValue.cpp
 OBJS		=	$(SRCS:.cpp=.o)
@@ -14,6 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
+	@strip $(NAME)
 
 %.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
