@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 11:45:58 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:55:10 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,5 +220,5 @@ void	BitcoinExchange::trimWhitespaces(std::string& str)
 
 const std::string	BitcoinExchange::Input::lineNbrToStr(void)
 {
-	return ( std::string("\n") + "(line: " + BTCEX_LIGHTCYAN + std::to_string(line_nbr) + BTCEX_LIGHTRED + ")" );
+	return ( std::string("\n") + "(line: " + std::to_string(line_nbr) + ")" );
 }
