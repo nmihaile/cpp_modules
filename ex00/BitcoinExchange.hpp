@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/27 16:18:41 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:15:26 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 #include <algorithm>
 #include <iostream>
 #include "Date.hpp"
+#include "MonetaryValue.hpp"
 
 #define BTCEX_GRAY "\033[90m"
+#define BTCEX_GREEN "\033[32m"
 #define BTCEX_LIGHTRED "\033[91m"
 #define BTCEX_LIGHTGREEN "\033[92m"
 #define BTCEX_LIGHTCYAN "\033[96m"
@@ -46,12 +48,6 @@ public:
 	void	evaluateInputFile(std::string _inputFile);
 
 private:
-	typedef enum e_monetary_type
-	{
-		BTCEX_PRICE,
-		BTCEX_AMOUNT
-	}	t_monetary_type;
-	
 	class Input
 	{
 	public:
@@ -60,11 +56,13 @@ private:
 		std::string	monetary_str;
 		std::size_t	line_nbr;
 
-		Date	date;
+		Date			date;
+		MonetaryValue	value;
 
-		const std::string	getLineNbr(void);
+		const std::string	lineNbrToStr(void);
 	};
 
+	std::string						m_dataFile;
 	std::map<std::time_t, uint64_t>	m_price_table;
 
 	void			processEntry(BitcoinExchange::Input& input);
@@ -72,11 +70,7 @@ private:
 	void			splitEntry(BitcoinExchange::Input& input, char delimiter);
 
 	std::ifstream	openFile(const std::string _file);
-	uint64_t		strToPrice(BitcoinExchange::Input& input, t_monetary_type mtype);
 	void			trimWhitespaces(std::string& str);
-
-	bool			validate_price(BitcoinExchange::Input& input);
-	bool			validate_amount(BitcoinExchange::Input& input);
 };
 
 #endif
