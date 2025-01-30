@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:13:43 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 16:23:00 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:43:20 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ long long	RPN::evaluate(std::string expression)
 		else
 			throw ( std::runtime_error(std::string("Error: invalid character: '") + c + '\'') );
 	}
+
+	if (m_stack.size() > 1)
+		throw ( std::runtime_error(std::string("Error: to many values in stack left")) );
+	else if (m_stack.size() < 1)
+		throw ( std::runtime_error(std::string("Error: no result stored in stack")) );
 
 	long long	result = m_stack.top();
 	m_stack.pop();
