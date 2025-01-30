@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 11:55:10 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:05:59 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,9 @@ void	BitcoinExchange::processEntry(BitcoinExchange::Input& input)
 		throw ( std::invalid_argument("Invalid input: " + std::string(e.what()) + " <" + input.line + ">" + input.lineNbrToStr()) );
 	}
 
-	m_price_table[input.date.toUnixTimestamp()] = input.value.getValueCents();
+	std::pair<std::map<std::time_t, uint64_t>::iterator, bool> ip = m_price_table.insert(std::pair<std::time_t, uint64_t>(input.date.toUnixTimestamp(), input.value.getValueCents()));
+	if (ip.second == false)
+		throw ( std::runtime_error("Invalid input: duplicate date in input database " + m_dataFile + ": <" + input.line + ">" + input.lineNbrToStr()) );
 }
 
 void	BitcoinExchange::evaluateEntry(BitcoinExchange::Input& input)

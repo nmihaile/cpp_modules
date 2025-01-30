@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 11:15:26 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:58:09 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <map>
+#include <utility>
 #include <chrono>
 #include <fstream>
 #include <stdexcept>
