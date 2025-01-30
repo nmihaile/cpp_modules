@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:13:43 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 17:43:20 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:14:53 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,3 @@ long long	RPN::div(void)
 
 	return (a / b);
 }
-
