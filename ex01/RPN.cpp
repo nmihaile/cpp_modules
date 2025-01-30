@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:13:43 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/30 15:14:53 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:08:42 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ long long	RPN::evaluate(std::string expression)
 	}
 
 	if (m_stack.size() > 1)
-		throw ( std::runtime_error(std::string("Error: to many values in stack left")) );
+		throw ( std::runtime_error(std::string("Error: too many values in stack left")) );
 	else if (m_stack.size() < 1)
 		throw ( std::runtime_error(std::string("Error: no result stored in stack")) );
 
