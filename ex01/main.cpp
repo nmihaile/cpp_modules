@@ -6,14 +6,14 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:03:18 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 16:12:06 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:45:18 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "RPN.hpp"
 
-void	exit_with_msg(std::string msg, int exit_code)
+void	exit_with_msg(const std::string msg, const int exit_code)
 {
 	std::cout << msg << std::endl;
 	exit(exit_code);

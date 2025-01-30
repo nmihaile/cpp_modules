@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:13:43 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/30 17:08:42 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:44:48 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ RPN::~RPN()
 /* ************************************************************************** */
 
 
-long long	RPN::evaluate(std::string expression)
+long long	RPN::evaluate(const std::string expression)
 {
 	std::stringstream	ss(expression);
 
@@ -79,7 +79,7 @@ long long	RPN::evaluate(std::string expression)
 /* ************************************************************************** */
 
 
-bool	RPN::isOperator(char c)
+bool	RPN::isOperator(const char c)
 {
 	return (c == '*' || c == '+' || c == '-' || c == '/');
 }
