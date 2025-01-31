@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:32:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/30 17:29:45 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:10:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(void)
 		{"7 7 * 7 -", "42"},
 		{"1 2 * 2 / 2 * 2 4 - +", "0"},
 		{"(1 + 1)", "Error: invalid character: '('\n"},
-		{"77 7 * 7 -", "Error: too many values in stack left\n"},
+		{"77 7 * 7 -", "Error: inavlid expression: too many values in stack left\n"},
 		{"77 7 * 7 - -", "-35"},
 		{"0 0 * ", "0"},
 		{"1 1 1 1 + + +", "4"},
@@ -43,7 +43,6 @@ int	main(void)
 		{"1 + 6", "Error: Not enougth operands for addition\n"},
 		{"1 - 6", "Error: Not enougth operands for subtraction\n"},
 		{"1 / 6", "Error: Not enougth operands for division\n"},
-
 
 	};
 
