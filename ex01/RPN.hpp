@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:13:44 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/30 17:44:39 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:44:23 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ public:
 private:
 	std::stack<long long>	m_stack;
 
-	bool		isOperator(const char c);
-	long long	mul(void);
-	long long	add(void);
-	long long	sub(void);
-	long long	div(void);
+	void	mul(void);
+	void	add(void);
+	void	sub(void);
+	void	div(void);
 };
 
 #endif
