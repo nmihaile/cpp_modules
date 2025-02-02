@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:32 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/02 12:12:42 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:47:52 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 
 	try
 	{
-		PmergeMe	pmergeme;
+		PmergeMe<std::vector<unsigned int>>	pmergeme;
 		pmergeme.parseArguments(ac - 1, &av[1]);
 		pmergeme.sort();
 	}

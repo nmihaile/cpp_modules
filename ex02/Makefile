@@ -20,7 +20,12 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+TEST_VALUES	=	5 4294967295 4 3 2 1
+
 t: $(NAME)
-	@./$(NAME) 5 4 3 2 1
+	@./$(NAME) $(TEST_VALUES)
+
+rt: re
+	@./$(NAME) $(TEST_VALUES)
 
 re: fclean all
