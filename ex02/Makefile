@@ -3,7 +3,7 @@ NAME		=	PmergeMe
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
-SRCS		=	main.cpp
+SRCS		=	main.cpp PmergeMe.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -19,5 +19,8 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+
+t: $(NAME)
+	@./$(NAME)
 
 re: fclean all

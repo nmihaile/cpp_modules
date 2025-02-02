@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 16:07:32 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/02 11:57:10 by nmihaile         ###   ########.fr       */
+/*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
+/*   Updated: 2025/02/02 11:55:11 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PmergeMe.hpp"
+#pragma once
+#ifndef PMERGEME_HPP
+#define PMERGEME_HPP
 
-int	main(void)
+class PmergeMe
 {
-	PmergeMe	pmergeme;
+public:
+	PmergeMe();
+	PmergeMe(const PmergeMe& other) = delete;
+	~PmergeMe();
+	PmergeMe&	operator=(const PmergeMe& rhs) = delete;
+private:
+};
 
-	return (0);
-}
+#endif
