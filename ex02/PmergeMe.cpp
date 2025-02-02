@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:24 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/02 12:05:25 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:13:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	PmergeMe::parseArguments(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
+
+	for (int i = 0; i < ac; ++i)
+		std::cout << av[i] << " ";
+
 }
 
 void	PmergeMe::sort()

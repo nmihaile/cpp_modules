@@ -21,6 +21,6 @@ fclean: clean
 	rm -f $(NAME)
 
 t: $(NAME)
-	@./$(NAME)
+	@./$(NAME) 5 4 3 2 1
 
 re: fclean all

@@ -6,13 +6,16 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/02 12:03:33 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:14:18 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
+
+
+#include <iostream>
 
 class PmergeMe
 {
