@@ -6,14 +6,14 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:32 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/02 15:47:52 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:10:57 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <exception>
 #include <string>
-#include "PmergeMe.hpp"
+#include "VectorPmergeMe.hpp"
 
 void	printf_exit(std::string msg, int exit_code)
 {
@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 
 	try
 	{
-		PmergeMe<std::vector<unsigned int>>	pmergeme;
+		VectorPmergeMe	pmergeme;
 		pmergeme.parseArguments(ac - 1, &av[1]);
 		pmergeme.sort();
 	}

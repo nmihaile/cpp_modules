@@ -3,7 +3,7 @@ NAME		=	PmergeMe
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
 
-SRCS		=	main.cpp PmergeMe.cpp
+SRCS		=	main.cpp PmergeMe.cpp VectorPmergeMe.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -20,7 +20,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-TEST_VALUES	=	5 4294967295 4 3 2 1
+TEST_VALUES		=	11 2 17 0 16 8 6 15 10 3 21 1 18 9
 
 t: $(NAME)
 	@./$(NAME) $(TEST_VALUES)
