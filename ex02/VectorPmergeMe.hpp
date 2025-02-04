@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/03 16:00:00 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/04 09:53:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "PmergeMe.hpp"
 
 #include <iomanip>
+#include "TailwindcssColors.h"
 
 class VectorPmergeMe : public PmergeMe<std::vector<unsigned int>>
 {
