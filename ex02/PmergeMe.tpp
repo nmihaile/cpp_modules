@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 11:48:17 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:41:55 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	PmergeMe<Container>::parseArguments(int ac, char **av)
 		if (ss.fail())
 			throw ( std::invalid_argument("Failed to convert argument into unsigned int: " + std::string(av[i])) );
 
-		m_container.push_back({value, static_cast<unsigned int>(i - 1)});
+		m_container.push_back({value, static_cast<unsigned int>(i - 1), std::numeric_limits<size_t>::max()});
 	}
 }
 

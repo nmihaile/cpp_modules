@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 12:43:12 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:12:37 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 			pairs.emplace_back(std::pair<Item, Item>(*curr, *next));
 		else
 			pairs.emplace_back(std::pair<Item, Item>(*next, *curr));
+		pairs.back().first.pidx = i;
 	}
 
 	// lets catch the winners
@@ -74,6 +75,52 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 	
 	// and recursively sort them
 	winners = merge_insert(winners);
-	
-	return (m_container);
+
+	// find b1 in pairs according to new sorted a's
+	Item b1 = pairs[0].second;
+	for (auto& p : pairs)
+		if (p.first.id == winners[0].id)
+		{
+			b1 = p.second;
+			break ;
+		}
+
+	// create main chain and push b1 and all a's
+	std::vector<Item>	main;
+	main.reserve(itemsCount);
+	main.emplace_back(b1);
+	for (auto& a : winners)
+		main.emplace_back(a);
+
+	// insert the remaining b's
+	std::cout << "-insert winners- " << winners.size() << std::endl;
+	for (auto it = winners.begin() + 1; it < winners.end(); ++it)
+	{
+		auto& curr_b = pairs[it->pidx].second;
+		// auto bound_it = main.begin() + (winners.begin() - it) + 1;
+		// auto bound_it = main.end() ;
+		auto bound_it = main.end() - 1;
+		auto pos = std::lower_bound(main.begin(), bound_it, curr_b.value,
+			[](const Item& el, unsigned int val){
+				std::cout << "el: " << el.value << " | val: " << val << "\n";
+				return (el.value < val);
+			});
+		main.insert(pos, curr_b);
+	}
+
+	// dont forget about the odd el at the end
+	std::cout << "-insert odd- " << std::endl;
+	if (itemsCount % 2 == 1)
+	{
+		auto leftover = input.back();
+		auto pos = std::lower_bound(main.begin(), main.end(), leftover.value,
+			[](const Item& el, unsigned int val){
+				std::cout << "el: " << el.value << " . val: " << val << "\n";
+				return (el.value < val);
+			});
+		main.insert(pos, leftover);
+	}
+
+	std::cout << "---------------" << std::endl;
+	return (main);
 }

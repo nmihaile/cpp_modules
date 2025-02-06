@@ -1,7 +1,7 @@
 
 NAME		=	PmergeMe
 CPP			=	c++
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -g -fsanitize=address
 
 SRCS		=	main.cpp PmergeMe.cpp VectorPmergeMe.cpp
 OBJS		=	$(SRCS:.cpp=.o)
@@ -22,7 +22,7 @@ fclean: clean
 
 # TEST_VALUES		=	3
 # TEST_VALUES		=	2 1
-TEST_VALUES		=	5 4 3 2 1
+TEST_VALUES		=	6 5 4 3 2 1
 # TEST_VALUES		=	11 2 17 0 16 8 6 15 10 3 21 1 18 9
 # TEST_VALUES		=	11 2 17 0 16 8 6 15 10 3 21 1 18 9 14 19 12 5 4 20 13 7
 
