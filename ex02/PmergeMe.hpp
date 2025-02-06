@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 17:41:47 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:24:05 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ public:
 
 protected:
 	Container	m_container;
+	size_t		m_compairisons;
 
 	void				validateIntStr(std::string str);
 	virtual Container	merge_insert(const Container& input) = 0;
+	bool				cmp(const unsigned int& a, const unsigned int& b);
 	bool				isSorted(void);
 };
 

@@ -6,14 +6,14 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 17:41:55 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:27:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 template <typename Container>
-PmergeMe<Container>::PmergeMe()
+PmergeMe<Container>::PmergeMe() : m_compairisons(0)
 {
 }
 
@@ -69,9 +69,16 @@ void	PmergeMe<Container>::print(bool check)
 					<< std::setw(6) << m_container.back().value << " ";
 
 	if (check)
-		(isSorted())	? std::cout << "✅ " << "\033[0m" 
-						: std::cout << "❌ " << "\033[0m";
+		(isSorted())	? std::cout << "✅ " << "\033[96m" << m_compairisons << "\033[0m" 
+						: std::cout << "❌ " << "\033[96m" << m_compairisons << "\033[0m";
 	std::cout << std::endl;
+}
+
+template <typename Container>
+bool	PmergeMe<Container>::cmp(const unsigned int& a, const unsigned int& b)
+{
+	++m_compairisons;
+	return (a < b);
 }
 
 template <typename Container>
