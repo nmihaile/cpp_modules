@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/03 15:16:40 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:59:05 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ public:
 	PmergeMe(const PmergeMe& other) = delete;
 	~PmergeMe();
 
-	PmergeMe&	operator=(const PmergeMe& rhs) = delete;
+	PmergeMe&		operator=(const PmergeMe& rhs) = delete;
 
 	void			parseArguments(int ac, char **av);
-	virtual void	sort() = 0;
+	virtual void	sort(void) = 0;
 
 protected:
 	Container	m_container;
 
-	void			validateIntStr(std::string str);
-	virtual void	sort(size_t	order) = 0;
+	void				validateIntStr(std::string str);
+	virtual Container	merge_insert(const Container& input) = 0;
 };
 
 #include "PmergeMe.tpp"

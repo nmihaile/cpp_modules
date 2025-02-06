@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/04 10:14:00 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:01:20 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ VectorPmergeMe::~VectorPmergeMe()
 /* ************************************************************************** */
 
 
-void	VectorPmergeMe::sort()
+void	VectorPmergeMe::sort(void)
 {
-	sort(1);
+	merge_insert(m_container);
 }
 
 
@@ -35,31 +35,10 @@ void	VectorPmergeMe::sort()
 /* ************************************************************************** */
 
 
-void	VectorPmergeMe::sort(size_t	order)
+std::vector<unsigned int>	VectorPmergeMe::merge_insert(const std::vector<unsigned int>& input)
 {
-	print(order);
-	if (order > m_container.size() / 2)
-	{
-		std::cout << std::endl;
-		return ;
-	}
-
-	for (std::vector<unsigned int>::iterator it = m_container.begin() + order - 1; it < m_container.end(); it += order * 2)
-	{
-		std::vector<unsigned int>::iterator next = it + order;
-		if (next > m_container.end() - order)
-			break ;
-
-		if (*it > *next)
-			for (int i = order - 1; i >= 0; --i)
-				std::swap<unsigned int>(*(it - i), *(next - i));
-	}
-
-	sort(order * 2);
-
-	if (m_container.size() / order <= 2)
-		return ;
-	std::cout << order << " | " << m_container.size() / order << std::endl;
+	(void)input;
+	return (m_container);
 }
 
 void	VectorPmergeMe::print(size_t order)

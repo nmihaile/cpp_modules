@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/03 15:03:37 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:54:02 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	PmergeMe<Container>::parseArguments(int ac, char **av)
 
 		m_container.push_back(value);
 	}
-}
-
-template <typename Container>
-void	PmergeMe<Container>::sort()
-{
 }
 
 
