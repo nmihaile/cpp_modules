@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 18:24:05 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:22:21 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
-#include <limits>
 
 typedef struct s_item
 {
 	unsigned int	value;
 	size_t			id;
-	size_t			pidx;	// index of winning item in pairs
 }	Item;
 
 template <typename Container = std::vector<Item>>

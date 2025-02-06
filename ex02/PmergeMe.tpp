@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 18:27:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:22:27 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	PmergeMe<Container>::parseArguments(int ac, char **av)
 		if (ss.fail())
 			throw ( std::invalid_argument("Failed to convert argument into unsigned int: " + std::string(av[i])) );
 
-		m_container.push_back({value, static_cast<unsigned int>(i - 1), std::numeric_limits<size_t>::max()});
+		m_container.push_back({value, static_cast<unsigned int>(i - 1)});
 	}
 }
 
@@ -61,6 +61,11 @@ void	PmergeMe<Container>::validateIntStr(std::string str)
 template <typename Container>
 void	PmergeMe<Container>::print(bool check)
 {
+	bool is_sorted = isSorted();
+
+	if (is_sorted)
+		std::cout << "\033[92m";
+
 	if (m_container.size() < 35)
 		for (auto& item : m_container)
 			std::cout << std::setw(2) << item.value << " ";
@@ -69,8 +74,8 @@ void	PmergeMe<Container>::print(bool check)
 					<< std::setw(6) << m_container.back().value << " ";
 
 	if (check)
-		(isSorted())	? std::cout << "✅ " << "\033[96m" << m_compairisons << "\033[0m" 
-						: std::cout << "❌ " << "\033[96m" << m_compairisons << "\033[0m";
+		(is_sorted)	? std::cout << "✅ " << "\033[96m" << m_compairisons << "\033[0m" 
+					: std::cout << "❌ " << "\033[96m" << m_compairisons << "\033[0m";
 	std::cout << std::endl;
 }
 

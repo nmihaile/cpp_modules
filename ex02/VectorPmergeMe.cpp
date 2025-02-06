@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 18:30:18 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:58:14 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 		std::vector<Item> sorted = input;
 		std::vector<Item>::iterator first = sorted.begin();
 		std::vector<Item>::iterator second = std::next(first);
-		// if (first->value > second->value)
 		if (cmp(second->value, first->value))
 			std::swap(*first, *second);
 		return (sorted);
@@ -62,12 +61,10 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 	{
 		auto curr = input.begin() + i * 2;
 		auto next = std::next(curr);
-		// if (curr->value > next->value)
 		if ( cmp(next->value, curr->value) )
 			pairs.emplace_back(std::pair<Item, Item>(*curr, *next));
 		else
 			pairs.emplace_back(std::pair<Item, Item>(*next, *curr));
-		pairs.back().first.pidx = i;
 	}
 
 	// lets catch the winners
@@ -97,37 +94,43 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 
 	// insert the remaining b's
 	// TODO: select el to insert by Jacobsthal seq, kinda
-	// std::cout << "-insert winners- " << winners.size() << std::endl;
-	for (auto it = winners.begin() + 1; it < winners.end(); ++it)
+	if (winners.size() > 1)
 	{
-		auto& curr_b = pairs[it->pidx].second;
+		// calc idx seq with jacobsthal seq
 
-		// is this right ?? or can I find a better solution
-		auto bound_it = main.end() - 1;
+		for (auto it = winners.begin() + 1; it < winners.end(); ++it)
+		{
+			Item curr_b;
+			for (auto& p : pairs)
+				if (it->id == p.first.id)
+				{
+					curr_b = p.second;
+					break ;
+				}
 
-		auto pos = std::lower_bound(main.begin(), bound_it, curr_b.value,
-			[this](const Item& el, unsigned int val){
-				// std::cout << "el: " << el.value << " | val: " << val << "\n";
-				++this->m_compairisons;
-				return (el.value < val);
-			});
-		main.insert(pos, curr_b);
+			// is this right ?? or can I find a better solution
+			auto bound_end = main.end() - 1;
+
+			auto pos = std::lower_bound(main.begin(), bound_end, curr_b.value,
+				[this](const Item& el, unsigned int val){
+					++this->m_compairisons;
+					return (el.value < val);
+				});
+			main.insert(pos, curr_b);
+		}
 	}
 
-	// dont forget about the odd el at the end
-	// std::cout << "-insert odd- " << std::endl;
+	// don't forget about the odd el at the end
 	if (itemsCount % 2 == 1)
 	{
-		auto leftover = input.back();
-		auto pos = std::lower_bound(main.begin(), main.end(), leftover.value,
+		auto odd_el = input.back();
+		auto pos = std::lower_bound(main.begin(), main.end(), odd_el.value,
 			[this](const Item& el, unsigned int val){
-				// std::cout << "el: " << el.value << " . val: " << val << "\n";
 				++this->m_compairisons;
 				return (el.value < val);
 			});
-		main.insert(pos, leftover);
+		main.insert(pos, odd_el);
 	}
 
-	// std::cout << "---------------" << std::endl;
 	return (main);
 }
