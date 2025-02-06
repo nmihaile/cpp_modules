@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 10:59:46 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:22:48 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #include <iomanip>
 
-class VectorPmergeMe : public PmergeMe<std::vector<unsigned int>>
+class VectorPmergeMe : public PmergeMe<std::vector<Item>>
 {
 public:
 	VectorPmergeMe();
@@ -31,9 +31,7 @@ public:
 	virtual void	sort(void) override;
 
 private:
-	virtual std::vector<unsigned int>	merge_insert(const std::vector<unsigned int>& input) override;
-
-	void			print(size_t order);
+	virtual std::vector<Item>	merge_insert(const std::vector<Item>& input) override;
 };
 
 #endif

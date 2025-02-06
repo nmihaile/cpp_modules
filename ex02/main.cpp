@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:32 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/03 15:10:57 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:30:27 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	main(int ac, char **av)
 	try
 	{
 		VectorPmergeMe	pmergeme;
-		pmergeme.parseArguments(ac - 1, &av[1]);
+		pmergeme.parseArguments(ac, av);
+		pmergeme.print(true);
 		pmergeme.sort();
+		pmergeme.print(true);
 	}
 	catch(const std::exception& e)
 	{
