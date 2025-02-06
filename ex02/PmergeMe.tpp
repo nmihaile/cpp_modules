@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/06 11:32:12 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:48:17 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ bool	PmergeMe<Container>::isSorted(void)
 		return (true);
 
 	for (auto it = m_container.begin() + 1; it < m_container.end(); ++it)
-		if (it->value > (it - 1)->value)
+		if (it->value < (it - 1)->value)
 			return (false);
 
 	return (true);
