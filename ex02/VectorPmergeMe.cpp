@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 13:03:47 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:06:31 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 					}
 			}
 
-			// auto pos = std::lower_bound(main.begin(), bound_end, curr_b.value,
 			auto pos = std::lower_bound(main.begin(), bound_end, curr_p.second.value,
 				[this](const Item& el, unsigned int val){
 					++this->m_compairisons;

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 12:58:22 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:07:12 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,7 @@ bool	PmergeMe<Container>::cmp(const unsigned int& a, const unsigned int& b)
 template <typename Container>
 unsigned int	PmergeMe<Container>::jacobsthal(unsigned int n)
 {
-	unsigned int	pow2n = 1 << n;
-	int				powNeg1n = (n++ % 2 == 0) ? 1 : -1;
-	return ((pow2n - powNeg1n) / 3);
+	return ( ((1 << n) - (n % 2 == 0 ? 1 : -1)) / 3 );
 }
 
 template <typename Container>
