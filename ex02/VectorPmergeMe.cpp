@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 16:43:14 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:58:29 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,28 @@ VectorPmergeMe::~VectorPmergeMe()
 /* ************************************************************************** */
 
 
-std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
+std::vector<Item>	VectorPmergeMe::merge_insert(std::vector<Item> input)
 {
-	size_t	itemsCount = input.size();
+	const size_t	inputSize = input.size();
 
-	if (itemsCount <= 1)
+	if (inputSize <= 1)
 		return (input);
 	
-	if (itemsCount == 2)
+	if (inputSize == 2)
 	{
-		std::vector<Item> sorted = input;
-		std::vector<Item>::iterator first = sorted.begin();
-		std::vector<Item>::iterator second = std::next(first);
-		if (cmp(second->value, first->value))
-			std::swap(*first, *second);
-		return (sorted);
+		if (cmp(input[1].value, input[0].value))
+			std::swap(input[0], input[1]);
+		return (input);
 	}
 
 	// lets build pairs
-	size_t	pairCount = itemsCount / 2;
+	const size_t	pairCount = inputSize / 2;
 	std::vector<std::pair<Item, Item>>	pairs;
 	pairs.reserve(pairCount);
 	for (size_t i = 0; i < pairCount; ++i)
 	{
-		auto curr = input.begin() + i * 2;
-		auto next = std::next(curr);
+		const auto curr = input.begin() + i * 2;
+		const auto next = std::next(curr);
 		if ( cmp(next->value, curr->value) )
 			pairs.emplace_back(std::pair<Item, Item>(*curr, *next));
 		else
@@ -76,15 +73,14 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 
 	// create main chain and push b1 and all a's
 	std::vector<Item>	main;
-	main.reserve(itemsCount);
+	main.reserve(inputSize);
 	main.emplace_back(b1);
-	for (auto& a : winners)
-		main.emplace_back(a);
+	main.insert(main.end(), winners.begin(), winners.end());
 
-	if (itemsCount % 2 == 1)
+	if (inputSize % 2 == 1)
 	{
 		pairs.push_back({input.back(), input.back()});
-		winners.push_back(input.back());
+		winners.emplace_back(input.back());
 	}
 	
 	// insert the remaining b's
@@ -100,34 +96,34 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 								: u = 0;
 
 			auto it = (winners.begin() + (1 + u)) ;
-			std::pair<Item, Item> curr_p;
+			std::pair<Item, Item>* curr_p;
 			for (auto& p : pairs)
 				if (it->id == p.first.id)
 				{
-					curr_p = p;
+					curr_p = &p;
 					break ;
 				}
 
 			// find the bound el, we only have to sort in to the left of this el.
 			std::vector<Item>::iterator bound_end;
-			if (itemsCount % 2 == 1 && it == winners.end() - 1)
+			if (inputSize % 2 == 1 && it == winners.end() - 1)
 				bound_end = main.end();
 			else
 			{
 				for (auto it = main.begin(); it < main.end(); ++it)
-					if (it->id == curr_p.first.id)
+					if (it->id == curr_p->first.id)
 					{	
 						bound_end = it;
 						break ;
 					}
 			}
 
-			auto pos = std::lower_bound(main.begin(), bound_end, curr_p.second.value,
+			auto pos = std::lower_bound(main.begin(), bound_end, curr_p->second.value,
 				[this](const Item& el, unsigned int val){
 					++this->m_compairisons;
 					return (el.value < val);
 				});
-			main.insert(pos, curr_p.second);
+			main.insert(pos, curr_p->second);
 		}
 	}
 

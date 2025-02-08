@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 12:43:05 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:45:16 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ public:
 	VectorPmergeMe&	operator=(const VectorPmergeMe& rhs) = delete;
 
 private:
-	virtual std::vector<Item>	merge_insert(const std::vector<Item>& input) override;
+	virtual std::vector<Item>	merge_insert(std::vector<Item> input) override;
 };
 
 #endif
