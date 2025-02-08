@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 10:55:00 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:32:39 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 		winners.emplace_back(p.first);
 	
 	// and recursively sort them
-	// if (winners.size() > 1)
 	winners = merge_insert(winners);
 
 	// find b1 in pairs according to new sorted a's
@@ -93,18 +92,18 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 	for (auto& a : winners)
 		main.emplace_back(a);
 
+	if (itemsCount % 2 == 1)
+	{
+		pairs.push_back({input.back(), input.back()});
+		winners.push_back(input.back());
+	}
+
 	// insert the remaining b's
 	if (winners.size() > 1)
 	{
 		// calc idx-seq with Jacobsthal seq
 		std::vector<Item> seq = insertOrder(winners.size() - 1);
 
-		// std::cout << "\033[93m[" << (winners.size() - 1) << "] " << "\033[95m~ ";
-		// for (auto s : seq)
-		// 	std::cout << s.value - 2 << " ";
-		// std::cout << "~\033[0m" << std::endl;
-
-		// for (auto it = winners.begin() + 1; it < winners.end(); ++it)
 		for (auto s : seq)
 		{
 			unsigned int u;
@@ -112,24 +111,27 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 								: u = 0;
 
 			auto it = (winners.begin() + (1 + u)) ;
-			// Item curr_b;
 			std::pair<Item, Item> curr_p;
 			for (auto& p : pairs)
 				if (it->id == p.first.id)
 				{
 					curr_p = p;
-					// curr_b = p.second;
 					break ;
 				}
 
-			// is this right ?? or can I find a better solution
-			auto bound_end = main.end() - 1;
-			for (auto it = main.begin(); it < main.end(); ++it)
-				if (it->id == curr_p.first.id)
-				{
-					bound_end = it;
-					break ;
-				}
+			// find the bound el, we only have to sort in to the left of this el.
+			std::vector<Item>::iterator bound_end;
+			if (itemsCount % 2 == 1 && it == winners.end() - 1)
+				bound_end = main.end();
+			else
+			{
+				for (auto it = main.begin(); it < main.end(); ++it)
+					if (it->id == curr_p.first.id)
+					{
+						bound_end = it;
+						break ;
+					}
+			}
 
 			// auto pos = std::lower_bound(main.begin(), bound_end, curr_b.value,
 			auto pos = std::lower_bound(main.begin(), bound_end, curr_p.second.value,
@@ -137,21 +139,8 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 					++this->m_compairisons;
 					return (el.value < val);
 				});
-			// main.insert(pos, curr_b.second);
 			main.insert(pos, curr_p.second);
 		}
-	}
-
-	// don't forget about the odd el at the end
-	if (itemsCount % 2 == 1)
-	{
-		auto odd_el = input.back();
-		auto pos = std::lower_bound(main.begin(), main.end(), odd_el.value,
-			[this](const Item& el, unsigned int val){
-				++this->m_compairisons;
-				return (el.value < val);
-			});
-		main.insert(pos, odd_el);
 	}
 
 	return (main);

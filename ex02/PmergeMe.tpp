@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 11:01:35 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:31:36 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	PmergeMe<Container>::print(bool check)
 					<< std::setw(0) << m_container.back().value << " ";
 
 	if (check)
-		(is_sorted)	? std::cout << "✅ " << "\033[96m" << std::setw(2) << m_compairisons << "\033[0m [" << m_container.size() << "]" 
-					: std::cout << "❌ " << "\033[96m" << std::setw(2) << m_compairisons << "\033[0m [" << m_container.size() << "]";
+		(is_sorted)	? std::cout << "✅ " << "\033[96m" << std::setw(2) << m_compairisons << "\033[95m [" << m_container.size() << "]\033[0m" 
+					: std::cout << "❌ " << "\033[96m" << std::setw(2) << m_compairisons << "\033[95m [" << m_container.size() << "]\033[0m";
 	std::cout << std::endl;
 }
 
