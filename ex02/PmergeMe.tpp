@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 12:42:27 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 12:58:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,14 @@ bool	PmergeMe<Container>::cmp(const unsigned int& a, const unsigned int& b)
 }
 
 template <typename Container>
+unsigned int	PmergeMe<Container>::jacobsthal(unsigned int n)
+{
+	unsigned int	pow2n = 1 << n;
+	int				powNeg1n = (n++ % 2 == 0) ? 1 : -1;
+	return ((pow2n - powNeg1n) / 3);
+}
+
+template <typename Container>
 Container	PmergeMe<Container>::insertOrder(size_t count)
 {
 	Container	seq;
@@ -109,9 +117,7 @@ Container	PmergeMe<Container>::insertOrder(size_t count)
 	unsigned int highest = 1;
 	while (seq.size() < count)
 	{
-		unsigned int	pow2n = 1 << jac_n;
-		int				powNeg1n = (jac_n++ % 2 == 0) ? 1 : -1;
-		unsigned int	jac = (pow2n - powNeg1n) / 3;
+		unsigned int	jac = jacobsthal(jac_n++);
 
 		if ( jac - highest > count - seq.size() )
 		{
