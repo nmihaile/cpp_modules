@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:32 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 10:16:11 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 12:23:22 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	main(int ac, char **av)
 		// print_seq(pmergeme.insertOrder(12), 12);
 		// print_seq(pmergeme.insertOrder(13), 13);
 
-		pmergeme.print(true);
+		pmergeme.print("Before", true);
 		pmergeme.sort();
-		pmergeme.print(true);
+		pmergeme.print("After", true);
 	}
 	catch(const std::exception& e)
 	{

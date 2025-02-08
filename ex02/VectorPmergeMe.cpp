@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 11:32:39 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 12:42:02 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ VectorPmergeMe::~VectorPmergeMe()
 /* ************************************************************************** */
 
 
-void	VectorPmergeMe::sort(void)
-{
-	m_compairisons = 0;
-	m_container = merge_insert(m_container);
-}
 
 
 /* ************************************************************************** */

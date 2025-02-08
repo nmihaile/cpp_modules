@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 11:31:36 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 12:42:27 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ void	PmergeMe<Container>::parseArguments(int ac, char **av)
 	}
 }
 
+template <typename Container>
+void	PmergeMe<Container>::sort(void)
+{
+	m_compairisons = 0;
+	m_container = merge_insert(m_container);
+}
+
 
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -59,9 +66,11 @@ void	PmergeMe<Container>::validateIntStr(std::string str)
 }
 
 template <typename Container>
-void	PmergeMe<Container>::print(bool check)
+void	PmergeMe<Container>::print(std::string prefix, bool check)
 {
 	bool is_sorted = isSorted();
+
+	std::cout << "\033[95m" << std::setw(6) << std::left << prefix << ": \033[0m";
 
 	if (is_sorted)
 		std::cout << "\033[92m";
@@ -74,8 +83,8 @@ void	PmergeMe<Container>::print(bool check)
 					<< std::setw(0) << m_container.back().value << " ";
 
 	if (check)
-		(is_sorted)	? std::cout << "✅ " << "\033[96m" << std::setw(2) << m_compairisons << "\033[95m [" << m_container.size() << "]\033[0m" 
-					: std::cout << "❌ " << "\033[96m" << std::setw(2) << m_compairisons << "\033[95m [" << m_container.size() << "]\033[0m";
+		(is_sorted)	? std::cout << "✅ " << "\033[96m" << std::setw(5) << std::right << m_compairisons << "\033[95m [" << m_container.size() << "]\033[0m" 
+					: std::cout << "❌ " << "\033[96m" << std::setw(5) << std::right << m_compairisons << "\033[95m [" << m_container.size() << "]\033[0m";
 	std::cout << std::endl;
 }
 
