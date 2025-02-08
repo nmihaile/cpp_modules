@@ -6,13 +6,13 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 14:06:31 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:43:14 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "VectorPmergeMe.hpp"
 
-VectorPmergeMe::VectorPmergeMe()
+VectorPmergeMe::VectorPmergeMe() : PmergeMe("std::vector")
 {
 }
 
@@ -86,7 +86,7 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 		pairs.push_back({input.back(), input.back()});
 		winners.push_back(input.back());
 	}
-
+	
 	// insert the remaining b's
 	if (winners.size() > 1)
 	{
@@ -116,7 +116,7 @@ std::vector<Item>	VectorPmergeMe::merge_insert(const std::vector<Item>& input)
 			{
 				for (auto it = main.begin(); it < main.end(); ++it)
 					if (it->id == curr_p.first.id)
-					{
+					{	
 						bound_end = it;
 						break ;
 					}

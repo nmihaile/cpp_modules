@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 12:57:26 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:30:33 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
+#include <chrono>
 
 typedef struct s_item
 {
@@ -32,9 +33,8 @@ template <typename Container = std::vector<Item>>
 class PmergeMe
 {
 public:
-
-
-	PmergeMe();
+	PmergeMe() = delete;
+	PmergeMe(std::string _container_name);
 	PmergeMe(const PmergeMe& other) = delete;
 	~PmergeMe();
 
@@ -43,11 +43,15 @@ public:
 	void			parseArguments(int ac, char **av);
 	virtual void	sort(void);
 
-	void			print(std::string prefix, bool check);
+	void			print(std::string prefix, bool check, bool time);
+	void			printTime();
+	double			getElapsedTime();
 
 protected:
-	Container	m_container;
-	size_t		m_compairisons;
+	Container									m_container;
+	size_t										m_compairisons;
+	std::chrono::duration<double, std::micro>	m_elapsed_time;
+	const std::string							m_container_name;
 
 	void				validateIntStr(std::string str);
 	virtual Container	merge_insert(const Container& input) = 0;
