@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 13:07:49 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 13:39:31 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,48 +129,6 @@ template <typename Container>
 unsigned int	PmergeMe<Container>::jacobsthal(unsigned int n)
 {
 	return ( ((1 << n) - (n % 2 == 0 ? 1 : -1)) / 3 );
-}
-
-template <typename Container>
-Container	PmergeMe<Container>::insertOrder(size_t count)
-{
-	Container	seq;
-
-	if (count == 0)
-		return (seq);
-	if (count == 1)
-		return (seq.push_back({0, 0}), seq);
-
-	unsigned int jac_n = 3;
-	unsigned int highest = 1;
-	while (seq.size() < count)
-	{
-		unsigned int	jac = jacobsthal(jac_n++);
-
-		if ( jac - highest > count - seq.size() )
-		{
-			size_t idx = seq.size();
-			while (seq.size() < count)
-			{
-				++highest;
-				seq.push_back({highest, highest});
-			}
-			std::reverse(seq.begin() + idx, seq.end());
-			return (seq);
-		}
-
-		unsigned int val = jac;
-		while (val > highest)
-		{
-			seq.push_back({val, val});
-			--val;
-			if (seq.size() >= count)
-				return (seq);
-		}
-		highest = jac;
-	}
-
-	return (seq);
 }
 
 template <typename Container>

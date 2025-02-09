@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 17:45:21 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 14:03:57 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ protected:
 	virtual Container	merge_insert(Container input) = 0;
 	bool				cmp(const unsigned int& a, const unsigned int& b);
 	unsigned int		jacobsthal(unsigned int n);
-	Container			insertOrder(size_t count);
 	bool				isSorted(void);
 };
 
