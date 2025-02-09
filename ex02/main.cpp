@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:32 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 15:47:51 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 19:24:14 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <exception>
 #include <string>
 #include "VectorPmergeMe.hpp"
+#include "ListPmergeMe.hpp"
 
 void	printf_exit(std::string msg, int exit_code)
 {
@@ -28,13 +29,18 @@ int	main(int ac, char **av)
 
 	try
 	{
-		VectorPmergeMe	vec_pmergeme;
-		vec_pmergeme.parseArguments(ac, av);
+		VectorPmergeMe	vec_me;
+		ListPmergeMe	lst_me;
+		vec_me.parseArguments(ac, av);
+		lst_me.parseArguments(ac, av);
 
-		vec_pmergeme.print("Before", true, false);
-		vec_pmergeme.sort();
-		vec_pmergeme.print("After", true, true);
-		vec_pmergeme.printTime();
+		vec_me.print("   Before", true, false);
+		vec_me.sort();
+		lst_me.sort();
+		vec_me.print("VEC After", true, false);
+		lst_me.print("LST After", true, false);
+		vec_me.printTime();
+		lst_me.printTime();
 	}
 	catch(const std::exception& e)
 	{

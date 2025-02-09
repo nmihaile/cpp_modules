@@ -3,7 +3,7 @@ NAME		=	PmergeMe
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11 -Ofast #-g #-fsanitize=address
 
-SRCS		=	main.cpp VectorPmergeMe.cpp
+SRCS		=	main.cpp VectorPmergeMe.cpp ListPmergeMe.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)

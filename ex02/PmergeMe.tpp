@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 13:39:31 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 19:25:46 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	PmergeMe<Container>::printTime()
 				<< "=> Time to process a range of "
 				<< "\033[95m[" << m_container.size() << "]\033[96m"
 				<< " elements with "
-				<< "\033[92;1m[" << m_container_name << "]\033[96;0m : \033[93m"
+				<< "\033[92;1m[" << std::setw(11) << std::left << m_container_name << "]\033[96;0m : \033[93m"
 				<< m_elapsed_time.count()
 				<< " µs \033[0m" << std::endl;
 }
@@ -137,8 +137,10 @@ bool	PmergeMe<Container>::isSorted(void)
 	if (m_container.size() <= 1)
 		return (true);
 
-	for (auto it = m_container.begin() + 1; it < m_container.end(); ++it)
-		if (it->value < (it - 1)->value)
+	auto prev = m_container.begin();
+	auto curr = std::next(prev);
+	for (; curr != m_container.end(); ++prev, ++curr)
+		if (curr->value < prev->value)
 			return (false);
 
 	return (true);
