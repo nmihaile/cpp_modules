@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 16:36:55 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:43:54 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,13 @@ std::vector<Item>	VectorPmergeMe::merge_insert(std::vector<Item> input)
 
 		while (inserting)
 		{
-			unsigned int jac = jacobsthal(jac_n++) - 1;
-
 			// find curr_w with curren jac
-			std::vector<Item>::iterator curr_w;
-			if (winners.begin() + jac >= winners.end())
+			std::vector<Item>::iterator curr_w = winners.begin() + jacobsthal(jac_n++) - 1;
+			if (curr_w >= winners.end())
 			{
 				curr_w = winners.end() - 1;
 				inserting = false;
 			}
-			else
-				curr_w = winners.begin() + jac;
 
 			// loop down from curr_w to highest
 			auto new_highest = curr_w;
