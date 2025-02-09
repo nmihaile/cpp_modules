@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:02 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 17:45:16 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 21:38:36 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 #ifndef VECTORPMERGEME_HPP
 #define VECTORPMERGEME_HPP
 
-#include <algorithm>
 #include <vector>
+#include <algorithm>
 #include <utility>
 #include "PmergeMe.hpp"
-
 
 class VectorPmergeMe : public PmergeMe<std::vector<Item>>
 {

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:17:06 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 18:22:45 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 21:38:41 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #ifndef LISTPMERGEME_HPP
 #define LISTPMERGEME_HPP
 
+#include <algorithm>
+#include <utility>
 #include <list>
 #include "PmergeMe.hpp"
 
