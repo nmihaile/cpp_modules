@@ -6,14 +6,19 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:35:50 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 19:25:46 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 21:34:24 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 template <typename Container>
-PmergeMe<Container>::PmergeMe(std::string _container_name) : m_compairisons(0), m_elapsed_time(0), m_container_name(_container_name)
+PmergeMe<Container>::PmergeMe(std::string _container_name)
+	:	m_compairisons(0),
+		m_sorted_count(0),
+		m_container_name(_container_name),
+		m_elapsed_time(0),
+		m_unsorted_count(0)
 {
 }
 
@@ -43,6 +48,7 @@ void	PmergeMe<Container>::parseArguments(int ac, char **av)
 
 		m_container.push_back({value, static_cast<unsigned int>(i - 1)});
 	}
+	m_unsorted_count = m_container.size();
 }
 
 template <typename Container>
@@ -53,6 +59,7 @@ void	PmergeMe<Container>::sort(void)
 	std::chrono::high_resolution_clock::time_point	t1 = std::chrono::high_resolution_clock::now();
 
 	m_container = merge_insert(m_container);
+	m_sorted_count = m_container.size();
 	
 	std::chrono::high_resolution_clock::time_point	t2 = std::chrono::high_resolution_clock::now();
 	m_elapsed_time = std::chrono::duration<double, std::micro>(t2 - t1);
@@ -72,15 +79,15 @@ void	PmergeMe<Container>::print(std::string prefix, bool check, bool time)
 
 	if (m_container.size() < 22)
 		for (auto& item : m_container)
-			std::cout << std::setw(2) << item.value << " ";
+			std::cout << std::setw(2) << std::right << item.value << " ";
 	else
 		std::cout	<< std::setw(6) << (*m_container.begin()).value << " ... "
 					<< std::setw(0) << m_container.back().value << " ";
 
 	if (check)
 	{
-		(is_sorted)	? std::cout << "✅ " << "\033[96m" << std::setw(5) << std::right << m_compairisons << "\033[95m [" << m_container.size() <<  "]"  
-					: std::cout << "❌ " << "\033[96m" << std::setw(5) << std::right << m_compairisons << "\033[95m [" << m_container.size() <<  "]";
+		(is_sorted)	? std::cout << "✅ " << "\033[96m" << std::setw(5) << std::right << m_compairisons << " comp.  " << printItemCount(is_sorted)  
+					: std::cout << "❌ " << "\033[96m" << std::setw(5) << std::right << m_compairisons << " comp.  " << printItemCount(is_sorted);
 		if (time)
 			std::cout << "\033[0m : \033[93m" << m_elapsed_time.count() << " µs";
 	}
@@ -90,19 +97,36 @@ void	PmergeMe<Container>::print(std::string prefix, bool check, bool time)
 template <typename Container>
 void	PmergeMe<Container>::printTime()
 {
-	std::cout	<< "\033[96m"
-				<< "=> Time to process a range of "
-				<< "\033[95m[" << m_container.size() << "]\033[96m"
-				<< " elements with "
-				<< "\033[92;1m[" << std::setw(11) << std::left << m_container_name << "]\033[96;0m : \033[93m"
-				<< m_elapsed_time.count()
-				<< " µs \033[0m" << std::endl;
+	std::cout	<< "\033[96m=> Time to process a range of "
+				<< "\033[95m[" << m_container.size() << "]"
+				<< "\033[96m elements with "
+				<< "\033[95;1m[" << std::setw(11) << std::left << m_container_name << "]"
+				<< "\033[96;0m : "
+				<< "\033[93m" << m_elapsed_time.count()	<< " µs \033[0m" << std::endl;
 }
 
 template <typename Container>
 double	PmergeMe<Container>::getElapsedTime()
 {
 	return ( m_elapsed_time.count() );
+}
+
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+
+template <typename Container>
+bool	PmergeMe<Container>::cmp(const unsigned int& a, const unsigned int& b)
+{
+	++m_compairisons;
+	return (a < b);
+}
+
+template <typename Container>
+unsigned int	PmergeMe<Container>::jacobsthal(unsigned int n)
+{
+	return ( ((1 << n) - (n % 2 == 0 ? 1 : -1)) / 3 );
 }
 
 
@@ -119,19 +143,6 @@ void	PmergeMe<Container>::validateIntStr(std::string str)
 }
 
 template <typename Container>
-bool	PmergeMe<Container>::cmp(const unsigned int& a, const unsigned int& b)
-{
-	++m_compairisons;
-	return (a < b);
-}
-
-template <typename Container>
-unsigned int	PmergeMe<Container>::jacobsthal(unsigned int n)
-{
-	return ( ((1 << n) - (n % 2 == 0 ? 1 : -1)) / 3 );
-}
-
-template <typename Container>
 bool	PmergeMe<Container>::isSorted(void)
 {
 	if (m_container.size() <= 1)
@@ -144,4 +155,18 @@ bool	PmergeMe<Container>::isSorted(void)
 			return (false);
 
 	return (true);
+}
+
+template <typename Container>
+std::string	PmergeMe<Container>::printItemCount(bool colorize_count_comparison)
+{
+	std::stringstream ss;
+
+	if (colorize_count_comparison)
+		(m_unsorted_count == m_sorted_count)	?	ss << "\033[92m["
+												:	ss << "\033[91m[";
+	else
+		ss << "\033[95m[";
+	ss << m_container.size() << "]";
+	return (ss.str());
 }

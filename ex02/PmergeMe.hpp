@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 14:03:57 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 21:29:34 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,22 @@ public:
 	double			getElapsedTime();
 
 protected:
-	Container									m_container;
-	size_t										m_compairisons;
-	std::chrono::duration<double, std::micro>	m_elapsed_time;
-	const std::string							m_container_name;
+	Container			m_container;
+	size_t				m_compairisons;
+	size_t				m_sorted_count;
 
-	void				validateIntStr(std::string str);
 	virtual Container	merge_insert(Container input) = 0;
 	bool				cmp(const unsigned int& a, const unsigned int& b);
 	unsigned int		jacobsthal(unsigned int n);
+
+private:
+	const std::string							m_container_name;
+	std::chrono::duration<double, std::micro>	m_elapsed_time;
+	size_t										m_unsorted_count;
+	
+	void				validateIntStr(std::string str);
 	bool				isSorted(void);
+	std::string			printItemCount(bool colorize_count_comparison);
 };
 
 #include "PmergeMe.tpp"
