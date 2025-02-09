@@ -10,7 +10,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
-	strip $(NAME)
+	@strip $(NAME)
 
 %.o: %.c
 	$(CPP) $(CPPFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 14:04:13 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:04:45 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,12 @@ std::vector<Item>	VectorPmergeMe::merge_insert(std::vector<Item> input)
 	winners = merge_insert(winners);
 
 	// find b1 in pairs according to new sorted a's
-	Item b1 = pairs[0].second;
-	for (auto& p : pairs)
-		if (p.first.id == winners[0].id)
-		{
-			b1 = p.second;
-			break ;
-		}
+	const Item b1 = [&](){
+		for (auto& p : pairs)
+			if (p.first.id == winners[0].id)
+				return (p.second);
+		return pairs[0].second;
+	}();
 
 	// create main chain and push b1 and all a's
 	std::vector<Item>	main;
