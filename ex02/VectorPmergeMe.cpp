@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 11:52:28 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 14:04:13 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,44 +91,64 @@ std::vector<Item>	VectorPmergeMe::merge_insert(std::vector<Item> input)
 	// insert the remaining b's
 	if (winners.size() > 1)
 	{
-		// calc idx-seq with Jacobsthal seq
-		std::vector<Item> seq = insertOrder(winners.size() - 1);
+		bool inserting = true;
 
-		for (auto s : seq)
+		auto highest = winners.begin();
+		unsigned int jac_n = 3;
+
+		while (inserting)
 		{
-			unsigned int u;
-			(seq.size() > 1)	? u = s.value - 2
-								: u = 0;
+			unsigned int jac = jacobsthal(jac_n++) - 1;
 
-			auto it = (winners.begin() + (1 + u)) ;
-			std::pair<Item, Item>* curr_p;
-			for (auto& p : pairs)
-				if (it->id == p.first.id)
-				{
-					curr_p = &p;
-					break ;
-				}
-
-			// find the bound el, we only have to sort in to the left of this el.
-			std::vector<Item>::iterator bound_end;
-			if (inputSize % 2 == 1 && it == winners.end() - 1)
-				bound_end = main.end();
-			else
+			// find curr_w with curren jac
+			std::vector<Item>::iterator curr_w;
+			if (winners.begin() + jac >= winners.end())
 			{
-				for (auto it = main.begin(); it < main.end(); ++it)
-					if (it->id == curr_p->first.id)
-					{	
-						bound_end = it;
+				curr_w = winners.end() - 1;
+				inserting = false;
+			}
+			else
+				curr_w = winners.begin() + jac;
+
+			// loop down from curr_w to highest
+			auto new_highest = curr_w;
+			std::vector<Item>::iterator bound_end;
+			while (curr_w > highest)
+			{
+				// get curr_p element
+				std::vector<std::pair<Item, Item>>::iterator curr_p;
+				for (auto it = pairs.begin(); it < pairs.end(); ++it)
+					if (it->first.id == curr_w->id)
+					{
+						curr_p = it;
 						break ;
 					}
-			}
 
-			auto pos = std::lower_bound(main.begin(), bound_end, curr_p->second.value,
-				[this](const Item& el, unsigned int val){
-					++this->m_compairisons;
-					return (el.value < val);
-				});
-			main.insert(pos, curr_p->second);
+				// find bound_el in main
+				std::vector<Item>::iterator bound_end;
+				if (inputSize % 2 == 1 && curr_p->first.id == winners.back().id)
+					bound_end = main.end();
+				else
+				{
+					for (auto it = main.begin(); it < main.end(); ++it)
+						if (it->id == curr_p->first.id)
+						{	
+							bound_end = it;
+							break ;
+						}
+				}
+
+				// binary insert
+				auto pos = std::lower_bound(main.begin(), bound_end, curr_p->second.value,
+					[this](const Item& el, unsigned int val){
+						++this->m_compairisons;
+						return (el.value < val);
+					});
+				main.insert(pos, curr_p->second);
+
+				--curr_w;
+			}
+			highest = new_highest;
 		}
 	}
 
