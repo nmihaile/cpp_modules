@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 16:04:45 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:22:13 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,10 @@ std::vector<Item>	VectorPmergeMe::merge_insert(std::vector<Item> input)
 			while (curr_w > highest)
 			{
 				// get curr_p element
-				std::vector<std::pair<Item, Item>>::iterator curr_p;
-				for (auto it = pairs.begin(); it < pairs.end(); ++it)
-					if (it->first.id == curr_w->id)
-					{
-						curr_p = it;
-						break ;
-					}
+				const std::vector<std::pair<Item, Item>>::iterator curr_p
+					= std::find_if(pairs.begin(), pairs.end(), [&curr_w](std::pair<Item, Item> it){
+						return ( it.first.id == curr_w->id );
+					});
 
 				// find bound_el in main
 				std::vector<Item>::iterator bound_end;
