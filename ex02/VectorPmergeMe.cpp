@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 16:43:54 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 19:32:13 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ std::vector<Item>	VectorPmergeMe::merge_insert(std::vector<Item> input)
 		return (input);
 	}
 
-	// lets build pairs
-	// and winners at the same time
+	// lets build pairs and winners at the same time
 	const size_t	pairCount = inputSize / 2;
 	std::vector<std::pair<Item, Item>>	pairs;
 	pairs.reserve(pairCount);
