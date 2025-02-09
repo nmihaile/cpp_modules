@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 16:26:32 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:36:55 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,18 +121,12 @@ std::vector<Item>	VectorPmergeMe::merge_insert(std::vector<Item> input)
 					});
 
 				// find bound_el in main
-				std::vector<Item>::iterator bound_end;
-				if (inputSize % 2 == 1 && curr_p->first.id == winners.back().id)
-					bound_end = main.end();
-				else
-				{
-					for (auto it = main.begin(); it < main.end(); ++it)
-						if (it->id == curr_p->first.id)
-						{	
-							bound_end = it;
-							break ;
-						}
-				}
+				const std::vector<Item>::iterator bound_end
+					= (inputSize % 2 == 1 && curr_p->first.id == winners.back().id)
+						?	main.end()
+						:	std::find_if(main.begin(), main.end(), [&curr_p](Item item){
+							return ( item.id == curr_p->first.id);
+						});
 
 				// binary insert
 				const auto pos = std::lower_bound(main.begin(), bound_end, curr_p->second.value,
