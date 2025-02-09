@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:08:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/08 17:58:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:52:28 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,29 @@ std::vector<Item>	VectorPmergeMe::merge_insert(std::vector<Item> input)
 	}
 
 	// lets build pairs
+	// and winners at the same time
 	const size_t	pairCount = inputSize / 2;
 	std::vector<std::pair<Item, Item>>	pairs;
 	pairs.reserve(pairCount);
+
+	std::vector<Item>	winners;
+	winners.reserve(pairCount);
+
 	for (size_t i = 0; i < pairCount; ++i)
 	{
 		const auto curr = input.begin() + i * 2;
 		const auto next = std::next(curr);
 		if ( cmp(next->value, curr->value) )
+		{
 			pairs.emplace_back(std::pair<Item, Item>(*curr, *next));
+			winners.emplace_back(*curr);
+		}
 		else
+		{
 			pairs.emplace_back(std::pair<Item, Item>(*next, *curr));
+			winners.emplace_back(*next);
+		}
 	}
-
-	// lets catch the winners
-	std::vector<Item>	winners;
-	winners.reserve(pairs.size());
-	for (auto& p : pairs)
-		winners.emplace_back(p.first);
 	
 	// and recursively sort them
 	winners = merge_insert(winners);
