@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:53:26 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/09 21:38:19 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:17:29 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ public:
 	PmergeMe&		operator=(const PmergeMe& rhs) = delete;
 
 	void			parseArguments(int ac, char **av);
-	virtual void	sort(void);
+	void			sort(void);
 
 	void			print(std::string prefix, bool check, bool time);
 	void			printTime();
@@ -56,9 +56,10 @@ protected:
 	unsigned int		jacobsthal(unsigned int n);
 
 private:
-	const std::string							m_container_name;
-	std::chrono::duration<double, std::micro>	m_elapsed_time;
-	size_t										m_unsorted_count;
+	const std::string			m_container_name;
+	std::chrono::nanoseconds	m_elapsed_time;
+	size_t						m_unsorted_count;
+	bool						m_sorted_was_executed;
 	
 	void				validateIntStr(std::string str);
 	bool				isSorted(void);
