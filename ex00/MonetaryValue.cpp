@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/28 15:59:32 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:21:29 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,35 @@ void	MonetaryValue::parseMonetaryValueStr(std::string& _value)
 			throw ( std::runtime_error("found multiple decimal points, only one allowed") );
 	}
 
+	m_value = convertToCents(_value);
+}
+
+uint64_t	MonetaryValue::convertToCents(const std::string& _value)
+{
+	std::pair<uint64_t, uint64_t>	monetaryValue(0, 0);
+
+	std::size_t	pos = _value.find('.');
+	if (pos == std::string::npos)
+		monetaryValue.first = strToUint64(_value);
+	else
+	{
+		const std::string	integral = _value.substr(0, pos);
+		const std::string	fractional = _value.substr(pos + 1);
+		monetaryValue.first = strToUint64(integral);
+		monetaryValue.second = strToUint64(fractional);
+	}
+		
+	return (monetaryValue.first * 100 + monetaryValue.second / 100);
+}
+
+uint64_t	MonetaryValue::strToUint64(const std::string& _value)
+{
 	std::stringstream	ss(_value);
-	double				parsedValue;
+	uint64_t			parsedValue;
 
 	ss >> parsedValue;
 	if (ss.fail())
 		throw ( std::runtime_error("failed to convert str to monetary value") );
 
-	// lightweight safeguard for negative values
-	if (parsedValue < 0)
-		throw ( std::runtime_error("negative monetary value not allowd") );
-		
-	m_value = static_cast<uint64_t>(parsedValue * 100.00);
+	return (parsedValue);
 }
