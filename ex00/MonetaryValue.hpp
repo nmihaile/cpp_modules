@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:59 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/11 12:20:20 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:56:08 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class MonetaryValue
 public:
 	MonetaryValue();
 	MonetaryValue(uint64_t _value);
-	MonetaryValue(std::string& _value);
+	MonetaryValue(const std::string& _value);
 	MonetaryValue(const MonetaryValue& other);
 	~MonetaryValue();
 
@@ -40,7 +40,7 @@ public:
 private:
 	uint64_t	m_value;
 
-	void		parseMonetaryValueStr(std::string& _value);
+	void		parseMonetaryValueStr(const std::string& _value);
 	uint64_t	convertToCents(const std::string& _value);
 	uint64_t	strToUint64(const std::string& _value);
 };

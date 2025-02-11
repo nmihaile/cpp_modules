@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:50:17 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/29 11:59:30 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:00:28 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,36 @@ void	test_MonetaryValue_copyConstructor(void)
 	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
 }
 
+void	test_MonetaryValue_incomplete_integral(void)
+{
+	try
+	{
+		MonetaryValue val1(".12");
+		(void)val1;
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+}
+
+void	test_MonetaryValue_incomplete_fractions(void)
+{
+	try
+	{
+		MonetaryValue val1("12.");
+		(void)val1;
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+}
+
+void	test_MonetaryValue_long_fractions(void)
+{
+	try
+	{
+		MonetaryValue val1("12.345");
+		(void)val1;
+	}
+	catch(const std::exception& e) { std::cout << e.what() << '\n'; }	
+}
+
 int	main(void)
 {
 
@@ -364,6 +394,9 @@ int	main(void)
 	TEST(test_Date_class_leap_years, "..................................................................................................................................................");
 	TEST(test_MonetaryValue_operator_overloads, "6.00");
 	TEST(test_MonetaryValue_copyConstructor, "2.45");
+	TEST(test_MonetaryValue_incomplete_integral, "incomplete integral or fractional part of monetary value\n");
+	TEST(test_MonetaryValue_incomplete_fractions, "incomplete integral or fractional part of monetary value\n");
+	TEST(test_MonetaryValue_long_fractions, "too many decimal places on monetary value, only two allowed\n");
 
 	print_test_result();
 

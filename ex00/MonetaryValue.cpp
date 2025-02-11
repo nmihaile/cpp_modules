@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/11 12:21:29 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:00:14 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ MonetaryValue::MonetaryValue(uint64_t _value) : m_value(_value)
 {
 }
 
-MonetaryValue::MonetaryValue(std::string& _value) : m_value(0)
+MonetaryValue::MonetaryValue(const std::string& _value) : m_value(0)
 {
 	parseMonetaryValueStr(_value);
 }
@@ -75,10 +75,10 @@ std::string	MonetaryValue::getValueStr(void) const
 /* ************************************************************************** */
 
 
-void	MonetaryValue::parseMonetaryValueStr(std::string& _value)
+void	MonetaryValue::parseMonetaryValueStr(const std::string& _value)
 {
 	int	dec_count = 0;
-	for (std::string::iterator it = _value.begin(); it < _value.end(); ++it)
+	for (std::string::const_iterator it = _value.begin(); it < _value.end(); ++it)
 	{
 		if (!std::isdigit(*it) && !(*it == '.'))
 			throw ( std::runtime_error("non monetary character detected, allowd [0..9|.]") );
@@ -100,13 +100,24 @@ uint64_t	MonetaryValue::convertToCents(const std::string& _value)
 		monetaryValue.first = strToUint64(_value);
 	else
 	{
+		if (pos == 0 || pos == _value.length() - 1)
+			throw ( std::runtime_error("incomplete integral or fractional part of monetary value") );
+
 		const std::string	integral = _value.substr(0, pos);
 		const std::string	fractional = _value.substr(pos + 1);
+		
 		monetaryValue.first = strToUint64(integral);
+		
+		if (fractional.length() > 2)
+			throw ( std::runtime_error("too many decimal places on monetary value, only two allowed") );
+
 		monetaryValue.second = strToUint64(fractional);
+
+		if (fractional.length() == 1)
+			monetaryValue.second *= 10;
 	}
 		
-	return (monetaryValue.first * 100 + monetaryValue.second / 100);
+	return (monetaryValue.first * 100 + monetaryValue.second);
 }
 
 uint64_t	MonetaryValue::strToUint64(const std::string& _value)
