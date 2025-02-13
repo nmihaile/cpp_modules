@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:01 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/30 15:05:59 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:54:43 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	BitcoinExchange::processEntry(BitcoinExchange::Input& input)
 		throw ( std::invalid_argument("Invalid input: " + std::string(e.what()) + " <" + input.line + ">" + input.lineNbrToStr()) );
 	}
 
-	std::pair<std::map<std::time_t, uint64_t>::iterator, bool> ip = m_price_table.insert(std::pair<std::time_t, uint64_t>(input.date.toUnixTimestamp(), input.value.getValueCents()));
+	std::pair<std::map<std::time_t, MonetaryValue>::iterator, bool> ip = m_price_table.insert(std::pair<std::time_t, MonetaryValue>(input.date.toUnixTimestamp(), input.value));
 	if (ip.second == false)
 		throw ( std::runtime_error("Invalid input: duplicate date in input database " + m_dataFile + ": <" + input.line + ">" + input.lineNbrToStr()) );
 }
@@ -140,12 +140,12 @@ void	BitcoinExchange::evaluateEntry(BitcoinExchange::Input& input)
 			throw ( std::runtime_error(std::string(e.what()) + std::string(" <") + input.line + ">") );
 		}
 		
-		amount = MonetaryValue(input.value.getValueCents());
-		if (amount.getValueCents() > 1000 * 100)
+		amount = input.value;
+		MonetaryValue	maxAmount("1000");
+		if (amount.getScaledValue() > maxAmount.getScaledValue())
 			throw ( std::runtime_error("amount greater than 1000: <" + input.line + ">") );
 
-
-		std::map<std::time_t, uint64_t>::iterator it = m_price_table.upper_bound(input.date.toUnixTimestamp());
+		std::map<std::time_t, MonetaryValue>::iterator it = m_price_table.upper_bound(input.date.toUnixTimestamp());
 		if (it == m_price_table.begin())
 		{
 			std::cout	<< BTCEX_LIGHTRED << "Invalid entry: " << BTCEX_RESET
@@ -158,9 +158,10 @@ void	BitcoinExchange::evaluateEntry(BitcoinExchange::Input& input)
 		MonetaryValue	btcAmount;
 		btcAmount = amount * btcPrice;
 
-		std::cout	<< BTCEX_LIGHTGREEN << input.date.toString() << BTCEX_GREEN
-					<< " => " << BTCEX_RESET << std::setw(10) << input.monetary_str
-					<< BTCEX_GRAY << " = " << BTCEX_LIGHTCYAN << btcAmount.getValueStr()
+		std::cout	<< BTCEX_LIGHTGREEN << input.date.toString() << BTCEX_GREEN << " => "
+					<< BTCEX_RESET << std::setw(10) << input.monetary_str
+					<< BTCEX_GRAY << " = "
+					<< BTCEX_LIGHTCYAN << btcAmount.toStr()
 					<< BTCEX_RESET << std::endl;
 	}
 	catch(const std::exception& e)

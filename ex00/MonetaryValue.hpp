@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:59 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/11 12:56:08 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:57:19 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,23 @@ public:
 
 	MonetaryValue&	operator=(const MonetaryValue& rhs);
 	MonetaryValue&	operator*=(const MonetaryValue& rhs);
-	MonetaryValue	operator*(const MonetaryValue& rhs);
+	MonetaryValue	operator*(const MonetaryValue& rhs) const;
 
-	uint64_t		getValueCents(void) const;
-	double			getValueDouble(void) const;
-	std::string		getValueStr(void) const;
+	uint64_t		getScaledValue(void) const;
+	double			toDouble(void) const;
+	std::string		toStr(void) const;
 	
 private:
-	uint64_t	m_value;
+	static const uint64_t	m_scale = 100000000;	// scale: BTC in satoshis AND, CURRENCY in nano_value
+	uint64_t				m_value;
 
 	void		parseMonetaryValueStr(const std::string& _value);
-	uint64_t	convertToCents(const std::string& _value);
-	uint64_t	strToUint64(const std::string& _value);
+	uint64_t	convertIntoScale(const std::string& _value);
+	template <typename T>
+	T			strToType(const std::string& _value);
+	
 };
+
+#include "MonetaryValue.tpp"
 
 #endif

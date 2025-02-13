@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:55:03 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/01/30 14:58:09 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:54:44 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ private:
 		const std::string	lineNbrToStr(void);
 	};
 
-	std::string						m_dataFile;
-	std::map<std::time_t, uint64_t>	m_price_table;
+	std::string								m_dataFile;
+	std::map<std::time_t, MonetaryValue>	m_price_table;
 
 	void			processEntry(BitcoinExchange::Input& input);
 	void			evaluateEntry(BitcoinExchange::Input& input);

@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/11 13:00:14 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:57:38 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,35 @@ MonetaryValue&	MonetaryValue::operator=(const MonetaryValue& rhs)
 
 MonetaryValue&	MonetaryValue::operator*=(const MonetaryValue& rhs)
 {
-	m_value = (m_value * rhs.m_value) / 100;
+	// m_value = (m_value * rhs.m_value) / m_scale;
+	__uint128_t result = static_cast<__uint128_t>(m_value) * static_cast<__uint128_t>(rhs.m_value);
+	result /= m_scale;
+	m_value = static_cast<uint64_t>(result);
 	return (*this);
 }
 
-MonetaryValue	MonetaryValue::operator*(const MonetaryValue& rhs)
+MonetaryValue	MonetaryValue::operator*(const MonetaryValue& rhs) const
 {
-	uint64_t result = (m_value * rhs.m_value) / 100;
-	return ( MonetaryValue(result) );
+	__uint128_t result = static_cast<__uint128_t>(m_value) * static_cast<__uint128_t>(rhs.m_value);
+	result /= m_scale;
+	return ( MonetaryValue(static_cast<uint64_t>(result)) );
 }
 
-uint64_t	MonetaryValue::getValueCents(void) const
+uint64_t	MonetaryValue::getScaledValue(void) const
 {
 	return (m_value);
 }
 
-double		MonetaryValue::getValueDouble(void) const
+double		MonetaryValue::toDouble(void) const
 {
-	return (m_value / 100.0);
+	double d_value = static_cast<double>(m_value) / m_scale;
+	return ( d_value );
 }
 
-std::string	MonetaryValue::getValueStr(void) const
+std::string	MonetaryValue::toStr(void) const
 {
 	std::ostringstream	os;
-	os << (m_value / 100) << '.' << std::setw(2) << std::setfill('0') << (m_value % 100);
+	os << toDouble();
 	return (os.str());
 }
 
@@ -88,46 +93,24 @@ void	MonetaryValue::parseMonetaryValueStr(const std::string& _value)
 			throw ( std::runtime_error("found multiple decimal points, only one allowed") );
 	}
 
-	m_value = convertToCents(_value);
+	m_value = convertIntoScale(_value);
 }
 
-uint64_t	MonetaryValue::convertToCents(const std::string& _value)
+uint64_t	MonetaryValue::convertIntoScale(const std::string& _value)
 {
-	std::pair<uint64_t, uint64_t>	monetaryValue(0, 0);
+	uint64_t	scaled_value = 0;
 
 	std::size_t	pos = _value.find('.');
 	if (pos == std::string::npos)
-		monetaryValue.first = strToUint64(_value);
+		scaled_value = strToType<uint64_t>(_value) * m_scale;
 	else
 	{
 		if (pos == 0 || pos == _value.length() - 1)
 			throw ( std::runtime_error("incomplete integral or fractional part of monetary value") );
 
-		const std::string	integral = _value.substr(0, pos);
-		const std::string	fractional = _value.substr(pos + 1);
-		
-		monetaryValue.first = strToUint64(integral);
-		
-		if (fractional.length() > 2)
-			throw ( std::runtime_error("too many decimal places on monetary value, only two allowed") );
-
-		monetaryValue.second = strToUint64(fractional);
-
-		if (fractional.length() == 1)
-			monetaryValue.second *= 10;
+		double d_value = strToType<double>(_value);
+		scaled_value = static_cast<uint64_t>(d_value * m_scale);
 	}
-		
-	return (monetaryValue.first * 100 + monetaryValue.second);
-}
 
-uint64_t	MonetaryValue::strToUint64(const std::string& _value)
-{
-	std::stringstream	ss(_value);
-	uint64_t			parsedValue;
-
-	ss >> parsedValue;
-	if (ss.fail())
-		throw ( std::runtime_error("failed to convert str to monetary value") );
-
-	return (parsedValue);
+	return (scaled_value);
 }
