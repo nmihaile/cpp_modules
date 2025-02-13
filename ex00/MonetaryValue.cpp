@@ -6,7 +6,7 @@
 /*   By: nmihaile <nmihaile@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:57 by nmihaile          #+#    #+#             */
-/*   Updated: 2025/02/13 18:57:38 by nmihaile         ###   ########.fr       */
+/*   Updated: 2025/02/13 19:07:57 by nmihaile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ MonetaryValue&	MonetaryValue::operator=(const MonetaryValue& rhs)
 
 MonetaryValue&	MonetaryValue::operator*=(const MonetaryValue& rhs)
 {
-	// m_value = (m_value * rhs.m_value) / m_scale;
 	__uint128_t result = static_cast<__uint128_t>(m_value) * static_cast<__uint128_t>(rhs.m_value);
 	result /= m_scale;
 	m_value = static_cast<uint64_t>(result);
